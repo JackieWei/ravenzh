@@ -1,0 +1,959 @@
+.blackFont
+{
+	color:#393939;
+}
+.whiteFont
+{
+	color:#cccccc;
+}
+	
+.defaultText
+{
+	fontSize: 12px;
+	fontWeight: bold;
+	color: #000000;
+}
+
+.hintText
+{
+	fontSize: 12px;
+	fontWeight: bold;
+	color: #0099cc;
+}
+
+Label.dateLabel
+{
+	fontSize: 10;
+	color: #383838;
+	fontWeight: bold;
+	fontStyle:italic;
+}
+
+.imageContainerBG
+{
+ 	backgroundImage: Embed(source="assets/components/imageContainer/image_container_bg.png", 
+							scaleGridLeft="6",
+							scaleGridTop="6",
+							scaleGridRight="21",
+							scaleGridBottom="21"); 
+	backgroundSize: "100%";
+}
+
+.whiteBG
+{
+ 	backgroundImage: Embed(source="assets/friend/white_bg.png", 
+							scaleGridLeft="16",
+							scaleGridTop="24",
+							scaleGridRight="17",
+							scaleGridBottom="26"); 
+	backgroundSize: "100%";
+} 
+
+.frame
+{
+ 	backgroundImage: Embed(source="assets/friend/frame.png", 
+							scaleGridLeft="250",
+							scaleGridTop="64",
+							scaleGridRight="252",
+							scaleGridBottom="65"); 
+	backgroundSize: "100%";
+}
+
+.titleFrame
+{
+ 	backgroundImage: Embed(source="assets/friend/title_frame.png", 
+							scaleGridLeft="10",
+							scaleGridTop="30",
+							scaleGridRight="11",
+							scaleGridBottom="31"); 
+	backgroundSize: "100%";
+}
+
+.lightBlueBG
+{
+ 	backgroundImage: Embed(source="assets/friend/light_blue.png", 
+							scaleGridLeft="12",
+							scaleGridTop="12",
+							scaleGridRight="13",
+							scaleGridBottom="13"); 
+	backgroundSize: "100%";
+}
+
+Button.updateBtn
+{
+	upSkin: Embed("assets/friend/update_btn_normal.png");
+	overSkin: Embed("assets/friend/update_btn_over.png");
+	downSkin: Embed("assets/friend/update_btn_down.png");
+	disabledSkin: Embed("assets/friend/update_btn_disabled.png");
+}
+
+
+.mainMenuBox
+{
+	backgroundImage: Embed(source="assets/menu/menu_bar.png", 
+							scaleGridLeft="22",
+							scaleGridTop="31",
+							scaleGridRight="24",
+							scaleGridBottom="32");
+	backgroundSize: "100%";
+}
+
+Button.closeBtn
+{
+	upSkin: Embed(source="assets/friend/close_btn.png");
+	overSkin: Embed(source="assets/friend/close_btn_hover.png");
+	downSkin: Embed(source="assets/friend/close_btn_down.png");
+	disabledSkin: Embed(source="assets/friend/close_btn_down.png");
+}
+
+Button.resizeBtn
+{
+	upSkin: Embed(source="assets/friend/mini_btn.png");
+	overSkin: Embed(source="assets/friend/mini_btn_hover.png");
+	downSkin: Embed(source="assets/friend/mini_btn_down.png");
+	disabledSkin: Embed(source="assets/friend/mini_btn_down.png");
+	selectedUpSkin: Embed(source="assets/friend/max_btn.png");
+	selectedOverSkin: Embed(source="assets/friend/max_btn_hover.png");
+	selectedDownSkin: Embed(source="assets/friend/max_btn_down.png");
+	selectedDisabledSkin: Embed(source="assets/friend/max_btn_down.png");
+}
+
+Button.miniBtn
+{
+	upSkin: Embed(source="assets/friend/mini_btn.png");
+	overSkin: Embed(source="assets/friend/mini_btn_hover.png");
+	downSkin: Embed(source="assets/friend/mini_btn_down.png");
+	disabledSkin: Embed(source="assets/friend/mini_btn_down.png");
+}
+
+Button.maxBtn
+{
+	upSkin: Embed(source="assets/friend/max_btn.png");
+	overSkin: Embed(source="assets/friend/max_btn_hover.png");
+	downSkin: Embed(source="assets/friend/max_btn_down.png");
+	disabledSkin: Embed(source="assets/friend/max_btn_down.png");
+}
+
+Button.preBtn
+{
+	upSkin: Embed(source="assets/controls/pre_btn_normal.png");
+	overSkin: Embed(source="assets/controls/pre_btn_over.png");
+	downSkin: Embed(source="assets/controls/pre_btn_down.png");
+	disabledSkin: Embed(source="assets/controls/pre_btn_disabled.png");
+}
+
+Button.nextBtn
+{
+	upSkin: Embed(source="assets/controls/next_btn_normal.png");
+	overSkin: Embed(source="assets/controls/next_btn_over.png");
+	downSkin: Embed(source="assets/controls/next_btn_down.png");
+	disabledSkin: Embed(source="assets/controls/next_btn_disabled.png");
+}
+Button.msgBtn
+{
+	upSkin: Embed(source="assets/message_normal.png", scaleGridLeft=50, scaleGridTop=1, scaleGridRight=109, scaleGridBottom=19);
+	overSkin: Embed(source="assets/message_normal.png", scaleGridLeft=50, scaleGridTop=1, scaleGridRight=109, scaleGridBottom=19);
+	downSkin: Embed(source="assets/message_normal.png", scaleGridLeft=50, scaleGridTop=1, scaleGridRight=109, scaleGridBottom=19);
+	disabledSkin: Embed(source="assets/message_normal.png", scaleGridLeft=50, scaleGridTop=1, scaleGridRight=109, scaleGridBottom=19);
+	selectedUpSkin: Embed(source="assets/message_selected.png", scaleGridLeft=50, scaleGridTop=1, scaleGridRight=109, scaleGridBottom=19);
+	selectedOverSkin: Embed(source="assets/message_selected.png", scaleGridLeft=50, scaleGridTop=1, scaleGridRight=109, scaleGridBottom=19);
+	selectedDownSkin: Embed(source="assets/message_selected.png", scaleGridLeft=50, scaleGridTop=1, scaleGridRight=109, scaleGridBottom=19);
+	selectedDisabledSkin: Embed(source="assets/message_selected.png", scaleGridLeft=50, scaleGridTop=1, scaleGridRight=109, scaleGridBottom=19);
+	paddingRight:10;
+	paddingLeft:10;
+	color:#FFFFFF;
+	textRollOverColor:#FFFFF0;
+	selectionColor:#FFFFFF;
+}
+
+Button.iconBtn
+{
+	upSkin:Embed(source="assets/activity/activityView_item_normal.png");
+	overSkin:Embed(source="assets/activity/activityView_item_hover.png");
+
+	downSkin:Embed(source="assets/activity/activityView_item_selected.png");
+	selectedUpSkin:Embed(source="assets/activity/activityView_item_selected.png");
+	selectedOverSkin: Embed(source="assets/activity/activityView_item_selected.png");
+	selectedDownSkin: Embed(source="assets/activity/activityView_item_selected.png");
+	selectedDisabledSkin:Embed(source="assets/activity/activityView_item_selected.png");
+}
+
+Button.icon
+{
+	upSkin:Embed(source="assets/activity/activityView_item_normal.png");
+	overSkin:Embed(source="assets/activity/activityView_item_hover.png");
+	downSkin:Embed(source="assets/activity/activityView_item_selected.png");
+	selectedUpSkin:Embed(source="assets/activity/activityView_item_selected.png");
+	selectedOverSkin: Embed(source="assets/activity/activityView_item_selected.png");
+	selectedDownSkin: Embed(source="assets/activity/activityView_item_selected.png");
+	selectedDisabledSkin:Embed(source="assets/activity/activityView_item_selected.png");
+}
+
+Button.searchBtn 
+{
+	upSkin: Embed("assets/mapMenu/search_btn_normal.png");
+	overSkin: Embed("assets/mapMenu/search_btn_over.png");
+	downSkin: Embed("assets/mapMenu/search_btn_down.png");
+}
+
+Button.frameBtn 
+{
+	upSkin: Embed("assets/mapMenu/frame_btn_normal.png");
+	overSkin: Embed("assets/mapMenu/frame_btn_over.png");
+	downSkin: Embed("assets/mapMenu/frame_btn_down.png");
+}
+
+LinkLabel
+{
+	color: #757575;
+	textOverColor: #383838;
+	textDownColor: #000000;
+ 	textDecoration: underline; 
+}
+
+LinkLabel.linkBtn
+{
+	color: #0292CD;
+	textOverColor: #42AFD9;
+	textDownColor: #42AFD9;
+}
+
+LinkLabel.fortgetPwdLink
+{
+	color: #69E1F3;
+	textOverColor: #00FF00;
+	textDownColor: #00FF00;
+	textAlign: left;
+}
+
+LinkLabel.greenLink
+{
+	color: #00FFA2;
+	textOverColor: #00FF00;
+	textDownColor: #00FF00;
+	textAlign: left;
+	fontSize: 15;
+}
+
+
+ViewBase
+{
+	backgroundImage: Embed(source="assets/friend/frame.png", 
+							scaleGridLeft="250",
+							scaleGridTop="64",
+							scaleGridRight="252",
+							scaleGridBottom="65");
+	backgroundSize: "100%";
+}
+
+ViewBase.blueFrame
+{
+	backgroundImage: Embed(source="assets/friend/blue_frame.png", 
+							scaleGridLeft="190",
+							scaleGridTop="100",
+							scaleGridRight="191",
+							scaleGridBottom="101"); 
+	backgroundSize: "100%";		
+}
+
+CharItem
+{
+	backgroundImage: Embed(source="assets/search/label_item.png");
+	backgroundSize: "100%";
+}
+
+.friendMenu
+{
+	backgroundImage : Embed(source="assets/friend/option_bg.png", 
+						scaleGridLeft="31",
+						scaleGridTop="12",
+						scaleGridRight="82",
+						scaleGridBottom="22");
+	backgroundSize: "100%";
+}
+
+.titleText
+{
+	backgroundImage: Embed(source="assets/components/title_text_bg.png",
+							scaleGridLeft="9",
+							scaleGridTop="9",
+							scaleGridRight="10",
+							scaleGridBottom="10"); 
+	backgroundSize: "100%";
+}
+
+.locationButton
+{
+	backgroundImage: Embed(source="assets/activity/activities_create_activy_select_city.png");
+}
+
+.activityView
+{
+	backgroundImage: Embed(source="assets/activity/activityView_bg.png", 
+							scaleGridLeft="273",
+							scaleGridTop="71",
+							scaleGridRight="274",
+							scaleGridBottom="72"); 
+	backgroundSize: "100%";
+}
+
+GridContainer
+{
+	singularColor: #FFFFFF;
+	dualColor: #FFFFFF;
+}
+
+GridContainer.alternantGC
+{
+	singularColor: #E8EEED;
+	dualColor: #FFFFFF;
+}
+
+.contentBackdrop
+{
+	backgroundImage: Embed(source="assets/components/content_bg.png", 
+							scaleGridLeft="13",
+							scaleGridTop="11",
+							scaleGridRight="14",
+							scaleGridBottom="12"); 
+	backgroundSize: "100%";
+}
+.titleBackdrop
+{
+	backgroundImage: Embed(source="assets/components/title_bg.png", 
+							scaleGridLeft="10",
+							scaleGridTop="20",
+							scaleGridRight="11",
+							scaleGridBottom="21"); 
+	backgroundSize: "100%";
+}
+
+.lockBG
+{
+	backgroundImage: Embed(source="assets/friend/lock_bg.png", 
+							scaleGridLeft="15",
+							scaleGridTop="40",
+							scaleGridRight="16",
+							scaleGridBottom="42"); 
+	backgroundSize: "100%";
+	
+}
+
+.activityDetailNavigatorInnerStyle
+{
+	backgroundImage: Embed(source="assets/activity/activityDetail_navigator_inner_bg.png", 
+							scaleGridLeft="25",
+							scaleGridTop="25",
+							scaleGridRight="26",
+							scaleGridBottom="26"); 
+	backgroundSize: "100%";
+}
+
+.activityDetailDetailInfoBG
+{
+	backgroundImage: Embed(source="assets/activity/activityDetail_detailInfo_bg.png", 
+							scaleGridLeft="10",
+							scaleGridTop="22",
+							scaleGridRight="11",
+							scaleGridBottom="23"); 
+	backgroundSize: "100%";
+}
+
+.activityDetailVideoItemBG
+{
+	overBackgroundImage: Embed(source="assets/activity/activity_detail_videoItemBG.png", 
+							scaleGridLeft="10",
+							scaleGridTop="22",
+							scaleGridRight="11",
+							scaleGridBottom="23"); 
+	downBackgroundImage: Embed(source="assets/activity/activity_detail_videoItemBG.png", 
+							scaleGridLeft="10",
+							scaleGridTop="22",
+							scaleGridRight="11",
+							scaleGridBottom="23"); 
+	backgroundSize: "100%";
+}
+
+.activityDetailVideoList
+{
+	backgroundImage: Embed(source="assets/activity/activity_detail_video&photo_list_bg.png", 
+							scaleGridLeft="10",
+							scaleGridTop="10",
+							scaleGridRight="11",
+							scaleGridBottom="11"); 
+	backgroundSize: "100%";
+}
+
+.activityUploadPhoto
+{
+	upSkin: Embed(source="assets/activity/activity_upload_photo_icon.png");
+ 	overSkin:Embed(source="assets/activity/activity_upload_photo_icon.png");
+ 	downSkin: Embed(source="assets/activity/activity_upload_photo_icon.png");
+ 	disabledSkin: Embed(source="assets/activity/activity_upload_photo_icon.png");
+}
+
+.activityUploadVideo
+{
+	upSkin: Embed(source="assets/activity/activity_upload_video_icon.png");
+ 	overSkin:Embed(source="assets/activity/activity_upload_video_icon.png");
+ 	downSkin: Embed(source="assets/activity/activity_upload_video_icon.png");
+ 	disabledSkin: Embed(source="assets/activity/activity_upload_video_icon.png");
+}
+
+ViewBase.searchView
+{
+	backgroundImage: Embed(source="assets/search/searchbox_bg.png", 
+							scaleGridLeft="230",
+							scaleGridTop="71",
+							scaleGridRight="231",
+							scaleGridBottom="72"); 
+	backgroundSize: "100%";
+}
+
+.resultItem
+{
+	backgroundImage: Embed(source="assets/search/item_bg.png", 
+							scaleGridLeft="12",
+							scaleGridTop="15",
+							scaleGridRight="13",
+							scaleGridBottom="60"); 
+	backgroundSize: "100%";
+}
+
+.detailPhoto
+{
+	upSkin: Embed(source="assets/activity/activity_detail_photo_normal.png"); 
+	overSkin:Embed(source="assets/activity/activity_detail_photo_normal.png"); 
+	downSkin:Embed(source="assets/activity/activity_detail_photo_normal.png");
+	selectedUpSkin:Embed(source="assets/activity/activity_detail_photo_selected.png");
+	selectedDownSkin:Embed(source="assets/activity/activity_detail_photo_selected.png");
+	selectedOverSkin:Embed(source="assets/activity/activity_detail_photo_selected.png");
+	selectedDisabledSkin:Embed(source="assets/activity/activity_detail_photo_selected.png"); 
+}
+.detailDetail
+{
+	upSkin: Embed(source="assets/activity/activity_detail_detail_normal.png"); 
+	overSkin:Embed(source="assets/activity/activity_detail_detail_normal.png"); 
+	downSkin:Embed(source="assets/activity/activity_detail_detail_normal.png");
+	selectedUpSkin:Embed(source="assets/activity/activity_detail_detail_selected.png");
+	selectedDownSkin:Embed(source="assets/activity/activity_detail_detail_selected.png");
+	selectedOverSkin:Embed(source="assets/activity/activity_detail_detail_selected.png");
+	selectedDisabledSkin:Embed(source="assets/activity/activity_detail_detail_selected.png"); 
+}
+.detailVideo
+{
+	upSkin: Embed(source="assets/activity/activity_detail_video_normal.png"); 
+	overSkin:Embed(source="assets/activity/activity_detail_video_normal.png"); 
+	downSkin:Embed(source="assets/activity/activity_detail_video_normal.png");
+	selectedUpSkin:Embed(source="assets/activity/activity_detail_video_selected.png");
+	selectedDownSkin:Embed(source="assets/activity/activity_detail_video_selected.png");
+	selectedOverSkin:Embed(source="assets/activity/activity_detail_video_selected.png");
+	selectedDisabledSkin:Embed(source="assets/activity/activity_detail_video_selected.png"); 
+}
+.detailComment
+{
+	upSkin: Embed(source="assets/activity/activity_detail_comment_normal.png"); 
+	overSkin:Embed(source="assets/activity/activity_detail_comment_normal.png"); 
+	downSkin:Embed(source="assets/activity/activity_detail_comment_normal.png");
+	selectedUpSkin:Embed(source="assets/activity/activity_detail_comment_selected.png");
+	selectedDownSkin:Embed(source="assets/activity/activity_detail_comment_selected.png");
+	selectedOverSkin:Embed(source="assets/activity/activity_detail_comment_selected.png");
+	selectedDisabledSkin:Embed(source="assets/activity/activity_detail_comment_selected.png"); 
+}
+.detailAttend
+{
+	upSkin: Embed(source="assets/activity/activity_detail_attend_normal.png"); 
+	overSkin:Embed(source="assets/activity/activity_detail_attend_normal.png"); 
+	downSkin:Embed(source="assets/activity/activity_detail_attend_normal.png");
+	selectedUpSkin:Embed(source="assets/activity/activity_detail_attend_selected.png");
+	selectedDownSkin:Embed(source="assets/activity/activity_detail_attend_selected.png");
+	selectedOverSkin:Embed(source="assets/activity/activity_detail_attend_selected.png");
+	selectedDisabledSkin:Embed(source="assets/activity/activity_detail_attend_selected.png"); 
+}
+.detailActivityBusiness
+{
+	
+}
+
+
+.horizontalDock
+{
+	minimumSize:			75;
+	maximumSize:			90;
+	scaleRange:				100;
+	labelPosition:			right;
+	horizontalLabelAlign:	center;
+	labelGap:				10;
+	labelAppearanceDelay:	0;
+
+	horizontalAlign:		center;
+	verticalAlign:			middle;
+	paddingBottom:			5;
+	horizontalGap:			0;
+}
+
+.subwayInfoContent
+{
+	backgroundImage: Embed(source="assets/traffic/subwainfo_bg.png", 
+							scaleGridLeft="51",
+							scaleGridTop="51",
+							scaleGridRight="52",
+							scaleGridBottom="52"); 
+	background-size:"100%";
+}
+
+Canvas.stationInfoBG
+{
+	backgroundImage: Embed(source="assets/traffic/station_info_bg.png", 
+							scaleGridLeft="15",
+							scaleGridTop="15",
+							scaleGridRight="16",
+							scaleGridBottom="16"); 
+	background-size:"100%";
+}
+
+.avatorLoader
+{
+	brokenImageBorderSkin: Embed(source="assets/default/default_head.png");
+}
+SWFLoader
+{
+	brokenImageBorderSkin: Embed(source="assets/default/default_image.png");
+}
+.businessBusinessBuilding
+{
+	upSkin: Embed(source="assets/building/building_business_business_normal.png"); 
+	overSkin:Embed(source="assets/building/building_business_business_normal.png"); 
+	downSkin:Embed(source="assets/building/building_business_business_hover.png");
+	selectedUpSkin:Embed(source="assets/building/building_business_business_hover.png");
+	selectedDownSkin:Embed(source="assets/building/building_business_business_hover.png");
+	selectedOverSkin:Embed(source="assets/building/building_business_business_hover.png");
+	selectedDisabledSkin:Embed(source="assets/building/building_business_business_hover.png"); 
+}
+.businessRelocatedBuilding
+{
+	upSkin: Embed(source="assets/building/building_business_relocated_normal.png"); 
+	overSkin:Embed(source="assets/building/building_business_relocated_normal.png"); 
+	downSkin:Embed(source="assets/building/building_business_relocated_hover.png");
+	selectedUpSkin:Embed(source="assets/building/building_business_relocated_hover.png");
+	selectedDownSkin:Embed(source="assets/building/building_business_relocated_hover.png");
+	selectedOverSkin:Embed(source="assets/building/building_business_relocated_hover.png");
+	selectedDisabledSkin:Embed(source="assets/building/building_business_relocated_hover.png");
+}
+.businessAddedBuilding
+{
+	upSkin: Embed(source="assets/building/building_business_added_normal.png"); 
+	overSkin:Embed(source="assets/building/building_business_added_normal.png"); 
+	downSkin:Embed(source="assets/building/building_business_added_hover.png");
+	selectedUpSkin:Embed(source="assets/building/building_business_added_hover.png");
+	selectedDownSkin:Embed(source="assets/building/building_business_added_hover.png");
+	selectedOverSkin:Embed(source="assets/building/building_business_added_hover.png");
+	selectedDisabledSkin:Embed(source="assets/building/building_business_added_hover.png"); 
+}
+
+.detailBusinessBuilding
+{
+	upSkin: Embed(source="assets/building/building_detail_business_normal.png"); 
+	overSkin:Embed(source="assets/building/building_detail_business_normal.png"); 
+	downSkin:Embed(source="assets/building/building_detail_business_normal.png");
+	selectedUpSkin:Embed(source="assets/building/building_detail_business_selected.png");
+	selectedDownSkin:Embed(source="assets/building/building_detail_business_selected.png");
+	selectedOverSkin:Embed(source="assets/building/building_detail_business_selected.png");
+	selectedDisabledSkin:Embed(source="assets/building/building_detail_business_selected.png"); 
+}
+.detailActivityBuilding
+{
+	upSkin: Embed(source="assets/building/building_detail_activity_normal.png"); 
+	overSkin:Embed(source="assets/building/building_detail_activity_normal.png"); 
+	downSkin:Embed(source="assets/building/building_detail_activity_normal.png");
+	selectedUpSkin:Embed(source="assets/building/building_detail_activity_selected.png");
+	selectedDownSkin:Embed(source="assets/building/building_detail_activity_selected.png");
+	selectedOverSkin:Embed(source="assets/building/building_detail_activity_selected.png");
+	selectedDisabledSkin:Embed(source="assets/building/building_detail_activity_selected.png"); 
+}
+.detailResidentBuilding
+{
+	upSkin: Embed(source="assets/building/building_detail_resident_normal.png"); 
+	overSkin:Embed(source="assets/building/building_detail_resident_normal.png"); 
+	downSkin:Embed(source="assets/building/building_detail_resident_normal.png");
+	selectedUpSkin:Embed(source="assets/building/building_detail_resident_selected.png");
+	selectedDownSkin:Embed(source="assets/building/building_detail_resident_selected.png");
+	selectedOverSkin:Embed(source="assets/building/building_detail_resident_selected.png");
+	selectedDisabledSkin:Embed(source="assets/building/building_detail_resident_selected.png"); 
+}
+.detailDetailBuilding
+{
+	upSkin: Embed(source="assets/building/building_detail_detail_normal.png"); 
+	overSkin:Embed(source="assets/building/building_detail_detail_normal.png"); 
+	downSkin:Embed(source="assets/building/building_detail_detail_normal.png");
+	selectedUpSkin:Embed(source="assets/building/building_detail_detail_selected.png");
+	selectedDownSkin:Embed(source="assets/building/building_detail_detail_selected.png");
+	selectedOverSkin:Embed(source="assets/building/building_detail_detail_selected.png");
+	selectedDisabledSkin:Embed(source="assets/building/building_detail_detail_selected.png"); 
+}
+.detailReviewBuilding
+{
+	upSkin: Embed(source="assets/building/building_detail_review_normal.png"); 
+	overSkin:Embed(source="assets/building/building_detail_review_normal.png"); 
+	downSkin:Embed(source="assets/building/building_detail_review_normal.png");
+	selectedUpSkin:Embed(source="assets/building/building_detail_review_selected.png");
+	selectedDownSkin:Embed(source="assets/building/building_detail_review_selected.png");
+	selectedOverSkin:Embed(source="assets/building/building_detail_review_selected.png");
+	selectedDisabledSkin:Embed(source="assets/building/building_detail_review_selected.png"); 
+}
+.businessBusinessBuildingBG
+{
+	background-image:Embed(source="assets/building/building_business_business_content.png",
+							scaleGridLeft="6",
+							scaleGridTop="9",
+							scaleGridRight="7",
+							scaleGridBottom="10");
+	background-size:"100%";
+}
+.voteIcon
+{
+	icon:Embed(source="assets/building/business_vote_icon.png");
+	upSkin:Embed(source="assets/transparent.png");
+	overSkin:Embed(source="assets/transparent.png");
+	downSkin:Embed(source="assets/transparent.png");
+	disabledSkin:Embed(source="assets/transparent.png");
+	selectedUpSkin:Embed(source="assets/transparent.png");
+	selectedOverSkin:Embed(source="assets/transparent.png");
+	selectedDownSkin:Embed(source="assets/transparent.png");
+	selectedDisabledSkin:Embed(source="assets/transparent.png");
+}
+.opposeIcon
+{
+	icon:Embed(source="assets/building/business_oppose_icon.png");
+	upSkin:Embed(source="assets/transparent.png");
+	overSkin:Embed(source="assets/transparent.png");
+	downSkin:Embed(source="assets/transparent.png");
+	disabledSkin:Embed(source="assets/transparent.png");
+	selectedUpSkin:Embed(source="assets/transparent.png");
+	selectedOverSkin:Embed(source="assets/transparent.png");
+	selectedDownSkin:Embed(source="assets/transparent.png");
+	selectedDisabledSkin:Embed(source="assets/transparent.png");
+}
+.correntIcon
+{
+	icon:Embed(source="assets/business/relocate.png");
+	upSkin:Embed(source="assets/transparent.png");
+	overSkin:Embed(source="assets/transparent.png");
+	downSkin:Embed(source="assets/transparent.png");
+	disabledSkin:Embed(source="assets/transparent.png");
+	selectedUpSkin:Embed(source="assets/transparent.png");
+	selectedOverSkin:Embed(source="assets/transparent.png");
+	selectedDownSkin:Embed(source="assets/transparent.png");
+	selectedDisabledSkin:Embed(source="assets/transparent.png");
+}
+
+.editIcon
+{
+	icon:Embed(source="assets/business/edit.png");
+	upSkin:Embed(source="assets/transparent.png");
+	overSkin:Embed(source="assets/transparent.png");
+	downSkin:Embed(source="assets/transparent.png");
+	disabledSkin:Embed(source="assets/transparent.png");
+	selectedUpSkin:Embed(source="assets/transparent.png");
+	selectedOverSkin:Embed(source="assets/transparent.png");
+	selectedDownSkin:Embed(source="assets/transparent.png");
+	selectedDisabledSkin:Embed(source="assets/transparent.png");
+}
+
+MeasureResultView
+{
+	backgroundImage: Embed(source="assets/measure_result.png", scaleGridLeft="17", scaleGridTop="13", scaleGridRight="18", scaleGridBottom="14");
+	backgroundSize: "100%";
+}
+
+Canvas.centerAlert
+{
+	backgroundImage: Embed(source="assets/controls/alert/center_alert_bg.png", 
+						scaleGridLeft="15",
+						scaleGridTop="60",
+						scaleGridRight="16",
+						scaleGridBottom="61");
+	backgroundSize: "100%";
+}
+
+.publicActivityItemBG
+{
+		backgroundImage: Embed(source="assets/friend/blue_frame.png", 
+					scaleGridLeft="190",
+					scaleGridTop="100",
+					scaleGridRight="191",
+					scaleGridBottom="101"); 
+		backgroundSize: "100%";		
+}
+.publicActivityBG
+{
+		backgroundImage: Embed(source="assets/activity/white_bg_whithout_shadow.png", 
+					scaleGridLeft="11",
+					scaleGridTop="11",
+					scaleGridRight="12",
+					scaleGridBottom="12"); 
+		backgroundSize: "100%";		
+}
+.activityItemBG
+{
+	backgroundImage: Embed(source="assets/activity/activity_item_bg.png",
+														scaleGridLeft="11",
+														scaleGridTop="26",
+														scaleGridRight="12",
+														scaleGridBottom="27"); 
+	backgroundSize: "100%";
+}
+.popularActivityItemBG
+{
+	upSkin: Embed(source="assets/activity/activity_item_bg.png",
+														scaleGridLeft="11",
+														scaleGridTop="26",
+														scaleGridRight="12",
+														scaleGridBottom="27"); 
+ 	overSkin: Embed(source="assets/friend/light_blue.png", 
+						scaleGridLeft="12",
+						scaleGridTop="12",
+						scaleGridRight="13",
+						scaleGridBottom="13"); 
+	selectedUpSkin:Embed(source="assets/friend/light_blue.png", 
+						scaleGridLeft="12",
+						scaleGridTop="12",
+						scaleGridRight="13",
+						scaleGridBottom="13"); 
+	selectedDownSkin:Embed(source="assets/friend/light_blue.png", 
+						scaleGridLeft="12",
+						scaleGridTop="12",
+						scaleGridRight="13",
+						scaleGridBottom="13"); 
+	selectedOverSkin:Embed(source="assets/friend/light_blue.png", 
+						scaleGridLeft="12",
+						scaleGridTop="12",
+						scaleGridRight="13",
+						scaleGridBottom="13"); 
+	selectedDisabledSkin:Embed(source="assets/friend/light_blue.png", 
+						scaleGridLeft="12",
+						scaleGridTop="12",
+						scaleGridRight="13",
+						scaleGridBottom="13"); 
+}
+
+.myActivitytTabStyle
+{
+	upSkin: Embed(source="assets/activity/myactivities_tab_normal.png"); 
+	overSkin:Embed(source="assets/activity/myactivities_tab_normal.png"); 
+	downSkin:Embed(source="assets/activity/myactivities_tab_normal.png");
+	selectedUpSkin:Embed(source="assets/activity/myactivities_tab_selected.png");
+	selectedDownSkin:Embed(source="assets/activity/myactivities_tab_selected.png");
+	selectedOverSkin:Embed(source="assets/activity/myactivities_tab_selected.png");
+	selectedDisabledSkin:Embed(source="assets/activity/myactivities_tab_selected.png"); 
+}  
+
+.businessDetailDescriptionIcon
+{
+	upSkin: Embed(source="assets/business/detail/business_detail_description_normal.png"); 
+	overSkin:Embed(source="assets/business/detail/business_detail_description_normal.png"); 
+	downSkin:Embed(source="assets/business/detail/business_detail_description_normal.png");
+	selectedUpSkin:Embed(source="assets/business/detail/business_detail_description_select.png");
+	selectedDownSkin:Embed(source="assets/business/detail/business_detail_description_select.png");
+	selectedOverSkin:Embed(source="assets/business/detail/business_detail_description_select.png");
+	selectedDisabledSkin:Embed(source="assets/business/detail/business_detail_description_select.png"); 
+}
+.businessDetailUserEditHistoryIcon
+{
+	upSkin: Embed(source="assets/business/detail/business_detail_userEditHistory_normal.png"); 
+	overSkin:Embed(source="assets/business/detail/business_detail_userEditHistory_normal.png"); 
+	downSkin:Embed(source="assets/business/detail/business_detail_userEditHistory_normal.png");
+	selectedUpSkin:Embed(source="assets/business/detail/business_detail_userEditHistory_select.png");
+	selectedDownSkin:Embed(source="assets/business/detail/business_detail_userEditHistory_select.png");
+	selectedOverSkin:Embed(source="assets/business/detail/business_detail_userEditHistory_select.png");
+	selectedDisabledSkin:Embed(source="assets/business/detail/business_detail_userEditHistory_select.png"); 
+}
+.businessDetailRelocateHistroyIcon
+{
+	upSkin: Embed(source="assets/business/detail/business_detail_userRelocateHistory_normal.png"); 
+	overSkin:Embed(source="assets/business/detail/business_detail_userRelocateHistory_normal.png"); 
+	downSkin:Embed(source="assets/business/detail/business_detail_userRelocateHistory_normal.png");
+	selectedUpSkin:Embed(source="assets/business/detail/business_detail_userRelocateHistory_select.png");
+	selectedDownSkin:Embed(source="assets/business/detail/business_detail_userRelocateHistory_select.png");
+	selectedOverSkin:Embed(source="assets/business/detail/business_detail_userRelocateHistory_select.png");
+	selectedDisabledSkin:Embed(source="assets/business/detail/business_detail_userRelocateHistory_select.png"); 
+}
+
+.rankStar
+{
+	upSkin: Embed(source="assets/activity/star_normal.png"); 
+	overSkin:Embed(source="assets/activity/star_normal.png"); 
+	downSkin:Embed(source="assets/activity/star_normal.png");
+	selectedUpSkin:Embed(source="assets/activity/star_selected.png");
+	selectedDownSkin:Embed(source="assets/activity/star_selected.png");
+	selectedOverSkin:Embed(source="assets/activity/star_selected.png");
+	selectedDisabledSkin:Embed(source="assets/activity/star_selected.png"); 
+}
+.reviewTitleBG
+{
+	backgroundImage: Embed(source="assets/activity/activity_review_title.png", 
+					scaleGridLeft="1",
+					scaleGridTop="0",
+					scaleGridRight="2",
+					scaleGridBottom="19"); 
+	backgroundSize: "100%";		
+	height:19px;
+}
+
+.mapTypeRoad
+{
+    upSkin: Embed(source="assets/mapMenu/roadNormal.png"); 
+    overSkin:Embed(source="assets/mapMenu/roadOver.png"); 
+    downSkin:Embed(source="assets/mapMenu/roadOver.png");
+    disabledSkin:Embed(source="assets/mapMenu/roadNormal.png");
+    selectedUpSkin:Embed(source="assets/mapMenu/roadSelected.png");
+    selectedDownSkin:Embed(source="assets/mapMenu/roadSelected.png");
+    selectedOverSkin:Embed(source="assets/mapMenu/roadSelected.png");
+    selectedDisabledSkin:Embed(source="assets/mapMenu/roadSelected.png"); 
+}
+.mapType2D
+{
+    upSkin: Embed(source="assets/mapMenu/2DNormal.png"); 
+    overSkin:Embed(source="assets/mapMenu/2DOver.png"); 
+    downSkin:Embed(source="assets/mapMenu/2DOver.png");
+    disabledSkin:Embed(source="assets/mapMenu/2DNormal.png");
+    selectedUpSkin:Embed(source="assets/mapMenu/2DSelected.png");
+    selectedDownSkin:Embed(source="assets/mapMenu/2DSelected.png");
+    selectedOverSkin:Embed(source="assets/mapMenu/2DSelected.png");
+    selectedDisabledSkin:Embed(source="assets/mapMenu/2DSelected.png"); 
+}
+.mapType3D
+{
+    upSkin: Embed(source="assets/mapMenu/3DNormal.png"); 
+    overSkin:Embed(source="assets/mapMenu/3DOver.png"); 
+    downSkin:Embed(source="assets/mapMenu/3DOver.png");
+    disabledSkin:Embed(source="assets/mapMenu/3DNormal.png");
+    selectedUpSkin:Embed(source="assets/mapMenu/3DSelected.png");
+    selectedDownSkin:Embed(source="assets/mapMenu/3DSelected.png");
+    selectedOverSkin:Embed(source="assets/mapMenu/3DSelected.png");
+    selectedDisabledSkin:Embed(source="assets/mapMenu/3DSelected.png"); 
+}
+.subwayBtn
+{
+    upSkin: Embed(source="assets/mapMenu/metroNormal.png"); 
+    overSkin:Embed(source="assets/mapMenu/metroOver.png"); 
+    downSkin:Embed(source="assets/mapMenu/metroOver.png");
+    selectedUpSkin:Embed(source="assets/mapMenu/metroSelected.png");
+    selectedDownSkin:Embed(source="assets/mapMenu/metroSelected.png");
+    selectedOverSkin:Embed(source="assets/mapMenu/metroSelected.png");
+    selectedDisabledSkin:Embed(source="assets/mapMenu/metroSelected.png"); 
+}
+.measureBtn
+{
+    upSkin: Embed(source="assets/mapMenu/measureNormal.png"); 
+    overSkin:Embed(source="assets/mapMenu/measureOver.png"); 
+    downSkin:Embed(source="assets/mapMenu/measureOver.png");
+    selectedUpSkin:Embed(source="assets/mapMenu/measureSelected.png");
+    selectedDownSkin:Embed(source="assets/mapMenu/measureSelected.png");
+    selectedOverSkin:Embed(source="assets/mapMenu/measureSelected.png");
+    selectedDisabledSkin:Embed(source="assets/mapMenu/measureSelected.png"); 
+}
+.maptype2D3D
+{
+    upSkin: Embed(source="assets/mapMenu/2D-3D.png"); 
+    overSkin:Embed(source="assets/mapMenu/2D-3D.png"); 
+    downSkin:Embed(source="assets/mapMenu/2D-3D.png");
+    selectedUpSkin:Embed(source="assets/mapMenu/2D-3D.png");
+    selectedDownSkin:Embed(source="assets/mapMenu/2D-3D.png");
+    selectedOverSkin:Embed(source="assets/mapMenu/2D-3D.png");
+    selectedDisabledSkin:Embed(source="assets/mapMenu/2D-3D.png"); 
+}
+.maptypeTools
+{
+    upSkin: Embed(source="assets/mapMenu/tools.png"); 
+    overSkin:Embed(source="assets/mapMenu/tools.png"); 
+    downSkin:Embed(source="assets/mapMenu/tools.png");
+    selectedUpSkin:Embed(source="assets/mapMenu/tools.png");
+    selectedDownSkin:Embed(source="assets/mapMenu/tools.png");
+    selectedOverSkin:Embed(source="assets/mapMenu/tools.png");
+    selectedDisabledSkin:Embed(source="assets/mapMenu/tools.png"); 
+}
+.mapTypeContents
+{
+	backgroundImage: Embed(source="assets/mapMenu/border_bg.png", 
+                    scaleGridLeft="7",
+                    scaleGridTop="7",
+                    scaleGridRight="8",
+                    scaleGridBottom="8"); 
+    backgroundSize: "100%";     
+}
+
+.lineStyle
+{
+	backgroundImage: Embed(source="assets/score/line.png", 
+                    	scaleGridLeft="4",
+                   		scaleGridTop="1",
+                    	scaleGridRight="5",
+                   	 	scaleGridBottom="2"); 
+    backgroundSize: "100%";  
+}
+
+.userReviewKuang
+{
+	backgroundImage: Embed(source="assets/friend/review/user_review_kuang.png", 
+                    	scaleGridLeft="7",
+                    	scaleGridTop="7",
+                    	scaleGridRight="8",
+                    	scaleGridBottom="8"); 
+    backgroundSize: "100%";  
+}
+
+.reviewTagActivity
+{
+	upSkin: Embed(source="assets/friend/review/reviewOnActivity_normal.png"); 
+    overSkin:Embed(source="assets/friend/review/reviewOnActivity_normal.png"); 
+    downSkin:Embed(source="assets/friend/review/reviewOnActivity_normal.png");
+    disabledSkin:Embed(source="assets/friend/review/reviewOnActivity_normal.png");
+    selectedUpSkin:Embed(source="assets/friend/review/reviewOnActivity_selected.png");
+    selectedDownSkin:Embed(source="assets/friend/review/reviewOnActivity_selected.png");
+    selectedOverSkin:Embed(source="assets/friend/review/reviewOnActivity_selected.png");
+    selectedDisabledSkin:Embed(source="assets/friend/review/reviewOnActivity_selected.png"); 
+}
+
+.reviewTagBusiness
+{
+	upSkin: Embed(source="assets/friend/review/reviewOnBusiness_normal.png"); 
+    overSkin:Embed(source="assets/friend/review/reviewOnBusiness_normal.png"); 
+    downSkin:Embed(source="assets/friend/review/reviewOnBusiness_normal.png");
+    disabledSkin:Embed(source="assets/friend/review/reviewOnBusiness_normal.png");
+    selectedUpSkin:Embed(source="assets/friend/review/reviewOnBusiness_selected.png");
+    selectedDownSkin:Embed(source="assets/friend/review/reviewOnBusiness_selected.png");
+    selectedOverSkin:Embed(source="assets/friend/review/reviewOnBusiness_selected.png");
+    selectedDisabledSkin:Embed(source="assets/friend/review/reviewOnBusiness_selected.png"); 
+}
+
+.reviewTagBuilding
+{
+	upSkin: Embed(source="assets/friend/review/reviewOnBuilding_normal.png"); 
+    overSkin:Embed(source="assets/friend/review/reviewOnBuilding_normal.png"); 
+    downSkin:Embed(source="assets/friend/review/reviewOnBuilding_normal.png");
+    disabledSkin:Embed(source="assets/friend/review/reviewOnBuilding_normal.png");
+    selectedUpSkin:Embed(source="assets/friend/review/reviewOnBuilding_selected.png");
+    selectedDownSkin:Embed(source="assets/friend/review/reviewOnBuilding_selected.png");
+    selectedOverSkin:Embed(source="assets/friend/review/reviewOnBuilding_selected.png");
+    selectedDisabledSkin:Embed(source="assets/friend/review/reviewOnBuilding_selected.png"); 
+}
+
+MenuTip
+{
+	backgroundImage:Embed(source="assets/menu/menu_tip.png", 
+						scaleGridLeft="11",
+						scaleGridTop="5",
+						scaleGridRight="13",
+						scaleGridBottom="6" );
+	backgroundSize:"100%";
+}
+.dropdownMenu
+{
+	backgroundImage:Embed(source="assets/menu/dropdown_menu.png", 
+						scaleGridLeft="17",
+						scaleGridTop="10",
+						scaleGridRight="27",
+						scaleGridBottom="20" );
+	backgroundSize:"100%";
+}

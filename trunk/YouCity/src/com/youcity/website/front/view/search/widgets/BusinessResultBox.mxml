@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:components="com.youcity.website.front.view.components.*" 
+	xmlns:widgets="com.youcity.website.front.view.search.widgets.*"
+	width="100%" height="100%" 
+	horizontalScrollPolicy="off" verticalScrollPolicy="off" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*">
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.view.marker.SearchMarkerManager;
+			import com.youcity.website.front.common.Constants;
+			import com.youcity.website.front.view.common.CallbackData;
+			import com.youcity.website.front.event.SearchEvent;
+			import com.youcity.website.front.view.components.PaginationEvent;
+			import com.youcity.website.front.vo.ResultVO;
+			import mx.rpc.events.ResultEvent;
+			import com.youcity.website.front.model.SearchModelLocator;
+			
+			private static const HINT_NO_RESULT:String  = "No Result";
+			
+			private var searchModel:SearchModelLocator = SearchModelLocator.getInstance();
+			
+			private var sMarker:SearchMarkerManager = SearchMarkerManager.getInstance();
+			
+			private var dataChanged:Boolean = false;
+		
+			private var _businessResult:ResultVO;
+			public function get businessResult():ResultVO
+			{
+				return this._businessResult;
+			}
+			
+			public function set businessResult(value:ResultVO):void
+			{
+				if (value != _businessResult&&  value != null)
+				{
+					this._businessResult = value;
+					dataChanged = true;
+					invalidateDisplayList();
+				}
+			}
+			
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+			{
+				super.updateDisplayList(unscaledWidth, unscaledHeight);
+				if (dataChanged)
+				{
+					dataChanged = false;
+					var length:uint = this._businessResult.resultList.length;
+					currentState = length == 0 ? "noResult" : "normal";
+					businessRP.dataProvider = this._businessResult.resultList;
+					pBox.totalNum = this._businessResult.totalNum;
+				}
+			}
+			
+			//handler for paginationbox's changePage event
+			//search the next page
+			private function handlePaginationEvent(event:PaginationEvent):void
+			{
+				sMarker.hide();
+				var param:Object = {q:searchModel.keyword,
+									ps:searchModel.pageSize,
+									np:event.currentPage,
+									cl:Constants.SEARCHTYPE_BUSINESS,
+									cg:searchModel.category};
+				doSearchBusiness(param);
+			}
+			
+			//do search with parameter
+			//the parameter object should contains keyword, pageSize, 
+			//currentPage, searchType and catagory
+			private function doSearchBusiness(param:Object):void
+			{
+				var e:SearchEvent = new SearchEvent(SearchEvent.SEARCH_BUSINESS);
+				e.callback = doSearchBusinessCallback;
+				e.data = param;
+				e.dispatch();
+			}
+			
+			//callback function for doSearchBusiness
+			private function doSearchBusinessCallback(callbackData:CallbackData):void
+			{
+				switch (callbackData.code)
+				{
+					case CallbackData.SUCCEED:
+						this.businessResult = searchModel.businessResult;
+						sMarker.source = this.businessResult.resultList;
+						break;
+					case CallbackData.FAILED:
+						break;
+				}
+			}
+		
+		]]>
+	</mx:Script>
+	<mx:states>
+		<mx:State name="normal">
+			<mx:SetProperty target="{pBox}" name="visible" value="true"/>
+		</mx:State>
+		<mx:State name="noResult">
+			<mx:AddChild relativeTo="{businessResultView}" position="firstChild">
+				<mx:HBox width="100%" verticalAlign="middle" styleName="titleText" paddingTop="5" paddingBottom="10">
+					<mx:SWFLoader source="assets/friend/exclamation.png"/>
+					<controls:Label text="{HINT_NO_RESULT}"/>
+				</mx:HBox>
+			</mx:AddChild>
+			<mx:SetProperty target="{pBox}" name="visible" value="false"/>
+		</mx:State>
+	</mx:states>
+	
+	<mx:Canvas id="businessResultView" width="100%" height="{height - 40}">
+		<components:GridContainer width="{width - 30}" columnCount="1">
+			<mx:Repeater id="businessRP">
+				<widgets:BusinessResultItem width="100%" businessVO="{businessRP.currentItem}" />
+			</mx:Repeater>
+		</components:GridContainer>
+	</mx:Canvas>
+	<components:PaginationBox id="pBox" width="100%" changePage="handlePaginationEvent(event)"/>
+</mx:VBox>

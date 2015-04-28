@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas
+	width="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off"
+	xmlns:mx="http://www.adobe.com/2006/mxml" backgroundColor="red" backgroundAlpha="0"
+	xmlns:tabNavi="com.youcity.website.front.view.components.tabNavi.*" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*">
+	<mx:Style>
+		.naviItem
+		{
+			upSkin: Embed("assets/useraccounts/sideview_setting_item_bg.png");
+			overSkin: Embed("assets/useraccounts/sideview_setting_item_bg.png");
+			downSkin: Embed("assets/useraccounts/sideview_setting_selected.png");
+			selectedDownSkin: Embed("assets/useraccounts/sideview_setting_selected.png");
+			selectedDisabledSkin: Embed("assets/useraccounts/sideview_setting_selected.png");
+			selectedDownSkin:Embed("assets/useraccounts/sideview_setting_selected.png");
+			selectedOverSkin:Embed("assets/useraccounts/sideview_setting_selected.png");
+			selectedUpSkin:Embed("assets/useraccounts/sideview_setting_selected.png");
+			font-family:Arial;
+			font-size:15px;
+			font-weight:bold;
+			color:#ADFFFF;
+		}
+		.unFoucs
+		{
+			upSkin: Embed("assets/useraccounts/sideview_setting_item_bg.png");
+			overSkin: Embed("assets/useraccounts/sideview_setting_item_bg.png");
+			downSkin: Embed("assets/useraccounts/sideview_setting_item_bg.png");
+			selectedDownSkin: Embed("assets/useraccounts/sideview_setting_item_bg.png");
+			selectedDisabledSkin: Embed("assets/useraccounts/sideview_setting_item_bg.png");
+			selectedDownSkin:Embed("assets/useraccounts/sideview_setting_item_bg.png");
+			selectedOverSkin:Embed("assets/useraccounts/sideview_setting_item_bg.png");
+			selectedUpSkin:Embed("assets/useraccounts/sideview_setting_item_bg.png");
+			font-family:Arial;
+			font-size:15px;
+			font-weight:bold;
+			color:#ADFFFF;
+		}
+		.itemStyle
+		{
+			upSkin: Embed("assets/useraccounts/sideview_setting_item_bg.png");
+			overSkin: Embed("assets/useraccounts/sideview_setting_item_bg.png");
+			downSkin: Embed("assets/useraccounts/sideview_setting_selected_left.png");
+			selectedDownSkin: Embed("assets/useraccounts/sideview_setting_selected.png");
+			selectedDisabledSkin: Embed("assets/useraccounts/sideview_setting_selected.png");
+			selectedDownSkin:Embed("assets/useraccounts/sideview_setting_selected.png");
+			selectedOverSkin:Embed("assets/useraccounts/sideview_setting_selected.png");
+			selectedUpSkin:Embed("assets/useraccounts/sideview_setting_selected.png");
+		}
+	</mx:Style>
+	<mx:Script>
+		<![CDATA[
+			import mx.events.IndexChangedEvent;
+			import mx.events.StateChangeEvent;
+			import mx.events.ItemClickEvent;
+			public var naviItemList:Array;
+			private function handleItemClick(event:ItemClickEvent):void
+			{
+				
+			}
+			private function handleCurrentStateChanging(event:StateChangeEvent):void
+			{
+				
+			}
+			private function handleViewStackChange(event:IndexChangedEvent):void
+			{
+				
+			}
+			
+			private function selectAll(flag:Boolean):void
+			{
+			 	leftItem.selected = flag;
+				middleItem.selected = flag;
+				rightItem.selected = flag;
+			}
+			
+			private function itemClickHanlder(event:MouseEvent):void
+			{
+				selectAll(false);
+				TabNaviItem(event.currentTarget).selected = true;
+			}
+			
+			private function onclickHanlder(event:MouseEvent):void
+			{
+				selectAll(false);
+				Button(event.currentTarget).selected = true;
+			}
+			
+			private function nav_1_ClickHanlder(event:MouseEvent):void
+			{
+				//navi_1.setStyle("tabStyleName", "naviItem");
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:HBox id="firstRow" width="100%" x="0" y="0">
+		<controls:Button id="leftItem" styleName="naviItem" toggle="true" click="onclickHanlder(event)"/>
+		<controls:Button id="middleItem" styleName="naviItem" toggle="true" click="onclickHanlder(event)"/>
+		<controls:Button id="rightItem" styleName="naviItem" toggle="true" click="onclickHanlder(event)"/>
+	</mx:HBox>
+<!--	<mx:Canvas id="secondRow" width="100%" y="{firstRow.y + firstRow.height}" x="2">
+		<tabNavi:TabNaviItem id="leftItem_2"
+			width="100%" x="0" y="0"  click="itemClickHanlder(event)"
+			naviItemLabel="aaa" naviStyleName="naviItem"
+			position="{TabNaviItem.POSITION_LEFT}" />
+		<tabNavi:TabNaviItem  id="middleItem_2"
+			width="100%" x="0" y="0"  click="itemClickHanlder(event)"
+			naviItemLabel="aaa" naviStyleName="naviItem"
+			position="{TabNaviItem.POSITION_MIDDLE}"/>
+		<tabNavi:TabNaviItem  id="rightItem_2"
+			width="100%" x="0" y="0" height="{height - rightItem_2.y}" selected="true"
+			naviItemLabel="aaa" naviStyleName="naviItem"  click="itemClickHanlder(event)"
+			position="{TabNaviItem.POSITION_RIGHT}">
+			<mx:Canvas width="100%" height="100%" y="28" backgroundColor="red" />
+		</tabNavi:TabNaviItem>
+	</mx:Canvas>-->
+<!--	<mx:TabNavigator id="navi_1" 
+		width="100%" height="100%" y="0" borderSides="no" 
+		tabStyleName="unFoucs" verticalGap="0" click="nav_1_ClickHanlder(event)"
+		horizontalGap="1" x="3" paddingTop="0">
+		<mx:Canvas
+			height="100%" width="100%" backgroundColor="red"
+			x="0" y="-1"/>
+		<mx:Canvas
+			height="100%" width="100%"  backgroundColor="blue"
+			x="0" y="0"/>
+		<mx:Canvas
+			height="100%" width="100%"  backgroundColor="gray"
+			x="0" y="0"/>	
+	</mx:TabNavigator>
+	<mx:TabNavigator  id="navi_2" 
+		click="onclickHanlder(event)" selectedTabTextStyleName="naviItem"
+		width="100%" height="100%" y="28" borderSides="no" 
+		tabStyleName="naviItem" verticalGap="0"
+		horizontalGap="1" x="3" paddingTop="0">
+		<mx:Canvas
+			height="100%" width="100%" backgroundColor="red"
+			x="0" y="-1"/>
+		<mx:Canvas
+			height="100%" width="100%"  backgroundColor="blue"
+			x="0" y="0"/>
+		<mx:Canvas
+			height="100%" width="100%"  backgroundColor="gray"
+			x="0" y="0"/>	
+	</mx:TabNavigator>-->
+</mx:Canvas>

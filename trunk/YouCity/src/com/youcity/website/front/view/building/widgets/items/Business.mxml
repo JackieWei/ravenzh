@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigator:ItemBase
+	xmlns:navigator="com.youcity.website.front.view.components.navigator.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:components="com.youcity.website.front.view.components.*" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*" 
+	xmlns:businessContent="com.youcity.website.front.view.building.widgets.items.businessContent.*"
+	xmlns:items="com.youcity.website.front.view.building.widgets.items.*" 
+	xmlns:base="com.youcity.website.front.view.building.base.*"
+	xmlns:code="flexlib.controls.*"
+	creationComplete="onCompleteHandler(event)"
+	>	
+	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.view.building.BuildingModel;
+			import mx.events.FlexEvent;
+			private function onCompleteHandler(event:FlexEvent):void
+			{
+//				if (index == BuildingModel.firstIndex)
+//				{
+//					navigator.selectedIndex = BuildingModel.secondIndex;
+//				}
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:HBox 
+		x="10" y="20" width="{width - 20}" height="{height - 25}"
+		verticalGap="0" horizontalGap="6" 
+		horizontalScrollPolicy="off" verticalScrollPolicy="off"
+		>
+		<items:DetailInfo id="detailInfo" source="{BuildingModel.currentBuilding}"/>
+		<businessContent:Business />
+<!--		<navigator:Navigator id="navigator"
+			location="top" 
+			x="10" y="20" 
+			iconGap="-5" 
+			marginStart="-1"
+			innerGap="-17"
+			iconWidth="171" iconHeight="35"
+			width="100%" height="{height - 20}"
+			contentStyleName="businessBusinessBuildingBG"
+			>
+			<navigator:icons>
+				<code:CanvasButton width="171" height="35" styleName="businessBusinessBuilding" />
+				<code:CanvasButton width="171" height="35" styleName="businessAddedBuilding" />
+				<code:CanvasButton width="171" height="35" styleName="businessRelocatedBuilding" />
+			</navigator:icons>
+			<navigator:contents>
+				<businessContent:Business />
+				<businessContent:Added />
+				<businessContent:Relocated />
+			</navigator:contents>
+		</navigator:Navigator>-->
+	</mx:HBox>
+</navigator:ItemBase>

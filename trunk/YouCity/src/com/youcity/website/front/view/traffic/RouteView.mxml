@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<route:ViewBase 
+	xmlns:route="com.youcity.website.front.view.common.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="360" height="465"
+	viewID="routeView"
+	creationComplete="onInit(event)"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off"
+	titleIcon="assets/traffic/route_detail_title.png"
+	xmlns:components="com.youcity.website.front.view.components.*" 
+	xmlns:items="com.youcity.website.front.view.traffic.items.*" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.model.CityModelLocator;
+			import mx.collections.ArrayCollection;
+			import com.youcity.website.front.view.common.CallbackData;
+			import mx.events.FlexEvent;
+			
+			[Bindable]
+			private var _stations:ArrayCollection;
+			
+			private static const ROUTE_PREFIX:String = "assets/traffic/routes_pict/";
+			
+			[Bindable]
+			private var routeLine:String;
+			
+			private function onInit(event:FlexEvent):void
+			{
+				getData();
+				addEventListener(ViewBase.EVENT_CLOSE_VIEW, onCloseHandler);
+				TrafficEventDisptacher.instance.addEventListener(TrafficEventDisptacher.CURRENT_ROUTE_CHANGE, onRouteChangHandler);
+			}
+			
+			private function onCloseHandler(event:Event):void
+			{
+				TrafficProxy.instance.closeRouteView();
+			}
+			
+			public function onRouteChangHandler(event:Event):void
+			{
+				getData();
+			}
+			
+			public function getData():void
+			{
+				TrafficProxy.instance.getRouteStations(SubwayModel.currentRoute,getStationsCallbackHandler,this);
+			}
+			
+			private function getStationsCallbackHandler(callbackData:CallbackData):void
+			{
+				if (CallbackData.SUCCEED == callbackData.code)
+				{
+					_stations = CityModelLocator.getInstance().routStations;
+//					if (!currentState) currentState = "default";
+					routeLogo.source = TrafficProxy.instance.getRouteIcon(SubwayModel.currentRoute, 2);
+					routeName.text = SubwayModel.subWayInfo.name;
+					routeLine = ROUTE_PREFIX + SubwayModel.currentRoute.toUpperCase() + ".png";
+				}
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:Canvas
+		x="20" y="{ViewBase.TITLE_HEIGHT}"
+        horizontalScrollPolicy="off"
+        width="{width - 28}" height="{height - ViewBase.TITLE_HEIGHT - 15}">
+		<mx:Canvas width="100%" height="100%">
+			<mx:HBox 
+				width="{width - 50}" 
+				horizontalGap="0" verticalGap="0"
+				horizontalScrollPolicy="off">
+				<mx:VBox height="100%">
+					<mx:SWFLoader id="routeLogo" />
+					<controls:Text id="routeName" 
+						fontSize="15" color="0x666666"
+						width="{width - 47 - 115}" />
+				</mx:VBox>
+				<mx:SWFLoader 
+					source="{routeLine}"
+					width="115" height="149" />
+			</mx:HBox>
+			<components:GridContainer 
+				y="150" x="0"
+				borderColor="0xe8eeed" borderStyle="solid" borderThickness="1"
+				cornerRadius="10"
+				columnCount="1" 
+				width="{width - 50}"
+				horizontalScrollPolicy="off"
+				>
+				<mx:Repeater id="rpt" dataProvider="{_stations}">
+					<items:RouteItem 
+						cornerRadius="10"
+						index="{rpt.currentIndex}"
+						source="{rpt.currentItem}" 
+						width="100%"/>
+				</mx:Repeater>
+			</components:GridContainer>
+		</mx:Canvas>
+	</mx:Canvas>
+	
+</route:ViewBase>

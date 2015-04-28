@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<common:ViewBase xmlns:common="com.youcity.website.front.view.common.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:widgets="com.youcity.website.front.view.search.widgets.*"
+	xmlns:components="com.youcity.website.front.view.components.*" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*"
+	width="270" height="500" 
+	viewID="searchView" 
+	titleIcon="assets/search/search_title.png" 
+	styleName="searchView" 
+	closeView="handleCloseViewEvent(event)" 
+	creationComplete="handleCreationComplete(event)">
+
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.event.MapManagerEvent;
+			import com.youcity.website.front.common.AssetsEmbed;
+			import com.youcity.website.front.view.marker.SearchMarkerManager;
+			import com.youcity.website.front.common.Constants;
+			import mx.controls.Button;
+			import com.youcity.website.front.vo.BusinessVO;
+			import com.youcity.website.front.vo.BuildingVO;
+			import com.youcity.website.front.vo.ResultVO;
+			import com.youcity.website.front.util.AuxUtil;
+			import com.youcity.website.front.model.SearchModelLocator;
+			import com.youcity.website.front.view.common.MapManager;
+			import mx.events.IndexChangedEvent;
+			import mx.events.FlexEvent;
+			import mx.events.ItemClickEvent;
+			
+			private var searchModel:SearchModelLocator = SearchModelLocator.getInstance();
+			
+			private var sMarker:SearchMarkerManager;
+			
+			private var resultNumber:uint = 0;
+			
+			private function handleCloseViewEvent(event:Event):void
+			{
+				MapManager.getInstance().stopEnclosure();
+				SearchProxy.instance.finishSearch();
+				if (searchConditionView)
+					searchConditionView.close();
+				//clear tips 
+				if(sMarker)
+					sMarker.clear();
+			}
+			
+			//Handler for CreationComplete Event
+			private function handleCreationComplete(event:FlexEvent):void
+			{
+				var param:Object = {};
+				if (searchModel.searchType)
+				{
+					param.searchType = searchModel.searchType;
+				}
+				if (searchModel.keyword)
+				{
+					param.keyword = searchModel.keyword;
+				}
+				this.searchConditionView.param = param;
+				
+				MapManager.getInstance().addEventListener(MapManagerEvent.ENCLOSURE_END, handleEnclosureEvent);
+			}
+			
+			//handler for enclosure end
+			private function handleEnclosureEvent(event:MapManagerEvent):void
+			{
+				searchBtn.selected = true;
+				searchResultView.selectedChild = searchConditionView;
+				resultMenu.selectedIndex = -1;
+				searchConditionView.doSearch();
+			}
+			
+			//handler for Search Button Click Event
+			private function handleSearchBtnClick(event:MouseEvent):void
+			{
+				if (searchModel.isAreaSearch || searchModel.isNearBySearch)
+				{
+					MapManager.getInstance().startEnclosure();
+					MapManager.getInstance().drawEnclosure(searchModel.area_start, searchModel.area_end);
+				}
+				searchResultView.selectedChild = searchConditionView;
+				resultMenu.selectedIndex = -1;
+			}
+			
+			//Handler for SearchMenu's menuItemClick event
+			//the ViewStack "searchResultView" will change its selecteChild 
+			//if you select a different menuItem
+			private function handleMenuItemClick(event:Event):void
+			{
+				searchBtn.selected = false;
+				var index:uint = resultMenu.selectedIndex;
+				var name:String = resultMenu.getChildAt(index).name;
+				switch (name)
+				{
+					case "buildingBtn":
+						searchResultView.selectedChild = buildingResultView;
+						break;
+					case "businessBtn":
+						searchResultView.selectedChild = businessResultView;
+						break;
+					default:
+						break;
+				}
+			}
+			
+			//Handler for ViewStack 's change event
+			//Remove all Markers, and add new Markers
+			private function handleSelectedChildChange(event:IndexChangedEvent):void
+			{
+				sMarker = SearchMarkerManager.getInstance();
+				
+				switch (event.newIndex)
+				{
+					case 1: 
+					    sMarker.hide();
+						buildingResultView.buildingResult = searchModel.buildingResult;
+						sMarker.source=searchModel.buildingResult.resultList;
+						break;
+					case 2:
+					    sMarker.hide();
+						businessResultView.businessResult = searchModel.businessResult;
+						sMarker.source=searchModel.businessResult.resultList;
+						break;
+					default:
+						break;
+				}
+			}
+			
+			//Handler for SearchConditionBox's searchStart event
+			private function handleSearchStart(event:Event):void
+			{
+				resultNumber = 0;
+				resultMenu.removeAllChildren();
+			}
+			
+			//Handler for SearchConditionBox's buildingSearchEnd event
+			//if the building result comes back first and the result is not empty,
+			//select building menu.
+			private function handleBuilidingSearchEnd(event:Event):void
+			{
+				var btn:mx.controls.Button = new mx.controls.Button();
+				btn.toolTip = "Building";
+				btn.name = "buildingBtn";
+				btn.toggle = true;
+				btn.styleName = "iconBtn";
+				btn.width = 40;
+				btn.height = 39;
+				btn.setStyle("icon", AssetsEmbed.BUILDING_ICON);
+				resultMenu.addChild(btn);
+				
+				if (searchModel.buildingResult.resultList.length != 0 && searchBtn.selected)
+				{
+					MapManager.getInstance().stopEnclosure(true);
+					searchResultView.selectedChild = buildingResultView;
+					resultMenu.selectedIndex = resultMenu.getChildIndex(btn);
+					searchBtn.selected = false;
+				}
+			}
+			
+			//Handler for SearchConditionBox's businessSearchEnd event
+			//if the business result comes back first and the result is not empty,
+			//select business menu.
+			private function handleBusinessSearchEnd(event:Event):void
+			{
+				var btn:mx.controls.Button = new mx.controls.Button();
+				btn.toolTip = "Business";
+				btn.name = "businessBtn";				
+				btn.toggle = true;
+				btn.styleName = "iconBtn";
+				btn.width = 40;
+				btn.height = 39;
+				btn.setStyle("icon", AssetsEmbed.BUSINESS_ICON);
+				resultMenu.addChild(btn);
+
+				if (searchModel.businessResult.resultList.length != 0 && searchBtn.selected)
+				{
+					MapManager.getInstance().stopEnclosure(true);
+					searchResultView.selectedChild = businessResultView;
+					resultMenu.selectedIndex = resultMenu.getChildIndex(btn);
+					searchBtn.selected = false;
+				}
+			}
+		]]>
+	</mx:Script>
+	<controls:Button id="searchBtn" x="0" y="{ViewBase.TITLE_HEIGHT + 10}" 
+					width="40" height="39"
+					icon="{AssetsEmbed.SEARCH_ICON}" 
+					styleName="iconBtn" 
+					toggle="true" 
+					selected="true" 
+					click="handleSearchBtnClick(event)"/>
+	
+	<widgets:SearchResultMenu id="resultMenu" 
+			x="0" y="{ViewBase.TITLE_HEIGHT + 50}" 
+			width="40" height="400"
+			itemClick="handleMenuItemClick(event)"/>
+	<mx:ViewStack id="searchResultView" 
+			x="40" y="{ViewBase.TITLE_HEIGHT + 5}"
+			width="{width - 60}" height="{height - 70}" 
+			change="handleSelectedChildChange(event)" 
+			paddingLeft="5">
+			
+		<!--******Search Condition********-->
+		<widgets:SearchConditionBox id="searchConditionView"
+						width="100%" height="100%"
+						searchStart="handleSearchStart(event)"
+						buildingSearchEnd="handleBuilidingSearchEnd(event)" 
+						businessSearchEnd="handleBusinessSearchEnd(event)"/>
+		<widgets:BuildingResultBox id="buildingResultView" width="100%" height="100%"/>	
+		<widgets:BusinessResultBox id="businessResultView" width="100%" height="100%"/>	
+	</mx:ViewStack>
+</common:ViewBase>

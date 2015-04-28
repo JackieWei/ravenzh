@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*" 
+	xmlns:components="com.youcity.website.front.view.components.*" 
+	xmlns:items="com.youcity.website.front.view.traffic.items.*">
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.vo.StationVO;
+			import com.youcity.website.front.view.traffic.RouteView;
+			
+			[Bindable]
+			public var source:StationVO;
+			
+			private static const SINGULARCOLOR:uint = 0xe8eeed;
+			private static const DUALCOLOR:uint = 0xffffff;
+			
+			private var _index:uint;
+			public function set index(value:uint):void
+			{
+				if (_index == value) return;
+				_index = value;
+				var color:uint = _index == uint((_index + 1)/2) * 2 ? DUALCOLOR : SINGULARCOLOR;
+				setStyle("backgroundColor", color);
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<controls:Text width="{width/2}" text="{source.name}" />
+	<items:RouteList source="{source.description.split(',')}" />
+	
+</mx:HBox>

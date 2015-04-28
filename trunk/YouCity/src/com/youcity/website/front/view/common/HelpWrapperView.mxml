@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ViewBase 
+	xmlns="com.youcity.website.front.view.common.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="600" height="600"
+	viewID="helpWrapperView"
+	xmlns:aboutus="com.youcity.website.front.view.useraccounts.aboutus.*"
+	xmlns:controls="com.youcity.website.front.view.components.controls.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.view.components.controls.alert.Alert;
+			import mx.events.ScrollEvent;
+			import com.youcity.website.front.util.DataLoadingUtil;
+			
+			private function addRoundClip(target:UIComponent):void
+			{
+				var shape:Shape = new Shape();
+				shape.graphics.beginFill(0x000000,1);
+				shape.graphics.drawRoundRect(0,0,target.width,target.height,10,10);
+				shape.graphics.endFill();
+				target.addChild(shape);
+				target.mask = shape;
+			}
+			
+			private function loadContextHandler(event:Event):void
+			{
+				addRoundClip(contextImgContainer);
+				DataLoadingUtil.startLoading(contextImgContainer);
+				var loader:Loader = new Loader();
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onCompleteHandler);
+				var url:URLRequest = new URLRequest("assets/help/help_context.jpg");
+				loader.load(url);
+			}
+			
+			private function onCompleteHandler(event:Event):void
+			{
+				DataLoadingUtil.finishLoading(contextImgContainer);
+				var loader:LoaderInfo = event.target as LoaderInfo;
+				contextImgContainer.addChild(loader.content);
+				contextImgContainer.width = loader.content.width;
+				contextImgContainer.height = loader.content.height;
+				addClickNavi();
+			}
+			
+			private function addClickNavi():void
+			{
+				var mapNavi:Sprite = spriteConstruct(190, 45, 55, 25);
+				mapNavi.addEventListener(MouseEvent.CLICK, onMapNaviClickHandler);
+				contextImgContainer.addChild(mapNavi);
+				var mapOption:Sprite = spriteConstruct(150, 45, 251, 57);
+				mapOption.addEventListener(MouseEvent.CLICK, onMapOptionClickHandler);
+				contextImgContainer.addChild(mapOption);
+				var miniMap:Sprite = spriteConstruct(150, 50, 135, 150);
+				miniMap.addEventListener(MouseEvent.CLICK, onMiniMapClickHandler);
+				contextImgContainer.addChild(miniMap);
+				var mainMenu:Sprite = spriteConstruct(195, 55, 280, 260);
+				mainMenu.addEventListener(MouseEvent.CLICK, onMainMenuClickHandler);
+				contextImgContainer.addChild(mainMenu);
+				var systemMenu:Sprite = spriteConstruct(72, 100, 400, 120);
+				systemMenu.addEventListener(MouseEvent.CLICK, onSytemMenuClickHandler);
+				contextImgContainer.addChild(systemMenu);
+			}
+			
+			private function onMapNaviClickHandler(event:MouseEvent):void
+			{
+				mainContainer.verticalScrollPosition = 794;
+			}
+			
+			private function onMapOptionClickHandler(event:MouseEvent):void
+			{
+				mainContainer.verticalScrollPosition = 390;
+			}
+			
+			private function onMiniMapClickHandler(event:MouseEvent):void
+			{
+//				mainContainer.verticalScrollPosition = 400;
+			}
+			
+			private function onMainMenuClickHandler(event:MouseEvent):void
+			{
+				mainContainer.verticalScrollPosition = 570;
+			}
+			
+			private function onSytemMenuClickHandler(event:MouseEvent):void
+			{
+//				mainContainer.verticalScrollPosition = 455;
+			}
+			
+			private function spriteConstruct(width:Number, height:Number, x:Number, y:Number):Sprite
+			{
+				var sprite:Sprite = new Sprite();
+				sprite.x = x;
+				sprite.y = y;
+				sprite.buttonMode = true;
+				sprite.graphics.beginFill(0x000000, 0);
+				sprite.graphics.drawRect(0,0,width,height);
+				sprite.graphics.endFill();
+				return sprite;
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:VBox id="mainContainer"
+		horizontalScrollPolicy="off" verticalGap="15"
+		width="570" x="15" y="{ViewBase.TITLE_HEIGHT}" height="{600 - ViewBase.TITLE_HEIGHT - 15}">
+		<mx:HBox id="contenxt" width="100%" horizontalAlign="center">
+			<mx:UIComponent id="contextImgContainer" 
+				creationComplete="loadContextHandler(event)" width="534" height="373" />
+		</mx:HBox>
+		<mx:VBox id="mapOptionButton" width="100%" horizontalAlign="center">
+			<controls:Label text="Map Operation Button" fontSize="15" styleName="blackFont"/>
+			<mx:HBox width="100%" horizontalAlign="left" verticalAlign="top">
+				<mx:HBox width="120" verticalAlign="middle">
+					<controls:Label text="• " styleName="blackFont" />
+					<mx:SWFLoader source="assets/help/enclosure.png"/>
+				</mx:HBox>
+				<controls:Text text="Click to select an area on the map to search for information within the area" width="410"/> 
+			</mx:HBox>
+			<mx:HBox width="100%" horizontalAlign="left" verticalAlign="top">
+				<mx:HBox width="120" verticalAlign="middle">
+					<controls:Label text="• " styleName="blackFont" />
+					<mx:SWFLoader source="assets/help/subway.png" />
+				</mx:HBox>
+				<controls:Text text="Click to show/hide the metro stations on the map" width="410"/> 
+			</mx:HBox>
+			<mx:HBox width="100%" horizontalAlign="left" verticalAlign="top">
+				<mx:HBox width="120" verticalAlign="middle">
+					<controls:Label text="• " styleName="blackFont" />
+					<mx:SWFLoader source="assets/help/measure.png" />
+				</mx:HBox>
+				<controls:Text  width="380" text="Click to activate the distance measurement function, single click on the map to set the starting point, and double click to finish "/> 
+			</mx:HBox>
+			<mx:HBox width="100%" horizontalAlign="left" verticalAlign="top">
+				<mx:HBox width="120" verticalAlign="middle">
+					<controls:Label text="• " styleName="blackFont" />
+					<mx:SWFLoader source="assets/help/maptype_3d.png" />
+					<mx:SWFLoader source="assets/help/maptype_2d.png" />
+				</mx:HBox>
+				<controls:Text text="Click to switch between 3D and 2D view"  width="410"/> 
+			</mx:HBox>
+		</mx:VBox>
+		<mx:VBox id="mainMenu" width="100%" horizontalAlign="center">
+			<controls:Label text="Main Menu (after login)" fontSize="15" styleName="blackFont"/>
+			<mx:HBox width="100%" horizontalAlign="left"  verticalAlign="middle">
+				<mx:HBox>
+					<controls:Label text="• " styleName="blackFont" />
+					<mx:SWFLoader source="assets/help/menu.jpg" />
+				</mx:HBox>
+				<controls:Text text="Click to open to main menu" width="410"/> 
+			</mx:HBox>
+			<mx:VBox width="100%" horizontalAlign="left" verticalGap="3" verticalAlign="middle">
+				<mx:HBox>
+					<controls:Label text="• " styleName="blackFont" />
+					<mx:SWFLoader source="assets/help/menu_open.jpg" />
+				</mx:HBox>
+				<controls:Text text="Click the edge to close the main menu" width="410" textIndent="20"/> 
+			</mx:VBox>
+			<mx:VBox width="100%" horizontalAlign="left"  verticalAlign="middle">
+				<mx:HBox>
+					<controls:Label text="• " styleName="blackFont" />
+					<controls:Text  width="410" text="Click each icon to access:"/> 
+				</mx:HBox>
+				<mx:HBox>
+					<mx:Spacer width="20" />
+					<mx:VBox>
+						<controls:Label text="–	My Friends" />
+						<controls:Label text="–	Public Activity" />
+						<controls:Label text="–	My Activity" />
+						<controls:Label text="–	My Friend’s Feed" />
+						<controls:Label text="–	My Map" />
+						<controls:Label text="–	Main Search Menu" />
+						<controls:Label text="–	My Mail / Message" />
+					</mx:VBox>
+				</mx:HBox>
+			</mx:VBox>
+		</mx:VBox>
+		<mx:VBox id="zoomControl" width="100%" horizontalAlign="center">
+			<mx:SWFLoader source="assets/help/zoom.jpg" />
+		</mx:VBox>
+	    <mx:VBox id="embedHelp" width="550" >
+	        <mx:HBox width="100%" horizontalAlign="center">
+		        <controls:Label text="How do I embed my YouCity Map to other websites or blogs" fontSize="15" styleName="blackFont"/>
+	        </mx:HBox>
+	        <mx:Spacer height="10" />
+            <controls:Text  width="550" text="Adding a custom 3D map to your website or blog is now as easy as embedding a YouTube video. No programming skills are required. All it takes is three simple steps:" />
+        	<mx:VBox width="100%">
+        		<mx:HBox verticalAlign="top">
+	                <controls:Label text="1• " styleName="blackFont" />
+	                <controls:Text width="510" text="On YouCity, pull up the map you want to embed. It can be a location, a business, an activity/event, or a map that you or your friends have created using our MyMap function."  />
+	            </mx:HBox>
+        		<mx:HBox verticalAlign="top">
+	                <controls:Label text="2• " styleName="blackFont" />
+	                <mx:VBox horizontalAlign="center">
+		                <controls:Text width="510" text="Then click 'Get Link ' in the bottom right-hand corner, and then click 'Copy' that you see in the second box."  />
+		                <controls:SWFLoader maxWidth="510" source="assets/help/activity_detail.png" width="100%" />
+	                    <controls:SWFLoader maxWidth="510" source="assets/help/getlink.png" />
+	                </mx:VBox>
+	            </mx:HBox>
+	            <mx:HBox verticalAlign="top">
+                    <controls:Label text="3• " styleName="blackFont" />
+                    <mx:VBox verticalAlign="top" horizontalAlign="center">
+                        <controls:Text width="510" text='Paste that code into your blog editor or into the HTML of your webpage.  And click “publish”'  />
+                        <controls:SWFLoader width="510" source="assets/help/embed.jpg" maintainAspectRatio="false" />
+                    </mx:VBox>
+                </mx:HBox>
+                <controls:Label text="Voila! The map appears on your blog."  />
+        	</mx:VBox>
+	    </mx:VBox>
+	</mx:VBox>
+	
+	<controls:Button click="mainContainer.verticalScrollPosition = 0" right="15" top="15" label="Return Top" />
+	
+</ViewBase>

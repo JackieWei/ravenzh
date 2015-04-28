@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	styleName="stationInfoBG"
+	xmlns:controls="com.youcity.website.front.view.components.controls.*"
+	width="{tipText.width}" height="{tipText.height}">
+	
+	<mx:Script>
+		<![CDATA[
+			override public function set name(value:String):void
+			{
+				tipText.text = value;
+			}
+		]]>
+	</mx:Script>
+	
+	<controls:Label id="tipText" color="0xff9c00" fontSize="14" />
+</mx:Canvas>

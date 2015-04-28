@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	horizontalAlign="center" verticalAlign="middle"
+	xmlns:controls="com.youcity.website.front.view.components.controls.*"
+	currentState="state_0"
+	>
+	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.view.business.BusinessProxy;
+			import mx.collections.ArrayCollection;
+			import com.youcity.website.front.vo.BusinessVO;
+			import com.youcity.website.front.view.common.CallbackData;
+			import com.youcity.website.front.view.building.BuildingProxy;
+			private var _source:BusinessVO
+			public function get source():BusinessVO
+			{
+				return _source;
+			}
+			[Bindable]
+			public function set source(value:BusinessVO):void
+			{
+				if (_source && _source == value) return;
+				_source = value;
+				currentState = "state_" + String(source.verifyStatus);
+			}
+			
+			private function voteAddedCallbackHandler(callbackData:CallbackData):void
+			{
+				addedVote.enabled = false;
+				addedOppose.enabled = false;
+				if (CallbackData.SUCCEED == callbackData.code)
+				{
+					source.agreeCount ++;
+				}
+			}
+			
+			private function opposeAddedCallbackHandler(callbackData:CallbackData):void
+			{
+				addedVote.enabled = false;
+				addedOppose.enabled = false;
+				if (CallbackData.SUCCEED == callbackData.code)
+				{
+					source.disagreeCount ++;
+				}
+			}
+			
+			private function voteRelocatedCallbackHandler(callbackData:CallbackData):void
+			{
+				relocatedVote.enabled = false;
+				relocatedOppose.enabled = false;
+				if (CallbackData.SUCCEED == callbackData.code)
+				{
+					source.agreeCount ++;
+				}
+			}
+			
+			private function opposeRelocatedCallbackHandler(callbackData:CallbackData):void
+			{
+				relocatedVote.enabled = false;
+				relocatedOppose.enabled = false;
+				if (CallbackData.SUCCEED == callbackData.code)
+				{
+					source.disagreeCount ++;
+				}
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:states>
+		<mx:State name="state_0">
+			<mx:AddChild relativeTo="{this}">
+				<mx:VBox height="100%" verticalAlign="middle">
+					<mx:HBox horizontalGap="0" >
+						<controls:Button
+						styleName="editIcon"
+						width="24" height="19"
+						toolTip="Edit it"
+						/>
+						<controls:LinkLabel 
+							styleName="linkBtn" textDecoration="none" 
+							click="BusinessProxy.instance.openBusiness(source, 0, 1); "
+							text="({source.notedListCount})" />
+					</mx:HBox>
+					<mx:HBox horizontalGap="0">
+						<controls:Button
+							styleName="correntIcon"
+							toolTip="Relocate it"
+							width="24" height="19"
+							/>
+						<controls:LinkLabel
+							styleName="linkBtn" textDecoration="none" 
+							click="BusinessProxy.instance.openBusiness(source, 0, 2) "
+							text="({source.relocatedListCount})" />
+					</mx:HBox>
+				</mx:VBox>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="state_1">
+			<mx:AddChild relativeTo="{this}">
+				<mx:VBox height="100%" verticalAlign="middle">
+					<mx:HBox>
+						<controls:Button id="addedVote" styleName="voteIcon" width="19" height="16" />
+						<controls:Label text="{source.agreeCount}"/>
+					</mx:HBox>
+					<mx:HBox>
+						<controls:Button id="addedOppose" styleName="opposeIcon" width="19" height="16" />
+						<controls:Label text="{source.disagreeCount}" />
+					</mx:HBox>
+				</mx:VBox>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="state_2">
+			<mx:AddChild relativeTo="{this}">
+				<mx:VBox height="100%" verticalAlign="middle">
+					<mx:HBox>
+						<controls:Button id="relocatedVote" styleName="voteIcon"  width="19" height="16"/>
+						<controls:Label text="{source.agreeCount}"/>
+					</mx:HBox>
+					<mx:HBox>
+						<controls:Button id="relocatedOppose" styleName="opposeIcon"  width="19" height="16"/>
+						<controls:Label text="{source.disagreeCount}" />
+					</mx:HBox>
+				</mx:VBox>
+			</mx:AddChild>
+		</mx:State>
+	</mx:states>
+	
+</mx:VBox>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<subway>
+<s><i>101</i><n>33RD ST</n><r>4,6</r><x>60858</x><y>21767</y></s>
+<s><i>102</i><n>79TH ST</n><r>1</r><x>71190</x><y>11635</y></s>
+<s><i>103</i><n>103RD ST</n><r>4,6</r><x>83495</x><y>13883</y></s>
+<s><i>104</i><n>EAST BROADWAY</n><r>F</r><x>49969</x><y>29713</y></s>
+<s><i>105</i><n>7TH AVE</n><r>B,D,E</r><x>65134</x><y>17147</y></s>
+<s><i>106</i><n>49TH ST</n><r>N,R,W</r><x>63885</x><y>17606</y></s>
+<s><i>107</i><n>23RD ST</n><r>1</r><x>55692</x><y>20646</y></s>
+<s><i>108</i><n>CITY HALL</n><r>N,R,W</r><x>43838</x><y>27748</y></s>
+<s><i>109</i><n>59TH ST</n><r>4,5,6</r><x>69437</x><y>19085</y></s>
+<s><i>110</i><n>BOWERY</n><r>J,M,Z</r><x>50107</x><y>27382</y></s>
+<s><i>111</i><n>SOUTH FERRY</n><r>1</r><x>38807</x><y>29774</y></s>
+<s><i>112</i><n>42ND ST/GRAND CENTRAL</n><r>S,4,5,6,7</r><x>63810</x><y>20793</y></s>
+<s><i>113</i><n>103RD ST</n><r>A,B,C</r><x>80450</x><y>10502</y></s>
+<s><i>114</i><n>47-50TH ST/ROCKEFELLER CTR</n><r>B,D,F,V</r><x>64819</x><y>18178</y></s>
+<s><i>115</i><n>BOWLING GREEN</n><r>4,5</r><x>39315</x><y>29261</y></s>
+<s><i>116</i><n>BROOKLYN BRG/CITY HALL</n><r>4,5,6</r><x>44295</x><y>28228</y></s>
+<s><i>117</i><n>FRANKLIN ST</n><r>1</r><x>45467</x><y>26101</y></s>
+<s><i>118</i><n>CHRISTOPHER ST/SHERIDAN SQ</n><r>1</r><x>50576</x><y>22625</y></s>
+<s><i>119</i><n>5TH AVE</n><r>N,R,W</r><x>68705</x><y>17792</y></s>
+<s><i>120</i><n>LEXINGTON AVE</n><r>N,R,W</r><x>69767</x><y>18963</y></s>
+<s><i>121</i><n>68TH ST/HUNTER COLLEGE</n><r>4,6</r><x>72221</x><y>18006</y></s>
+<s><i>122</i><n>CHAMBERS ST</n><r>1,2,3</r><x>43815</x><y>26843</y></s>
+<s><i>123</i><n>CHAMBERS ST</n><r>A,C,E</r><x>44083</x><y>27172</y></s>
+<s><i>124</i><n>14TH ST</n><r>1,2,3</r><x>52890</x><y>21636</y></s>
+<s><i>125</i><n>5TH AVE</n><r>E,V</r><x>66437</x><y>18580</y></s>
+<s><i>126</i><n>23RD ST</n><r>F,V</r><x>56284</x><y>21298</y></s>
+<s><i>127</i><n>CANAL ST</n><r>J,M,Z</r><x>47495</x><y>27330</y></s>
+<s><i>128</i><n>W 4TH ST/WASH SQ</n><r>A,B,C,D,E,F,V</r><x>50692</x><y>23374</y></s>
+<s><i>129</i><n>8TH AVE</n><r>L</r><x>52472</x><y>20900</y></s>
+<s><i>130</i><n>28TH ST</n><r>4,6</r><x>59253</x><y>22267</y></s>
+<s><i>131</i><n>57TH ST</n><r>N,R,W,Q</r><x>66365</x><y>16639</y></s>
+<s><i>132</i><n>3RD AVE</n><r>L</r><x>55696</x><y>24681</y></s>
+<s><i>133</i><n>86TH ST</n><r>A,B,C</r><x>75037</x><y>12506</y></s>
+<s><i>134</i><n>RECTOR ST</n><r>1</r><x>40376</x><y>28349</y></s>
+<s><i>135</i><n>110TH ST</n><r>4,6</r><x>85744</x><y>13049</y></s>
+<s><i>136</i><n>14TH ST</n><r>F,V</r><x>53518</x><y>22325</y></s>
+<s><i>137</i><n>GRAND ST</n><r>B,D</r><x>49565</x><y>28055</y></s>
+<s><i>138</i><n>96TH ST</n><r>4,5,6</r><x>81258</x><y>14713</y></s>
+<s><i>139</i><n>72ND ST</n><r>A,B,C</r><x>70506</x><y>14185</y></s>
+<s><i>140</i><n>86TH ST</n><r>4,5,6</r><x>78073</x><y>15891</y></s>
+<s><i>141</i><n>110TH ST/CENTRAL PARK N</n><r>2,3</r><x>84024</x><y>11126</y></s>
+<s><i>142</i><n>28TH ST</n><r>N,R,W</r><x>58295</x><y>21180</y></s>
+<s><i>143</i><n>CANAL ST</n><r>N,Q,R,W</r><x>47235</x><y>26696</y></s>
+<s><i>144</i><n>PARK PLACE</n><r>2,3</r><x>43503</x><y>27838</y></s>
+<s><i>145</i><n>1ST AVE</n><r>L</r><x>56646</x><y>25817</y></s>
+<s><i>146</i><n>96TH ST</n><r>1,2,3</r><x>76700</x><y>9675</y></s>
+<s><i>147</i><n>77TH ST</n><r>4,6</r><x>75143</x><y>16975</y></s>
+<s><i>148</i><n>23RD ST</n><r>N,R,W</r><x>56996</x><y>22083</y></s>
+<s><i>149</i><n>CATHEDRAL PKY</n><r>A,B,C</r><x>82804</x><y>9800</y></s>
+<s><i>150</i><n>66TH ST/LINCOLN CENTER</n><r>1</r><x>67789</x><y>14026</y></s>
+<s><i>151</i><n>ESSEX ST</n><r>J,M,Z</r><x>51430</x><y>28665</y></s>
+<s><i>152</i><n>WALL ST</n><r>2,3</r><x>41347</x><y>29335</y></s>
+<s><i>153</i><n>BRDWY/LAFAYETTE ST</n><r>B,D,F,V</r><x>50502</x><y>25654</y></s>
+<s><i>154</i><n>57TH ST/6TH AVE</n><r>F</r><x>67039</x><y>17361</y></s>
+<s><i>155</i><n>8TH ST/NEW YORK UNIV</n><r>N,R,W</r><x>53220</x><y>24760</y></s>
+<s><i>156</i><n>50TH ST</n><r>1</r><x>63992</x><y>17263</y></s>
+<s><i>157</i><n>2ND AVE/HOUSTON ST</n><r>F,V</r><x>51840</x><y>26879</y></s>
+<s><i>158</i><n>PRINCE ST</n><r>N,R,W</r><x>49817</x><y>25832</y></s>
+<s><i>159</i><n>42ND ST</n><r>A,C,E</r><x>61001</x><y>17710</y></s>
+<s><i>160</i><n>86TH ST</n><r>1</r><x>73503</x><y>10838</y></s>
+<s><i>161</i><n>CHAMBERS ST</n><r>J,M,Z</r><x>44867</x><y>28123</y></s>
+<s><i>162</i><n>23RD ST</n><r>A,C,E</r><x>55070</x><y>19956</y></s>
+<s><i>163</i><n>FULTON ST</n><r>2,3</r><x>43167</x><y>28854</y></s>
+<s><i>164</i><n>42ND ST</n><r>B,D,F,V</r><x>62109</x><y>19170</y></s>
+<s><i>165</i><n>LEXINGTON AV/3RD AV</n><r>E</r><x>66468</x><y>18618</y></s>
+<s><i>166</i><n>CANAL ST</n><r>1</r><x>46604</x><y>25257</y></s>
+<s><i>167</i><n>14/UNION SQ</n><r>L,N,Q,R,W,4,5,6</r><x>54816</x><y>23726</y></s>
+<s><i>168</i><n>42ND ST/TIME SQUARE</n><r>1,2,3,N,R,S,7,Q,W</r><x>61745</x><y>18533</y></s>
+<s><i>169</i><n>103RD ST</n><r>1</r><x>78936</x><y>8841</y></s>
+<s><i>170</i><n>34TH ST</n><r>B,D,F,N,Q,R,W,V</r><x>59757</x><y>20061</y></s>
+<s><i>171</i><n>81ST ST/MSM OF NATURAL HISTORY</n><r>A,B,C</r><x>73407</x><y>13109</y></s>
+<s><i>172</i><n>BLEECKER ST</n><r>4,6</r><x>51268</x><y>25767</y></s>
+<s><i>173</i><n>6TH AVE</n><r>L</r><x>53567</x><y>22325</y></s>
+<s><i>174</i><n>CATHEDRAL PKY/110TH ST</n><r>B,C</r><x>80862</x><y>7670</y></s>
+<s><i>175</i><n>HOUSTON ST</n><r>1</r><x>48498</x><y>23715</y></s>
+<s><i>176</i><n>96TH ST</n><r>A,B,C</r><x>78222</x><y>11328</y></s>
+<s><i>177</i><n>WORLD TRADE CENTER</n><r>E</r><x>42461</x><y>27714</y></s>
+<s><i>178</i><n>FULTON ST</n><r>4,5</r><x>42620</x><y>28117</y></s>
+<s><i>179</i><n>23RD ST</n><r>4,6</r><x>57687</x><y>22849</y></s>
+<s><i>180</i><n>CANAL ST</n><r>A,C,E</r><x>46726</x><y>25608</y></s>
+<s><i>181</i><n>BROAD ST</n><r>J,M,Z</r><x>41101</x><y>28977</y></s>
+<s><i>182</i><n>ASTOR PLACE</n><r>4,6</r><x>53588</x><y>25168</y></s>
+<s><i>183</i><n>34TH ST/PENN STATION</n><r>1,2,3</r><x>59106</x><y>19334</y></s>
+<s><i>184</i><n>WALL ST</n><r>4,5</r><x>40983</x><y>28684</y></s>
+<s><i>185</i><n>LEXINGTON AV/3RD AV</n><r>E,F</r><x>67533</x><y>19790</y></s>
+<s><i>186</i><n>14/UNION SQ</n><r>L,N,Q,R,W,4,5,6</r><x>54799</x><y>23734</y></s>
+<s><i>187</i><n>SPRING ST</n><r>4,6</r><x>49532</x><y>26450</y></s>
+<s><i>188</i><n>BROADWAY/NASSAU ST</n><r>A,C,J,M,Z</r><x>42870</x><y>28484</y></s>
+<s><i>189</i><n>14TH ST</n><r>A,C,E</r><x>52271</x><y>20947</y></s>
+<s><i>190</i><n>LEXINGTON AVE/63RD ST</n><r>F</r><x>70706</x><y>18615</y></s>
+<s><i>191</i><n>34TH ST/PENN STATION</n><r>A,C,E</r><x>58515</x><y>18681</y></s>
+<s><i>192</i><n>SPRING ST</n><r>A,C,E</r><x>48127</x><y>24725</y></s>
+<s><i>193</i><n>RECTOR ST</n><r>N,R,W</r><x>40566</x><y>28528</y></s>
+<s><i>194</i><n>51ST ST</n><r>E,F,4,6</r><x>66886</x><y>20032</y></s>
+<s><i>195</i><n>72ND ST</n><r>1,2,3</r><x>69147</x><y>12716</y></s>
+<s><i>196</i><n>CANAL ST</n><r>4,6</r><x>47427</x><y>27135</y></s>
+<s><i>197</i><n>DELANCEY ST</n><r>F</r><x>51508</x><y>28600</y></s>
+<s><i>198</i><n>18TH ST</n><r>1</r><x>54144</x><y>21172</y></s>
+<s><i>199</i><n>59TH ST/COLUMBUS CIR</n><r>A,B,C,D,1</r><x>66564</x><y>15842</y></s>
+<s><i>200</i><n>FULTON ST</n><r>J,M,Z</r><x>42851</x><y>28428</y></s>
+<s><i>201</i><n>50TH ST</n><r>A,C,E</r><x>63543</x><y>16763</y></s>
+<s><i>202</i><n>5TH AVE/BRYANT PARK</n><r>7</r><x>62602</x><y>19464</y></s>
+</subway>

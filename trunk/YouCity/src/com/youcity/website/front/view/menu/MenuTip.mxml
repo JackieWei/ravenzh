@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml" 
+	implements="mx.core.IToolTip"
+	horizontalAlign="center" verticalCenter="middle"
+	paddingLeft="5" paddingTop="3" paddingRight="5" paddingBottom="3">
+	<mx:Script>
+		<![CDATA[
+			private var textChanged:Boolean = false;
+			private var _text:String;
+			public function get text():String
+			{
+				return this._text;
+			}
+			
+			public function set text(value:String):void
+			{
+				if(value != null && value != this._text)
+				{
+					this._text = value;
+					textChanged = true;
+					invalidateProperties();
+				}
+			}
+			
+			override protected function commitProperties():void
+			{
+				super.commitProperties();
+				if(textChanged)
+				{
+					textChanged = false;
+					tipLabel.text = this._text;
+				}
+			}
+		]]>
+	</mx:Script>
+	<mx:Label id="tipLabel" styleName="whiteFont" fontSize="14"/>
+</mx:Box>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox
+	height="100" width="200"
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	styleName="lightBlueBG"
+	paddingTop="5" paddingBottom="5" paddingLeft="10" paddingRight="10"
+	xmlns:components="com.youcity.website.front.view.components.*" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.vo.BusinessVO;
+			import com.youcity.website.front.util.AuxUtil;
+
+			private var _businessInfo:BusinessVO;
+			
+			private var dataChanged:Boolean = false;
+			
+			public function get businessInfo():BusinessVO{
+				return this._businessInfo;
+			}
+			
+			public function set businessInfo(value:BusinessVO):void{
+				if ( value != null &&_businessInfo != value)
+				{
+					this._businessInfo=value;
+					dataChanged = true;
+					invalidateProperties();
+				}
+			}
+			
+			override protected function commitProperties():void
+			{
+				super.commitProperties();
+				if (dataChanged)
+				{
+					dataChanged = false;
+					
+					this.businessName.text = _businessInfo.businessName;
+					AuxUtil.includeTarget(content, !AuxUtil.isEmpty(_businessInfo.businessContent));
+					this.content.text = _businessInfo.businessContent;
+					this.address.text = _businessInfo.address;
+					
+					if(_businessInfo.tags){
+						AuxUtil.includeTarget(businessTags, true);
+						var tags:String;
+						for(var tag:String in _businessInfo.tags){
+							tags += tag;
+						}
+						this.businessTags.text = tags;
+					}
+				}
+			}
+
+		]]>
+	</mx:Script>
+	
+	<mx:HBox verticalGap="0" horizontalGap="0" verticalAlign="left">
+		<controls:Label id="businessName" maxWidth="150" color="0x0093d0"/>
+	</mx:HBox>
+	<mx:HBox verticalGap="0" horizontalGap="0" verticalAlign="left">
+		<controls:Label id="content" maxWidth="150" color="0x0093d0"/>
+	</mx:HBox>
+	<mx:HBox verticalGap="0" horizontalGap="0" verticalAlign="left">
+		<controls:Label id="address" maxWidth="150" color="0x0093d0"/>
+	</mx:HBox>
+	<mx:HBox verticalGap="0" horizontalGap="0" verticalAlign="left">
+		<controls:Label id="businessTags" maxWidth="150" color="0x0093d0"/>
+	</mx:HBox>
+</mx:VBox>

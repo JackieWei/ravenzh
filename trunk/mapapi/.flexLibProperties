@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flexLibProperties version="1">
+<includeClasses>
+<classEntry path="com.youcity.maps.util.MapUtil"/>
+<classEntry path="com.youcity.maps.MapEvent"/>
+<classEntry path="com.youcity.maps.controls.IControlContainer"/>
+<classEntry path="com.youcity.maps.overlays.IOverlay"/>
+<classEntry path="com.youcity.maps.tiles.interfaces.ITile"/>
+<classEntry path="com.youcity.maps.MapPoint"/>
+<classEntry path="com.youcity.maps.CityConstant"/>
+<classEntry path="com.youcity.maps.MapBound"/>
+<classEntry path="com.youcity.maps.tiles.layers.tiles.Tile"/>
+<classEntry path="com.youcity.maps.controls.RoadControl"/>
+<classEntry path="com.youcity.maps.controls.StandardControlContainer"/>
+<classEntry path="com.youcity.maps.controls.ControlBase"/>
+<classEntry path="com.youcity.maps.controls.PositionContainer"/>
+<classEntry path="com.youcity.maps.tiles.interfaces.ITileLayer"/>
+<classEntry path="com.youcity.maps.controls.ControlEvent"/>
+<classEntry path="com.youcity.maps.overlays.Flash"/>
+<classEntry path="com.youcity.maps.tiles.layers.tiles.ImageTile"/>
+<classEntry path="com.youcity.maps.tiles.layers.ImageTileLayer"/>
+<classEntry path="com.youcity.maps.controls.IControl"/>
+<classEntry path="com.youcity.maps.tiles.layers.HotSpotTileLayer"/>
+<classEntry path="com.youcity.maps.MapConstants"/>
+<classEntry path="com.youcity.maps.controls.EnclosureButton"/>
+<classEntry path="com.youcity.maps.controls.MapTypeControl"/>
+<classEntry path="com.youcity.maps.controls.RotationControl"/>
+<classEntry path="com.youcity.maps.util.DisplayUtil"/>
+<classEntry path="com.youcity.maps.tiles.HashMapItem"/>
+<classEntry path="com.youcity.maps.tiles.layers.tiles.HotSpot"/>
+<classEntry path="com.youcity.maps.MapTypeConstants"/>
+<classEntry path="com.youcity.maps.tiles.layers.tiles.HotSpotTile"/>
+<classEntry path="com.youcity.maps.controls.MiniMapControlContainer"/>
+<classEntry path="com.youcity.maps.LatLngPoint"/>
+<classEntry path="com.youcity.maps.controls.ControlContainer"/>
+<classEntry path="com.youcity.maps.overlays.Marker"/>
+<classEntry path="com.youcity.maps.controls.ButtonControl"/>
+<classEntry path="com.youcity.maps.overlays.InfoWindow"/>
+<classEntry path="com.youcity.maps.controls.DirectionControlContainer"/>
+<classEntry path="com.youcity.maps.AssetsEmbed"/>
+<classEntry path="com.youcity.maps.controls.MapTypeContainer"/>
+<classEntry path="com.youcity.maps.overlays.LineDrawer"/>
+<classEntry path="com.youcity.maps.overlays.OverlayBase"/>
+<classEntry path="com.youcity.maps.Map"/>
+<classEntry path="com.youcity.maps.controls.ZoomControl"/>
+<classEntry path="com.youcity.maps.MapEventDispatcher"/>
+<classEntry path="com.youcity.maps.IMapType"/>
+<classEntry path="com.youcity.maps.controls.ZoomContainer"/>
+<classEntry path="com.youcity.maps.controls.PositionControl"/>
+<classEntry path="com.youcity.maps.ManhattanConstants"/>
+<classEntry path="com.youcity.maps.MapType"/>
+<classEntry path="com.youcity.maps.controls.MapTypeControlContainer"/>
+<classEntry path="com.youcity.maps.tiles.HashMap"/>
+<classEntry path="com.youcity.maps.ScreenPoint"/>
+<classEntry path="com.youcity.maps.overlays.GraphicDrawer"/>
+<classEntry path="com.youcity.maps.controls.MiniMapControl"/>
+<classEntry path="com.youcity.maps.tiles.layers.TileLayerBase"/>
+</includeClasses>
+<includeResources>
+<resourceEntry destPath="assets/control_measure.png" sourcePath="assets/control_measure.png"/>
+<resourceEntry destPath="assets/minimap_hidebutton_down.png" sourcePath="assets/minimap_hidebutton_down.png"/>
+<resourceEntry destPath="assets/zoom_tree.png" sourcePath="assets/zoom_tree.png"/>
+<resourceEntry destPath="assets/zoom_slider.png" sourcePath="assets/zoom_slider.png"/>
+<resourceEntry destPath="assets/maptype_2d.png" sourcePath="assets/maptype_2d.png"/>
+<resourceEntry destPath="assets/position_control_3d.png" sourcePath="assets/position_control_3d.png"/>
+<resourceEntry destPath="assets/position_control_2d.png" sourcePath="assets/position_control_2d.png"/>
+<resourceEntry destPath="assets/minimap_hidebutton_up.png" sourcePath="assets/minimap_hidebutton_up.png"/>
+<resourceEntry destPath="assets/measure.png" sourcePath="assets/measure.png"/>
+<resourceEntry destPath="assets/maptype_sat.png" sourcePath="assets/maptype_sat.png"/>
+<resourceEntry destPath="assets/flag.gif" sourcePath="assets/flag.gif"/>
+<resourceEntry destPath="assets/road_over.png" sourcePath="assets/road_over.png"/>
+<resourceEntry destPath="assets/road_normal.png" sourcePath="assets/road_normal.png"/>
+<resourceEntry destPath="assets/enclosure.png" sourcePath="assets/enclosure.png"/>
+<resourceEntry destPath="assets/road_selected.png" sourcePath="assets/road_selected.png"/>
+<resourceEntry destPath="assets/zoom_level.png" sourcePath="assets/zoom_level.png"/>
+<resourceEntry destPath="assets/maptype_3d.png" sourcePath="assets/maptype_3d.png"/>
+<resourceEntry destPath="assets/subway.png" sourcePath="assets/subway.png"/>
+<resourceEntry destPath="assets/tile_default_bg.jpg" sourcePath="assets/tile_default_bg.jpg"/>
+</includeResources>
+<namespaceManifests/>
+</flexLibProperties>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<controls:RoundTextInput xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*" 
+	focusIn="handleFocusIn(event)" 
+	focusOut="handleFocusOut(event)">
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.util.AuxUtil;
+		
+			private var hintChanged:Boolean = true;
+			private var _hint:String;
+			public function get hint():String
+			{
+				return this._hint;
+			}
+			
+			public function set hint(value:String):void
+			{
+				if (this._hint != value)
+				{
+					hintChanged = true;
+					this._hint = value;
+					invalidateDisplayList();
+				}
+			}
+
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+			{
+				super.updateDisplayList(unscaledWidth, unscaledHeight);
+				if (hintChanged)
+				{
+					hintChanged = false;
+					this.text = this._hint;
+					setStyle("color", 0xC7C7C7);
+					setStyle("fontStyle", "italic");
+					setStyle("fontSize", "10");
+				}	
+			}
+			
+			private function handleFocusIn(event:FocusEvent):void
+			{
+				if (AuxUtil.isSame(this._hint, this.text))
+				this.text = "";
+				setStyle("color", 0x000000);
+				setStyle("fontStyle", "normal");
+				setStyle("fontSize", "12");
+			}
+					
+			private function handleFocusOut(event:FocusEvent):void
+			{
+				if (AuxUtil.isEmpty(this.text))
+				{
+					this.text = this._hint;
+					setStyle("color", 0xC7C7C7);
+					setStyle("fontStyle", "italic");
+					setStyle("fontSize", "10");
+				}
+			}		
+		]]>
+	</mx:Script>
+</controls:RoundTextInput>
+

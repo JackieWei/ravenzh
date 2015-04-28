@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"  
+	xmlns:business="com.youcity.website.front.business.*" 
+	xmlns:controller="com.youcity.website.front.controller.*" 
+	xmlns:local="*"
+	xmlns:menu="com.youcity.website.front.view.menu.*"
+	width="100%" height="100%" 
+	horizontalScrollPolicy="off" verticalScrollPolicy="off"
+	backgroundColor="#F0FFF0" 
+	backgroundAlpha=".6"
+	layout="absolute"
+	pageTitle="Virtual City Real Life!"
+	tabEnabled="false" 
+	preloader="com.youcity.website.front.view.common.YouCityPreloader"
+	creationComplete="handleCreationComplete(event)"> 
+	
+	<mx:Style source="assets/style.css"/>
+	<mx:Style source="assets/assets.css"/>
+	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.model.CityModelLocator;
+			import com.youcity.website.front.vo.CityVO;
+			import com.youcity.website.front.commands.CommandBase;
+			import com.youcity.website.front.common.Constants;
+			import com.youcity.maps.MapConstants;
+			import com.youcity.website.front.common.Config;
+			import com.youcity.website.front.common.LoaderHelper;
+			import com.youcity.website.front.view.common.FrontManager;
+			import mx.events.FlexEvent;
+			import mx.controls.Alert;
+			
+			//Handler for CreationComplete Event
+			private function handleCreationComplete(event:FlexEvent):void {
+				loadConfigFile("front.xml");
+			}
+			
+			private function loadConfigFile(url:String):void {
+				var configLoader:URLLoader = new URLLoader();	
+				configLoader.addEventListener(Event.COMPLETE, handleConfigLoadComplete);
+				configLoader.load(new URLRequest(url));
+			}
+			
+			private function handleConfigLoadComplete(event:Event):void {
+				(event.currentTarget as URLLoader).removeEventListener(Event.COMPLETE, handleConfigLoadComplete);
+				initConstants(XML(event.currentTarget.data));
+				loadCityFile("city.xml");
+			}
+			
+			private function loadCityFile(url:String):void {
+				var cityLoader:URLLoader = new URLLoader();	
+				cityLoader.addEventListener(Event.COMPLETE, handleCityLoadComplete);
+				cityLoader.load(new URLRequest(url));
+			}
+			
+			private function handleCityLoadComplete(event:Event):void {
+				(event.currentTarget as URLLoader).removeEventListener(Event.COMPLETE, handleCityLoadComplete);
+				initCity(XML(event.currentTarget.data));
+				loadEventmappingFile("event-mapping.xml")
+			}
+			
+			private function loadEventmappingFile(url:String):void {
+				var loader:URLLoader = new URLLoader();	
+				loader.addEventListener(Event.COMPLETE, handleEventmappingFileLoadComplete);
+				loader.addEventListener(IOErrorEvent.IO_ERROR, handleLoaderFailedEvent);
+				loader.load(new URLRequest(url));
+			}
+			
+			private function handleEventmappingFileLoadComplete(event:Event):void {
+				(event.currentTarget as URLLoader).removeEventListener(Event.COMPLETE, handleEventmappingFileLoadComplete);
+				initEventmapping(XML(event.currentTarget.data));
+				FrontManager.getInstance().init(mapContainer, viewContainer, systemContainer);
+			}
+			
+			//initialize Constants from XML file
+			private function initConstants(param:XML):void {
+				Config.AVATAR_PREFIX = param.avatarPath;
+				Config.FILE_UPLOAD = param.fileupload;
+				Config.PHOTO_PREFIX = param.photoPrefix;
+				Config.SERVICE_URL = param.service;
+				Config.SERACH_SERVICE_URL = param.searchService;
+				Config.HOME_URL = param.home;
+				Config.BLOG_URL = param.blog;
+				Config.TWITTER_URL = param.twitter;
+				MapConstants.AD_PREFIX = param.ad_prefix;
+			}
+			
+			private function initCity(cityXML:XML):void {
+				var city_dictionary:Dictionary = new Dictionary(true);
+				var cities:XMLList = cityXML.city;
+				for each(var city:XML in cities) {
+					var tempCity:CityVO = new CityVO();
+					tempCity.cityName = city.@name;
+					tempCity.pictureUrl = city.pictureUrl;
+					tempCity.mapRoot = city.mapRoot;
+					tempCity.defaultCenterX = city.defaultCenterX;
+					tempCity.defaultCenterY = city.defaultCenterY;
+					tempCity.defaultZoom = uint(city.defaultZoom);
+					city_dictionary[tempCity.cityName] = tempCity;
+				}
+				CityModelLocator.getInstance().cities = city_dictionary;
+				
+				MapConstants.MANHATTAN_MAPURL = city_dictionary["New York"].mapRoot;
+				MapConstants.SAN_FRANCISCO_MAPURL = city_dictionary["San Francisco"].mapRoot;
+			}
+			
+			//initialize event mappings ,including MainController, CommandBase
+			private function initEventmapping(mappingXML:XML):void {
+				var event_mapping:Dictionary = new Dictionary(true);
+				var mappings:XMLList = mappingXML.mapping;
+				for each(var mapping:XML in mappings)
+				{
+					var event:String = mapping.@event;
+					var commandName:String = mapping.command.@name;
+					var serviceName:String = mapping.service.@name;
+					var methodName:String = mapping.method.@name;
+					var params:XMLList = mapping..param;
+					var arr:Array = [];
+					for each(var param:XML in params)
+					{
+						arr.push({name:param.@name, type:param.@type});
+					}
+					var obj:Object = {command:commandName, 
+									  service:serviceName,
+									  method:methodName,
+									  params:arr};
+					event_mapping[event] = obj;
+				}
+				mc.initCommand(event_mapping);
+				CommandBase.init(event_mapping);
+			}
+			
+			//handler for loader failed event
+			private function handleLoaderFailedEvent(event:Event):void {
+				(event.currentTarget as URLLoader).removeEventListener(IOErrorEvent.IO_ERROR, handleLoaderFailedEvent);
+				mx.controls.Alert.show("CONFIGURATION LOAD FAILED");
+			}
+		]]>
+	</mx:Script>
+	<business:CustomRemoteObject	id="ro"/>
+	<controller:MainController 		id="mc"/>
+	<local:MapContainer 	id="mapContainer"/>
+	<menu:MenuContainer 	id="mainMenu"/>	
+	<local:ViewContainer 	id="viewContainer"/>
+	<local:SystemContainer 	id="systemContainer"/>
+</mx:Application>

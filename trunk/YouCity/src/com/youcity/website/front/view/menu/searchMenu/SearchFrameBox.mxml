@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*"
+	height="31"
+	paddingLeft="5" paddingRight="8"
+	horizontalGap="3"
+	verticalAlign="middle"  
+	creationComplete="handleCreationComplete(event)">
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.model.SearchModelLocator;
+			import com.youcity.website.front.view.search.SearchProxy;
+			import com.youcity.website.front.view.common.MapManager;
+			import mx.events.FlexEvent;
+			
+			private var arr:Array = [{label:"All", value:"0"}, 
+									{label:"Building", value:"1"},
+									{label:"Business", value:"2"}];
+				
+			private var searchModel:SearchModelLocator = SearchModelLocator.getInstance();
+			
+			//Handler for  CreaionComplete Event
+			private function handleCreationComplete(event:FlexEvent):void
+			{
+				this.typeComboBox.dataProvider = arr;
+			}
+									
+			//handler for Search Button Click Event
+			//Just open Search View
+			private function handleSearchBtnClick(event:Event):void
+			{
+				var param:Object = {keyword:this.keywordTxt.text, searchType:this.typeComboBox.selectedItem.value};
+				SearchProxy.instance.openSearch(param);
+			}
+			
+			//handler for Frame Button Click Event
+			//Start to Enclosure On the Map
+			private function handleFrameBtnClick(event:MouseEvent):void
+			{
+				searchModel.keyword = this.keywordTxt.text;
+				searchModel.searchType = this.typeComboBox.selectedItem.value;
+				MapManager.getInstance().startEnclosure();
+			}
+		]]>
+	</mx:Script>
+	<mx:TextInput id="keywordTxt" width="200" height="19" styleName="searchTextInput" enter="handleSearchBtnClick(event)"/>
+	<controls:ComboBox id="typeComboBox" width="85" height="19" styleName="combobox3"/>
+	<controls:Button styleName="searchBtn" click="handleSearchBtnClick(event)" toolTip="Search"/>
+	<controls:Button styleName="frameBtn" click="handleFrameBtnClick(event)" toolTip="Area Search"/>
+</mx:HBox>

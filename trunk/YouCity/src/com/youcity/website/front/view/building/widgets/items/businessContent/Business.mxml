@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base:BuildingItemBase
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:navigator="com.youcity.website.front.view.components.navigator.*" 
+	horizontalScrollPolicy="off" verticalScrollPolicy="off"
+	watcherType="{OtherED.BUILDING_BUSINESS_CHANGED}"
+	xmlns:base="com.youcity.website.front.view.building.base.*"
+	xmlns:components="com.youcity.website.front.view.components.*" 
+	xmlns:businessContent="com.youcity.website.front.view.building.widgets.items.businessContent.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.view.building.BuildingED;
+			import com.youcity.website.front.vo.BusinessVO;
+			import com.youcity.website.front.controller.OtherED;
+			import com.youcity.website.front.view.common.CallbackData;
+			import com.youcity.website.front.view.building.BuildingProxy;
+			import com.youcity.website.front.model.OtherModelLocator;
+			import mx.collections.ArrayCollection;
+
+			override public function getData():void
+			{
+				super.getData();
+				BuildingProxy.instance.getBusiness(callbackHandler, BusinessVO.VERIFIED);
+//				circle();
+			}
+			
+			private function changeHandler(event:Event):void
+			{
+				getData();
+			}
+			
+			override public function clear():void
+			{
+				super.clear();
+				//OtherED.getInstance().removeEventListener(OtherED.CURRENT_BUILDING_CHANGED, changeHandler);
+			}
+			
+			
+			private function callbackHandler(callbackData:CallbackData):void
+			{
+				if (CallbackData.SUCCEED == callbackData.code)
+				{
+					_businessRpt.dataProvider = OtherModelLocator.getInstance().building_businessList_normal;
+				}
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:Canvas id="content" y="10" width="100%" height="{height - 30}" horizontalScrollPolicy="off">
+		<components:GridContainer x="5" y="10" width="{content.width - 40}"	columnCount="1"	verticalGap="5">
+			<mx:Repeater id="_businessRpt" recycleChildren="true">
+				<businessContent:BusinessItem
+					source="{_businessRpt.currentItem}" 
+					/>
+			</mx:Repeater>
+		</components:GridContainer>
+	</mx:Canvas>
+	
+</base:BuildingItemBase>

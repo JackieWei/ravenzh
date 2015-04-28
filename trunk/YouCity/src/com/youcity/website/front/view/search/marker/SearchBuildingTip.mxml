@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox
+	height="100" width="200"
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	styleName="lightBlueBG"
+	paddingTop="5" paddingBottom="5" paddingLeft="10" paddingRight="10"
+	xmlns:components="com.youcity.website.front.view.components.*" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.vo.BuildingVO;
+			import com.youcity.website.front.util.AuxUtil;
+
+			private var _buildingInfo:BuildingVO;
+			
+			private var dataChanged:Boolean = false;
+			
+			public function get buildingInfo():BuildingVO{
+				return this._buildingInfo;
+			}
+			
+			public function set buildingInfo(value:BuildingVO):void{
+				if ( value != null &&_buildingInfo != value)
+				{
+					this._buildingInfo=value;
+					dataChanged = true;
+					invalidateProperties();
+				}
+			}
+			
+			override protected function commitProperties():void
+			{
+				super.commitProperties();
+				if (dataChanged)
+				{
+					dataChanged = false;
+					
+					this.buildingName.text = _buildingInfo.buildingName;
+					this.address.text = _buildingInfo.address;
+					
+					AuxUtil.includeTarget(address, !AuxUtil.isEmpty(_buildingInfo.buildingContent));
+					this.content.text = _buildingInfo.buildingContent;
+					
+					AuxUtil.includeTarget(phoneNumber, !AuxUtil.isEmpty(_buildingInfo.phoneNumber));
+					this.phoneNumber.text = _buildingInfo.phoneNumber;
+					
+				}
+			}
+
+		]]>
+	</mx:Script>
+	
+	<mx:HBox verticalGap="0" horizontalGap="0" verticalAlign="left">
+		<controls:Label id="buildingName" maxWidth="150" color="0x0093d0"/>
+	</mx:HBox>
+	<mx:HBox verticalGap="0" horizontalGap="0" verticalAlign="left">
+		<controls:Label id="address" maxWidth="150" color="0x0093d0"/>
+	</mx:HBox>
+	<mx:HBox verticalGap="0" horizontalGap="0" verticalAlign="left">
+		<controls:Label id="content" maxWidth="150" color="0x0093d0"/>
+	</mx:HBox>
+	<mx:HBox verticalGap="0" horizontalGap="0" verticalAlign="left">
+		<controls:Label id="phoneNumber" maxWidth="150" color="0x0093d0"/>
+	</mx:HBox>
+</mx:VBox>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<business:ServiceLocator 
+	xmlns:business="com.adobe.cairngorm.business.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.common.Config;
+		]]>
+	</mx:Script>
+	
+	<mx:RemoteObject id="cityService" 		
+		destination="cityServiceDestination" 		
+		showBusyCursor="true"
+		endpoint="{Config.SERVICE_URL}"/>
+	<mx:RemoteObject id="commonService" 	
+		destination="commonServiceDestination" 		
+		showBusyCursor="true"
+		endpoint="{Config.SERVICE_URL}"/>
+	<mx:RemoteObject id="otherService" 	
+		destination="otherServiceDestination" 		
+		showBusyCursor="true"
+		endpoint="{Config.SERVICE_URL}"/>
+	<mx:HTTPService id="searchService" 
+		resultFormat="e4x"  
+		url="{Config.SERACH_SERVICE_URL}"  	
+		showBusyCursor="true"/>
+</business:ServiceLocator>

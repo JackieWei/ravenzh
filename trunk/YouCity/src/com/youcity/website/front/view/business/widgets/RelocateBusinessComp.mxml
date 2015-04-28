@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*"
+	>
+	
+	<mx:Metadata>
+		[Event(name="relocateEnd", type="flash.events.Event")]
+	</mx:Metadata>
+	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.view.business.BusinessProxy;
+			import com.youcity.website.front.view.business.BusinessModel;
+			import mx.events.FlexEvent;
+			import com.youcity.website.front.view.building.BuildingED;
+			import com.youcity.website.front.view.building.BuildingProxy;
+			
+		]]>
+	</mx:Script>
+	
+	<mx:VBox width="100%" height="100%">
+		<controls:Text
+			fontSize="21" width="{width - 30}" selectable="false"
+			text="{BusinessModel.businessTobeRehost.businessName}" />
+		<controls:Label 
+			width="{width - 30}"
+			text="The business is currently located at" />
+		<mx:Text 
+			text="{BusinessModel.businessTobeRehost.buildingName}" 
+			styleName="blackFont"
+			textIndent="15" width="{width - 30}" />
+		<controls:Label 
+			width="{width - 30}" 
+			text="Click to select a new building" />
+        <controls:Text 
+            text="Note that buildings can only be selected at the two largest zoom levels."  width="{width - 20}"  />
+		<mx:HBox width="{width - 30}" horizontalAlign="center">
+			<mx:Text 
+				text="{BusinessModel.businessNewHost.buildingName} Building" 
+				styleName="hintText" />
+		</mx:HBox>
+		<mx:HBox>
+			<controls:Button label="Relocate" enabled="{BusinessModel.businessNewHost != null}" />
+			<controls:Button label="Cancel" />
+		</mx:HBox>
+	</mx:VBox>
+	
+</mx:Canvas>

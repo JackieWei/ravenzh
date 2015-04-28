@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:controls="com.youcity.website.front.view.components.controls.*" 
+	xmlns:components="com.youcity.website.front.view.components.*"
+	verticalScrollPolicy="off" horizontalScrollPolicy="off" 
+	cornerRadius="10" width="100%" height="65"
+	creationComplete="_alternateControl = new AlternateControl(this)"
+	xmlns:businessContent="com.youcity.website.front.view.building.widgets.items.businessContent.*">
+	
+	<!--mouseOver="styleName='lightBlueBG'" mouseOut="styleName=''"-->
+	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.view.building.base.AlternateControl;
+			import com.youcity.website.front.view.business.BusinessProxy;
+			import com.youcity.website.front.vo.BusinessVO;
+			
+			public static const ACTURAL_WIDTH:Number = 145;
+			public static const ACTURAL_HEIGHT:Number = 169;
+			
+			private var _alternateControl:AlternateControl;
+			
+			private var _source:BusinessVO;
+			public function set source(value:BusinessVO):void
+			{
+				_source = value;
+				setContent(_source);
+			}
+			
+			public function setContent(source:BusinessVO):void
+			{
+				logo.source = source.logo;
+				businessName.text = source.businessName;
+				phoneNumber.text  = source.address;
+				if (source.phoneNumber && "" != source.phoneNumber)
+				{
+					if (source.address && "" != source.address)
+						phoneNumber.text += " (" + source.phoneNumber + ")";
+					else
+						phoneNumber.text = source.phoneNumber;
+				}
+				website.text = source.website;
+				optionItem.source = source;
+			}
+			
+			public function openBusinessView(event:MouseEvent):void
+			{
+				var businessId:String = BusinessVO.RELOCATE == _source.verifyStatus ? _source.refBusinessId : _source.id;
+				BusinessProxy.instance.openBusinessView(businessId, 0, uint(_source.verifyStatus))
+			}
+			
+		]]>
+	</mx:Script>
+	<components:ImageUI id="logo"
+		x="5" y="5"
+		width="50" height="50" 
+		buttonMode="true" mouseChildren="false"
+		click="openBusinessView(event)"/>
+	<mx:VBox x="65" width="{width - 65}" height="100%" horizontalGap="0" verticalGap="0" >
+		<controls:Label id="businessName" fontSize="15" selectable="true" styleName="blackFont" />
+		<controls:Label id="phoneNumber"  selectable="true" />
+		<controls:Label id="website" selectable="true"/>
+	</mx:VBox>
+	<businessContent:OptionItem id="optionItem"
+		right="0" bottom="0" 
+		height="100%" />
+</mx:Canvas>

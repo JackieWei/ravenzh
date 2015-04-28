@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*"
+	width="30" height="26" 
+	horizontalAlign="center" verticalAlign="middle"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off">
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.util.AuxUtil;
+			private var dataChanged:Boolean = false
+			
+			private var dataChange:Boolean = false;
+			private var _char:uint;
+			public function get char():uint
+			{
+				return this._char;
+			}
+			
+			public function set char(value:uint):void
+			{
+				dataChange = true;
+				this._char = value;
+				invalidateDisplayList();
+			}
+			
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+			{
+				super.updateDisplayList(unscaledWidth, unscaledHeight);
+				if (dataChange)
+				{
+					dataChanged = false;
+					charText.text = AuxUtil.generateChar(this._char + 1);
+				}
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:Style>
+		.charItem
+		{
+			color: #FFFFFF;
+			fontSize: 14;
+			fontWeight: bold;
+		}
+	</mx:Style>
+	<controls:Label id="charText" width="100%" styleName="charItem" textAlign="center"/>
+</mx:HBox>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*"
+	verticalGap="3">
+	
+	<mx:Script>
+		<![CDATA[
+			[Bindable]
+			public var targetName:String;
+			
+			[Bindable]
+			public var newValue:String;
+			
+			[Bindable]
+			public var oldValue:String;
+			
+		]]>
+	</mx:Script>
+	<controls:Label text="{targetName}:" />
+	<controls:LinkLabel 
+		buttonMode="false"
+		textDecoration="none" styleName="hintText"
+		text="{oldValue + ': '}" />
+	<controls:Label text="------" />
+	<controls:LinkLabel 
+		buttonMode="false"
+		textDecoration="none" text="{newValue}" styleName="hintText"/>
+	
+</mx:HBox>

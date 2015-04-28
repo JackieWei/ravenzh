@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	styleName="activityDetailDetailInfoBG"
+	xmlns:controls="com.youcity.website.front.view.components.controls.*"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off" 
+	xmlns:components="com.youcity.website.front.view.components.*"
+	xmlns:rank="com.youcity.website.front.view.activities.rank.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.view.business.BusinessProxy;
+			import com.youcity.website.front.model.UserModelLocator;
+			import com.youcity.website.front.view.components.controls.alert.Alert;
+			import com.youcity.website.front.view.business.BusinessModel;
+			import mx.events.FlexEvent;
+			import com.youcity.website.front.vo.BusinessVO;
+			import com.youcity.website.front.vo.BuildingVO;
+			
+			private var _source:BusinessVO;
+			public function get source():BusinessVO
+			{
+				return this._source;
+			}
+			public function set source(value:BusinessVO):void
+			{
+				_source = value;
+				category.text = BusinessModel.categoryDict[_source.category];
+				website.text = _source.website;
+				phoneNumber.text = _source.phoneNumber;
+				address.text = _source.address;
+				businessName.text = _source.businessName;
+				rank.rank = uint(BusinessModel.avgScore);
+				reviews.text = String(BusinessModel.voteUserNum) +  (BusinessModel.voteUserNum >1 ? 'reviews' : 'review');
+				content.text = _source.businessContent;
+			}
+			
+			private function createActivityHandler(event:MouseEvent):void
+			{
+				BusinessProxy.instance.openCreateActivityView(_source);
+			}
+			
+		]]>
+	</mx:Script>
+	
+		<mx:VBox
+			width="180" height="100%" x="5" y="25" 
+			horizontalScrollPolicy="off"
+			horizontalAlign="left"
+			>
+			<controls:Label id="businessName" />
+			<controls:Label id="address"/>
+			<controls:Label id="phoneNumber" />
+			<controls:Label id="website" />
+			<controls:Label id="category" />
+			<mx:VBox horizontalGap="0" verticalGap="0">
+				<rank:StarsComp id="rank" direction="horizontal"/>
+				<controls:Label id="reviews" />
+			</mx:VBox>
+			<controls:Text id="content" width="180" maxHeight="220"/>
+		</mx:VBox>
+		<mx:VBox 
+			right="10" bottom="10"
+			width="100%" horizontalAlign="right" horizontalGap="1" verticalGap="1">
+			<controls:AuthorizeButton id="takeMeThere"
+				label="Take Me There"
+				click="BusinessProxy.instance.takeMeThere()" />
+			<controls:AuthorizeButton id="createActivityBtn"
+				label="Create Activity" width="110"
+				click="createActivityHandler(event)"/>
+			<controls:Button id="getLink"
+				label="Get Link" 
+				click="BusinessProxy.instance.getLinkAlert()" />
+		</mx:VBox>
+</mx:Canvas>

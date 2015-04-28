@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<mappings>
+    <mapping event="get_tags">
+        <command name="com.youcity.website.front.commands.common.GetTagsCommand"/>
+        <service name="commonService"/>
+        <method name="getTags">
+            <param name="refType" type="String"/>
+            <param name="listNum" type="Number"/>
+        </method>
+    </mapping>
+    <mapping event="get_tags_by_business_category">
+        <command name="com.youcity.website.front.commands.common.GetTagsByBusinessCategoryCommand"/>
+        <service name="commonService"/>
+        <method name="getTagsByBusinessCategory">
+            <param name="categoryId" type="String"/>
+        </method>
+    </mapping>
+    <mapping event="get_business_detailinfo">
+        <command name="com.youcity.website.front.commands.other.GetBusinessDetailInfoCommand"/>
+        <service name="otherService"/>
+        <method name="getBusinessDetailInfo">
+            <param name="businessId" type="String"/>
+        </method>
+    </mapping>
+    <mapping event="get_business_categorylist">
+        <command name="com.youcity.website.front.commands.other.GetBusinessCategoryListCommand"/>
+        <service name="otherService"/>
+        <method name="getCategoryListOfBusiness"/>
+    </mapping>
+    <mapping event="get_building_detailinfo">
+        <command name="com.youcity.website.front.commands.other.GetBuildingDetailInfoCommand"/>
+        <service name="otherService"/>
+        <method name="getBuildingDetailInfo">
+            <param name="buildingId" type="String"/>
+        </method>
+    </mapping>
+    <mapping event="get_building_businesslist">
+        <command name="com.youcity.website.front.commands.other.GetBuildingBusinessListCommand"/>
+        <service name="otherService"/>
+        <method name="getBuildingBusinessList">
+            <param name="buildingId" type="String"/>
+            <param name="verifyStatus" type="Number"/>
+        </method>
+    </mapping>
+    <mapping event="get_polygon_by_refId">
+        <command name="com.youcity.website.front.commands.other.GetPolyGonByRefIdCommand"/>
+        <service name="otherService"/>
+        <method name="getPolyGonByRefId">
+            <param name="refId" type="String"/>
+            <param name="refType" type="Number"/>
+        </method>
+    </mapping>
+    <mapping event="get_ad_manage_list">
+        <command name="com.youcity.website.front.commands.other.GetADManageListCommand"/>
+        <service name="otherService"/>
+        <method name="getADManageList">
+            <param name="zoom" type="Number"/>
+            <param name="max_x" type="Number"/>
+            <param name="min_x" type="Number"/>
+            <param name="max_y" type="Number"/>
+            <param name="min_y" type="Number"/>
+        </method>
+    </mapping>
+    <mapping event="get_route_stationlist">
+        <command name="com.youcity.website.front.commands.city.GetRouteStationListCommand"/>
+        <service name="cityService"/>
+        <method name="getRouteList">
+            <param name="routeId" type="String"/>
+        </method>
+    </mapping>
+    <mapping event="search_business">
+        <command name="com.youcity.website.front.commands.search.SearchCommand"/>
+        <service name="searchService"/>
+    </mapping>
+    <mapping event="search_building">
+        <command name="com.youcity.website.front.commands.search.SearchCommand"/>
+        <service name="searchService"/>
+    </mapping>  
+</mappings>

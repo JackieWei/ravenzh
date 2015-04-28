@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cities>  
+	<city name="New York">
+		<pictureUrl>assets/city/NewYork.jpg</pictureUrl>
+		<mapRoot>http://www.youcity.com/man_new</mapRoot>
+		<defaultCenterX>43724</defaultCenterX>
+		<defaultCenterY>27842</defaultCenterY>
+		<defaultZoom>2</defaultZoom>
+	</city>
+	<city name="San Francisco">
+		<pictureUrl>assets/city/SanFrancisco.jpg</pictureUrl>
+		<mapRoot>http://www.youcity.com/sf</mapRoot>
+		<defaultCenterX>21248</defaultCenterX>
+		<defaultCenterY>8960</defaultCenterY>
+		<defaultZoom>2</defaultZoom>
+	</city>
+</cities>

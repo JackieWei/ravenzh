@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	styleName="activityDetailDetailInfoBG"
+	xmlns:controls="com.youcity.website.front.view.components.controls.*"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off" 
+	width="190" height="100%"
+	xmlns:components="com.youcity.website.front.view.components.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.view.building.BuildingProxy;
+			import com.youcity.website.front.view.common.CallbackData;
+			import com.youcity.website.front.vo.BuildingVO;
+			
+			private var _source:BuildingVO;
+			public function set source(value:BuildingVO):void
+			{
+				_source = value;
+				setContent(_source);
+			}
+			
+			private function setContent(building:BuildingVO):void
+			{
+				samplePhoto.source = "assets/building/building_picture_sample.png";
+				buildingName.text = building.buildingName;
+				address.text = building.address;
+				photoNumber.text = building.phoneNumber;
+//				category.text = building.category;
+				content.text = building.buildingContent;
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:VBox width="180" x="5" y="25" horizontalAlign="center">
+		<mx:SWFLoader id="samplePhoto" width="170" height="170" maintainAspectRatio="true"/>
+		<controls:Label id="buildingName"  width="170" fontSize="15" styleName="blackFont"/>
+		<controls:Label id="address" width="170"/>
+		<controls:Label id="photoNumber" width="170" />
+		<controls:Text id="content" width="170"/>
+	</mx:VBox>
+	
+	<mx:VBox bottom="15" right="10" horizontalAlign="right" verticalGap="1">
+		<controls:Button id="takeMeThere"
+			label="Take Me There"
+			width="110" height="25"
+			click="BuildingProxy.instance.takeMeThere()"
+			/>
+		<controls:Button id="searchNearby" 
+			label="Search Nearby"
+			width="110" height="25"
+			click="BuildingProxy.instance.searchNearby()"
+			/>
+		<controls:Button id="settleDown" label="Settle Down" width="110" height="25"/>
+		<controls:Button id="addBusiness" label="Add Business" width="110" height="25"/>
+		<controls:Button id="createActivity" label="Create Activity" width="110" height="25"/>
+		<controls:Button id="getLink" label="Get Link"  click="BuildingProxy.instance.getLinkAlert()" />
+	</mx:VBox>
+</mx:Canvas>

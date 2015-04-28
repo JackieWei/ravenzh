@@ -1,0 +1,279 @@
+Application
+{
+ 	fontFamily: Arial; 
+	fontSize: 12;
+	fontWeight: bold;
+	color: #000000;
+	focusAlpha: 0;
+}
+
+Text
+{
+	color:#8e8e8e;
+	fontFamily:"Verdana";
+	font-size:11;
+	fontThickness:5;
+	letterSpacing:0;
+	font-weight:bold;
+}
+
+ Label
+{
+	color:#8e8e8e;
+	fontFamily:"Verdana";
+	font-size:11;
+	fontThickness:5;
+	letterSpacing:0;
+	font-weight:bold;
+}
+
+ScrollBar
+{
+	downArrowSkin: Embed(source="assets/controls/downArrow_down.png");
+	downArrowOverSkin: Embed(source="assets/controls/downArrow_down.png");
+	downArrowDownSkin: Embed(source="assets/controls/downArrow_down.png");
+	downArrowDisabledSkin: Embed(source="assets/controls/downArrow_down.png");
+	
+	upArrowSkin: Embed(source="assets/controls/upArrow_down.png");
+	upArrowOverSkin: Embed(source="assets/controls/upArrow_down.png");
+	upArrowDownSkin: Embed(source="assets/controls/upArrow_down.png");
+	upArrowDisabledSkin: Embed(source="assets/controls/upArrow_down.png");
+	
+	thumbIcon:Embed(source="assets/controls/thumb_icon.png");
+	thumbSkin: Embed(source="assets/controls/thumb_normal.png", scaleGridLeft="1", scaleGridTop="15", scaleGridRight="11", scaleGridBottom="16");
+	thumbOverSkin: Embed(source="assets/controls/thumb_normal.png", scaleGridLeft="1", scaleGridTop="15", scaleGridRight="11", scaleGridBottom="16");
+	thumbDownSkin: Embed(source="assets/controls/thumb_normal.png", scaleGridLeft="1", scaleGridTop="15", scaleGridRight="11", scaleGridBottom="16");
+	thumbDisabledSkin: Embed(source="assets/controls/thumb_normal.png", scaleGridLeft="1", scaleGridTop="15", scaleGridRight="11", scaleGridBottom="16");
+	
+ 	trackSkin: Embed(source="assets/controls/track_normal.png", scaleGridLeft="1", scaleGridTop="58", scaleGridRight="19", scaleGridBottom="59");
+	trackOverSkin: Embed(source="assets/controls/track_normal.png", scaleGridLeft="1", scaleGridTop="58", scaleGridRight="19", scaleGridBottom="59");
+	trackSkin: Embed(source="assets/controls/track_normal.png", scaleGridLeft="1", scaleGridTop="58", scaleGridRight="19", scaleGridBottom="59");
+	trackDisabledSkin: Embed(source="assets/controls/track_normal.png", scaleGridLeft="1", scaleGridTop="58", scaleGridRight="19", scaleGridBottom="59"); 
+}
+
+Button
+{
+	fontWeight:bold;
+	focusAlpha: 0;
+	color: #EEEEEE;
+	textDownColor:#FFFFF0;
+	textRollOverColor: #FFFFFF;
+	textSelectedColor: #FFFFF0;
+	disabledColor: #757575;
+	upSkin:Embed(source="assets/controls/Button_upSkin.png", scaleGridLeft="10", scaleGridTop="8", scaleGridRight="12", scaleGridBottom="16");
+	overSkin:Embed(source="assets/controls/Button_overSkin.png", scaleGridLeft="10", scaleGridTop="8", scaleGridRight="12", scaleGridBottom="16");
+	downSkin:Embed(source="assets/controls/Button_downSkin.png", scaleGridLeft="10", scaleGridTop="8", scaleGridRight="12", scaleGridBottom="16");
+	disabledSkin:Embed(source="assets/controls/Button_disabledSkin.png", scaleGridLeft="10", scaleGridTop="8", scaleGridRight="12", scaleGridBottom="16");
+	selectedUpSkin:Embed(source="assets/controls/Button_selectedUpSkin.png", scaleGridLeft="10", scaleGridTop="8", scaleGridRight="12", scaleGridBottom="16");
+	selectedOverSkin:Embed(source="assets/controls/Button_selectedOverSkin.png", scaleGridLeft="10", scaleGridTop="8", scaleGridRight="12", scaleGridBottom="16");
+	selectedDownSkin:Embed(source="assets/controls/Button_selectedDownSkin.png", scaleGridLeft="10", scaleGridTop="8", scaleGridRight="12", scaleGridBottom="16");
+	selectedDisabledSkin:Embed(source="assets/controls/Button_selectedDisabledSkin.png", scaleGridLeft="10", scaleGridTop="8", scaleGridRight="12", scaleGridBottom="16");
+}
+
+TextInput.ycTextInput
+{
+	fontSize: 12;
+	fontWeight: bold; 
+	color: #000000;
+	borderStyle:solid;
+	borderThickness: 1;
+	borderColor: #8D9192;
+	cornerRadius: 4;
+	paddingLeft:3;
+	paddingRight:3;
+	backgroundColor: #DAEDEB;
+}
+
+CheckBox.ycCheckBox
+{
+	upIcon: Embed(source="assets/controls/CheckBox_upIcon.png");
+	overIcon: Embed(source="assets/controls/CheckBox_overIcon.png");
+	downIcon: Embed(source="assets/controls/CheckBox_downIcon.png");
+	disabledIcon: Embed(source="assets/controls/CheckBox_disabledIcon.png");
+	selectedUpIcon: Embed(source="assets/controls/CheckBox_selectedUpIcon.png");
+	selectedOverIcon: Embed(source="assets/controls/CheckBox_selectedOverIcon.png");
+	selectedDownIcon: Embed(source="assets/controls/CheckBox_selectedDownIcon.png");
+	selectedDisabledIcon: Embed(source="assets/controls/CheckBox_selectedDisabledIcon.png");
+	focusAlpha: 0;
+	fontWeight: bold;
+	color: #000000;
+	textRollOverColor: #000000;
+	textSelectedColor:#000000;
+	highlightAlphas: .5, .8;
+}
+
+ComboBox.ycComboBox
+{
+	disabledSkin: Embed(source="assets/controls/ComboBox_disabledSkin.png", scaleGridLeft="12", scaleGridTop="1", scaleGridRight="40", scaleGridBottom="22");
+	downSkin: Embed(source="assets/controls/ComboBox_downSkin.png", scaleGridLeft="12", scaleGridTop="1", scaleGridRight="40", scaleGridBottom="22");
+	overSkin: Embed(source="assets/controls/ComboBox_overSkin.png", scaleGridLeft="12", scaleGridTop="1", scaleGridRight="40", scaleGridBottom="22");
+	upSkin: Embed(source="assets/controls/ComboBox_upSkin.png", scaleGridLeft="12", scaleGridTop="1", scaleGridRight="40", scaleGridBottom="22");
+	editableDisabledSkin: Embed(source="assets/controls/ComboBox_editableDisabledSkin.png");
+	editableDownSkin: Embed(source="assets/controls/ComboBox_editableDownSkin.png");
+	editableOverSkin: Embed(source="assets/controls/ComboBox_editableOverSkin.png");
+	editableUpSkin: Embed(source="assets/controls/ComboBox_editableUpSkin.png");
+	focusAlpha: 0;
+	fontWeight: bold;
+	dropDownStyleName: "myComboBoxDropDowns";
+}
+
+ComboBox.combobox2
+{
+	disabledSkin: Embed(source="assets/controls/ComboBox_disabledSkin_2.png", scaleGridLeft="12", scaleGridTop="1", scaleGridRight="40", scaleGridBottom="22");
+	downSkin: Embed(source="assets/controls/ComboBox_downSkin_2.png", scaleGridLeft="12", scaleGridTop="1", scaleGridRight="40", scaleGridBottom="22");
+	overSkin: Embed(source="assets/controls/ComboBox_overSkin_2.png", scaleGridLeft="12", scaleGridTop="1", scaleGridRight="40", scaleGridBottom="22");
+	upSkin: Embed(source="assets/controls/ComboBox_upSkin_2.png", scaleGridLeft="12", scaleGridTop="1", scaleGridRight="40", scaleGridBottom="22");
+	editableDisabledSkin: Embed(source="assets/controls/ComboBox_editableDisabledSkin_2.png");
+	editableDownSkin: Embed(source="assets/controls/ComboBox_editableDownSkin_2.png");
+	editableOverSkin: Embed(source="assets/controls/ComboBox_editableOverSkin_2.png");
+	editableUpSkin: Embed(source="assets/controls/ComboBox_editableUpSkin_2.png");
+	focusAlpha: 0;
+	fontWeight: bold;
+	dropDownStyleName: "myComboBoxDropDowns";
+}
+
+ComboBox.combobox3
+{
+	upSkin: Embed(source="assets/controls/ComboBox_upSkin_3.png", scaleGridLeft="12", scaleGridTop="1", scaleGridRight="40", scaleGridBottom="18");
+	overSkin: Embed(source="assets/controls/ComboBox_overSkin_3.png", scaleGridLeft="12", scaleGridTop="1", scaleGridRight="40", scaleGridBottom="18");
+	downSkin: Embed(source="assets/controls/ComboBox_downSkin_3.png", scaleGridLeft="12", scaleGridTop="1", scaleGridRight="40", scaleGridBottom="18");
+	focusAlpha: 0;
+	fontWeight: bold;
+	dropDownStyleName: "myComboBoxDropDowns";
+}		
+
+.myComboBoxDropDowns {
+   borderThickness: 2;
+   letterSpacing: 0;
+/*    color: #0092CF; */
+   
+   borderColor: #0181CC;
+   selectionColor: #ECF6ED;
+   rollOverColor: #ECF6ED;
+/*    alternatingItemColors: #C6E2CC, #C6E2CC; */
+   cornerRadius: 5;
+   
+   textSelectedColor: #0082BF;
+   textRollOverColor: #0082BF;
+}
+
+RadioButton.ycRadioButton
+{
+	upIcon: Embed(source="assets/controls/RadioButton_upIcon.png");
+	overIcon: Embed(source="assets/controls/RadioButton_overIcon.png");
+	downIcon: Embed(source="assets/controls/RadioButton_downIcon.png");
+	disabledIcon: Embed(source="assets/controls/RadioButton_disabledIcon.png");
+	selectedUpIcon: Embed(source="assets/controls/RadioButton_selectedUpIcon.png");
+	selectedOverIcon: Embed(source="assets/controls/RadioButton_selectedOverIcon.png");
+	selectedDownIcon: Embed(source="assets/controls/RadioButton_selectedDownIcon.png");
+	selectedDisabledIcon: Embed(source="assets/controls/RadioButton_selectedDisabledIcon.png");
+	fontWeight: bold;
+}	
+
+RadioButton.picBtn
+{
+	color: #383838;
+	textDownColor:#0000FF;
+	textRollOverColor: #000000;
+	textSelectedColor: #000000;
+	disabledColor: #757575;
+	fontWeight: bold;
+	upIcon: Embed(source="assets/controls/RadioButton_upIcon.png");
+	overIcon: Embed(source="assets/controls/RadioButton_overIcon.png");
+	downIcon: Embed(source="assets/controls/RadioButton_downIcon.png");
+	disabledIcon: Embed(source="assets/controls/RadioButton_disabledIcon.png");
+	selectedUpIcon: Embed(source="assets/controls/RadioButton_selectedUpIcon.png");
+	selectedOverIcon: Embed(source="assets/controls/RadioButton_selectedOverIcon.png");
+	selectedDownIcon: Embed(source="assets/controls/RadioButton_selectedDownIcon.png");
+	selectedDisabledIcon: Embed(source="assets/controls/RadioButton_selectedDisabledIcon.png");
+}
+
+DateField.ycDateField
+{
+	color:#000000;
+}
+
+List.ycList
+{
+	alternatingItemColors: #E8EEED, #FFFFFF; 
+	cornerRadius: 6;
+	borderStyle: solid;
+	borderColor: #FFFFFF;
+}
+
+NormalTextInput
+{
+	borderSkin: Embed(source="assets/controls/TextInput_borderSkin2.png", 
+					scaleGridLeft="10", 
+					scaleGridTop="10", 
+					scaleGridRight="147", 
+					scaleGridBottom="16");
+	color: #000000;
+	fontSize: 12;
+	fontWeight: bold;
+	paddingTop: 2;
+	paddingLeft: 5;
+	paddingRight: 5;
+	fontFamily: Arial;
+	focusAlpha: 0.1;
+	focusColor: #A6A6A6;
+	cornerRadius: 7;
+	focusThickness: 1;
+	themeColor: #A6A6A6;
+}
+
+TextInput.underwriteTextInput
+{
+	borderSkin: Embed(source="assets/controls/TextInput_borderSkin3.png", 
+					scaleGridLeft="20", 
+					scaleGridTop="1", 
+					scaleGridRight="25", 
+					scaleGridBottom="23");
+	fontFamily: Arial;
+	fontSize: 12;
+	fontWeight: bold;
+	paddingTop: 2;
+	paddingLeft: 20;
+	paddingRight: 10;
+	cornerRadius: 10;
+	focusAlpha: 0.0;
+	focusColor: #A6A6A6;
+	cornerRadius: 7;
+	focusThickness: 1;
+	themeColor: #A6A6A6;
+}
+
+TextInput.searchTextInput
+{
+	borderSkin: Embed(source="assets/controls/TextInput_borderSkin4.png", scaleGridLeft="20", scaleGridTop="1",scaleGridRight="100", scaleGridBottom="18");
+	paddingLeft: 10;
+	paddingRight: 5;
+	fontFamily: Arial;
+	fontSize: 12;
+	fontWeight: bold;
+	focusAlpha: 0.0;
+	focusColor: #A6A6A6;
+	themeColor: #A6A6A6;
+}
+
+TextArea.ycTextArea
+{
+	borderSkin: Embed(source="assets/controls/TextArea_borderSkin.png", 
+					scaleGridLeft="6", 
+					scaleGridTop="6", 
+					scaleGridRight="17", 
+					scaleGridBottom="16");
+	color: #000000;
+	fontSize: 12;
+	fontWeight: bold;
+	paddingLeft: 8;
+	paddingTop: 5;
+	paddingRight: 8;
+	fontFamily: Arial;
+	paddingBottom: 5;
+	focusAlpha: 0.1;
+	focusColor: #A6A6A6;
+	cornerRadius: 6;
+	focusThickness: 1;
+	themeColor: #A6A6A6;
+}

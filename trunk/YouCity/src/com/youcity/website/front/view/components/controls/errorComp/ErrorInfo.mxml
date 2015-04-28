@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+	backgroundColor="0x0cfcad" backgroundAlpha=".5"
+	height="20" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*">
+	
+	<mx:Script>
+		<![CDATA[
+			private var _message:String;
+			public function set  message(value:String):void
+			{
+				_message = value;
+				errorTip.text = value;
+			}
+		]]>
+	</mx:Script>
+	
+	<controls:Label id="errorTip" x="{(width - errorTip.width)/2}" y="{(height - errorTip.height)/2}" />
+</mx:Canvas>

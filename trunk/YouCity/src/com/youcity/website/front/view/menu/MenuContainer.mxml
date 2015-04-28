@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*" 
+	xmlns:searchMenu="com.youcity.website.front.view.menu.searchMenu.*" 
+	xmlns:components="com.youcity.website.front.view.components.*" 
+	xmlns:menu="com.youcity.website.front.view.menu.*" 
+	width="100%" height="100%"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off" 
+	creationComplete="handleCreationComplete(event)">
+
+	<mx:Style>
+		.hotEventIcon
+		{
+			upSkin: Embed("assets/menu/hot_event_up.png");
+			overSkin: Embed("assets/menu/hot_event_over.png");
+			downSkin: Embed("assets/menu/hot_event_down.png");
+			disabledSkin: Embed("assets/menu/hot_event_up.png");
+		}
+		.findEventIcon
+		{
+			upSkin: Embed("assets/menu/find_event_up.png");
+			overSkin: Embed("assets/menu/find_event_over.png");
+			downSkin: Embed("assets/menu/find_event_down.png");
+			disabledSkin: Embed("assets/menu/find_event_up.png");
+		}
+		.creatEventIcon
+		{
+			upSkin: Embed("assets/menu/create_event_up.png");
+			overSkin: Embed("assets/menu/create_event_over.png");
+			downSkin: Embed("assets/menu/create_event_down.png");
+			disabledSkin: Embed("assets/menu/create_event_up.png");
+		}
+		.inviteFriendIcon
+		{
+			upSkin: Embed("assets/menu/invite_friend_up.png");
+			overSkin: Embed("assets/menu/invite_friend_over.png");
+			downSkin: Embed("assets/menu/invite_friend_down.png");
+			disabledSkin: Embed("assets/menu/invite_friend_up.png");
+		}
+		.exploreIcon
+		{
+			upSkin: Embed("assets/menu/explore_up.png");
+			overSkin: Embed("assets/menu/explore_over.png");
+			downSkin: Embed("assets/menu/explore_down.png");
+			disabledSkin: Embed("assets/menu/explore_up.png");
+		}
+		.mainMenuIcon
+		{
+			upSkin: Embed("assets/menu/main_menu_up.png");
+			overSkin: Embed("assets/menu/main_menu_over.png");
+			downSkin: Embed("assets/menu/main_menu_down.png");
+			disabledSkin: Embed("assets/menu/main_menu_up.png");
+		}
+	</mx:Style>
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.binding.utils.BindingUtils;
+			import com.youcity.website.front.util.DebugUtil;
+			import com.youcity.website.front.view.search.SearchProxy;
+			import com.youcity.website.front.common.Constants;
+			import mx.events.FlexEvent;
+			import com.youcity.website.front.view.common.ViewManager;
+			import flash.net.navigateToURL;
+			
+			[Bindable]
+			private var mailLink:String = "<a href=\"mailto:map@hdmg.dm\"><u>E:map@hdmg.dm</u></a>";
+			
+			[Bindable]
+			private var newY:Number = 0;
+			
+			private function handleCreationComplete(event:FlexEvent):void
+			{
+				var tempPoint1:Point = menuBox.contentToGlobal(new Point(searthBtn.x, searthBtn.y));
+				var tempPoint11:Point = this.globalToContent(tempPoint1);
+				sMenu.x = tempPoint11.x;
+
+				var tempPoint2:Point = menuBox.contentToGlobal(new Point(mainBtn.x, mainBtn.y));
+				var tempPoint22:Point = this.globalToContent(tempPoint2);
+				mMenu.x = tempPoint22.x;
+				
+				newY = tempPoint11.y + 85;
+			}
+			
+			private function handleHotBtnClickEvent(event:MouseEvent):void {
+				//todo
+				DebugUtil.debug();
+			}
+			
+			private function handleFindBtnClickEvent(event:MouseEvent):void {
+				//todo
+				DebugUtil.debug();
+			}
+			
+			private function handleCreateBtnClickEvent(event:MouseEvent):void {
+				//todo
+				DebugUtil.debug();
+			}
+			
+			private function handleInviteBtnClickEvent(event:MouseEvent):void {
+				//todo
+				DebugUtil.debug();
+			}
+			
+			private function handleSearchBtnClickEvent(event:MouseEvent):void
+			{
+				if(sMenu.visible)
+				{
+					sMenu.visible = false;
+					return;
+				}
+				sMenu.visible = true;
+			}
+			
+			private function handleMainBtnClickEvent(event:MouseEvent):void {
+				//todo
+			}
+			
+			private function handleSearchSubMenuClickEvent(event:MouseEvent):void
+			{
+				sMenu.visible = false;
+			}
+
+			private function handleMainSubMenuClickEvent(event:MouseEvent):void
+			{
+				mMenu.visible = false;
+			}
+			
+			private function handleIconRollOverEvent(event:MouseEvent):void
+			{
+				var btn:MenuIconButton = event.currentTarget as MenuIconButton;
+				var tempPoint:Point = btn.localToContent(new Point(btn.x, btn.y));
+				tip.x = tempPoint.x;
+				tip.y = tempPoint.y + 85;
+				tip.text = btn.tip;
+				tip.visible = true;
+			}
+			
+			private function handleIconRollOutEvent(event:MouseEvent):void
+			{
+				tip.text = "";
+				tip.visible = false;
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:Move id="moveUp" yFrom="{newY}" yTo="-100" duration="300"/>
+	<mx:Move id="moveDown" yFrom="{-100}" yTo="{newY}" duration="300"/>
+	
+	<menu:MenuTip id="tip" visible="false"/>
+	<menu:MMenu id="mMenu" visible="false" click="handleMainSubMenuClickEvent(event)" showEffect="{moveDown}" hideEffect="{moveUp}"/>
+	<menu:SearchSubMenu id="sMenu" visible="false" click="handleSearchSubMenuClickEvent(event)" showEffect="{moveDown}" hideEffect="{moveUp}"/>
+
+	<mx:HBox id="menuBox" width="100%" height="95" 
+			paddingLeft="30" paddingTop="4" paddingRight="50" paddingBottom="13"
+			horizontalGap="0" 
+			verticalAlign="middle" 
+			styleName="mainMenuBox">
+			
+		<mx:VBox verticalGap="0">
+			<mx:Text text="W:HotelDestinationManagementGroup.com" color="black"/>
+			<mx:Text text="P: 888.918.3737" color="black"/>
+			<mx:Text htmlText="{mailLink}" color="black"/>
+		</mx:VBox>
+		<mx:Spacer width="20"/>
+		<menu:MenuIconButton id="hotBtn" 
+			rollOver="handleIconRollOverEvent(event)" 
+			rollOut="handleIconRollOutEvent(event)"
+			click="handleHotBtnClickEvent(event)" 
+			tip="Hot Event" 
+			styleName="hotEventIcon"/>
+		<menu:MenuIconButton id="findBtn" 
+			rollOver="handleIconRollOverEvent(event)" 
+			rollOut="handleIconRollOutEvent(event)"
+			click="handleFindBtnClickEvent(event)"  
+			tip="Find Event" 
+			styleName="findEventIcon"/>
+		<menu:MenuIconButton id="createBtn" 
+			rollOver="handleIconRollOverEvent(event)" 
+			rollOut="handleIconRollOutEvent(event)"
+			click="handleCreateBtnClickEvent(event)"  
+			tip="Create Event" 
+			styleName="creatEventIcon"/>
+		<menu:MenuIconButton id="inviteBtn" 
+			rollOver="handleIconRollOverEvent(event)" 
+			rollOut="handleIconRollOutEvent(event)"
+			click="handleInviteBtnClickEvent(event)" 
+			tip="Invite Friend" 
+			styleName="inviteFriendIcon"/>
+		<menu:MenuIconButton id="searthBtn" 
+			rollOver="handleIconRollOverEvent(event)" 
+			rollOut="handleIconRollOutEvent(event)"
+			click="handleSearchBtnClickEvent(event)"
+			tip="Explore" 
+			styleName="exploreIcon"/>
+		<menu:MenuIconButton id="mainBtn" 
+			rollOver="handleIconRollOverEvent(event)" 
+			rollOut="handleIconRollOutEvent(event)" 
+			click="handleMainBtnClickEvent(event)"
+			tip="Main Menu" 
+			styleName="mainMenuIcon"/>
+		<mx:Spacer width="20"/>
+		<searchMenu:SearchFrameBox backgroundAlpha="0"/>
+		<mx:Spacer width="60"/>
+		<mx:Image source="assets/HDMG_logo.gif" height="70"/>
+	</mx:HBox>
+	
+</mx:Canvas>

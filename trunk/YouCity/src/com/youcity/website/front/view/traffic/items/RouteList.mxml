@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridContainer 
+	xmlns="com.youcity.website.front.view.components.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	columnCount="3" 
+	creationComplete="onInit(event)"
+	>
+	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.view.traffic.SubwayModel;
+			import mx.core.UIComponent;
+			import mx.events.FlexEvent;
+			import com.youcity.website.front.view.traffic.TrafficProxy;
+			
+			private var _size:uint;
+			public function get size():uint
+			{
+				return _size;
+			}
+			public function set size(value:uint):void
+			{
+				if (_size == value) return;
+				_size = value;
+				if (_source)
+					setRpeater(_source);
+			}
+			
+			private var _source:Array;
+			public function get source():Array
+			{
+				return _source;
+			}
+			public function set source(value:Array):void
+			{
+				_source = value;
+				setRpeater(_source);
+			}
+			
+			private var _src:Array;
+			
+			private function setRpeater(src:Array):void
+			{
+				var source:Array = [];
+				_src = [];
+				var route:String;
+				for (var i:uint = 0; i < src.length; i++)
+				{
+					if (SubwayModel.currentRoute == src[i]) continue;
+					route = TrafficProxy.instance.getRouteIcon(String(src[i]), _size);
+					source.push(route);
+					_src.push([src[i],route] );
+				}
+				rpt.dataProvider = source;
+			}
+			
+			public function onInit(event:FlexEvent):void
+			{
+				
+			}
+			
+			public function clickHandler(event:MouseEvent):void
+			{
+				var target:UIComponent = UIComponent(event.currentTarget);
+				TrafficProxy.instance.openRouteView(_src[target.repeaterIndex][0]);
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Repeater id="rpt">
+		<mx:SWFLoader 
+			buttonMode="true"
+			source="{rpt.currentItem}" 
+			click="clickHandler(event)" 
+			/>
+	</mx:Repeater>
+</GridContainer>

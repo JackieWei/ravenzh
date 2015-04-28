@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<business:ViewBase 
+	xmlns:business="com.youcity.website.front.view.common.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="800" height="500"
+	viewID="businessView"
+	creationComplete="onInit(event)"
+	xmlns:navigator="com.youcity.website.front.view.components.navigator.*" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*" 
+	xmlns:businessItems="com.youcity.website.front.view.business.widgets.items.*"
+	xmlns:commonItem="com.youcity.website.front.view.photoVideo.commonItem.*" 
+	xmlns:code="flexlib.controls.*"
+	currentState="default"
+	titleIcon="assets/business/business_detail.png"
+	closeView="viewCloseHandler(event)"
+	xmlns:widgets="com.youcity.website.front.view.business.widgets.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.util.DebugUtil;
+			import com.youcity.website.front.event.OtherEvent;
+			import com.youcity.website.front.controller.OtherED;
+			import com.youcity.website.front.model.OtherModelLocator;
+			import com.youcity.website.front.vo.BusinessVO;
+			import mx.events.FlexEvent;
+			import com.youcity.website.front.view.common.ViewManager;
+			public static const VIEW_WIDTH:Number = 800;
+			public static const VIEW_HEIGHT:Number = 500;
+			
+			private var _otherModel:OtherModelLocator = OtherModelLocator.getInstance();
+			
+			private function onInit(event:FlexEvent):void
+			{
+				navigator.selectedIndex = BusinessModel.firstIndex;
+				BusinessED.instance.addEventListener(BusinessED.REHOST, onReHostHandler);
+			}
+			
+			private function onReHostHandler(event:Event):void
+			{
+				currentState = "minimize";
+			}
+			
+			private function viewCloseHandler(event:Event):void
+			{
+				BusinessED.instance.removeEventListener(BusinessED.REHOST, onReHostHandler);
+				BusinessProxy.instance.closeBusinessView();
+			}
+			
+			private function onSelectedChangedHandler(event:Event):void {
+				//todo
+				DebugUtil.debug();
+			}
+		]]>
+	</mx:Script>
+	<business:states>
+		<mx:State name="default">
+			<mx:AddChild relativeTo="{this}" position="lastChild">
+				<mx:Canvas 
+					width="100%" height="100%" 
+					horizontalScrollPolicy="off" verticalScrollPolicy="off">
+					<navigator:Navigator id="navigator"
+						iconGap="-29" 
+						marginStart="215" iconWidth="102" iconHeight="33"
+						change="onSelectedChangedHandler(event)"
+						innerGap="-13" location="top"
+						width="{VIEW_WIDTH - 33}" height="{VIEW_HEIGHT - 35}"
+						y="18" x="19"
+						contentStyleName="activityDetailNavigatorInnerStyle"
+						>
+						<navigator:icons>
+							<code:CanvasButton width="103" height="33" styleName="detailDetail"/>
+						</navigator:icons>
+						<navigator:contents>
+							<businessItems:Detail />
+						</navigator:contents>
+					</navigator:Navigator>
+				</mx:Canvas>
+			</mx:AddChild>
+			<mx:SetProperty name="titleIcon" target="{this}" value="assets/business/business_detail.png" />
+		</mx:State>
+		<mx:State name="minimize">
+			<mx:AddChild relativeTo="{this}">
+				<widgets:RelocateBusinessComp
+					relocateEnd="currentState = 'default'" 
+					width="{width - 40}" height="{height - 40}"
+					x="20" y="{ViewBase.TITLE_HEIGHT}" />
+			</mx:AddChild>
+			<mx:SetProperty name="titleIcon" target="{this}" value="assets/business/relocate_business.png" />
+			<mx:SetProperty name="width" target="{this}" value="{300}" />
+			<mx:SetProperty name="height" target="{this}" value="{280}" />
+		</mx:State>
+	</business:states>
+</business:ViewBase>

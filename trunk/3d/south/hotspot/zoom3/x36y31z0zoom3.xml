@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hotspot>
+<spot><id>1b14d6b5ff3c0611b491e536e4d6b5cf</id><title>161 William</title><centerX>18845</centerX><centerY>16192</centerY><coords>9429,8045,9389,8057,9370,8140,9423,8200,9450,8211,9433,8048,9433,8048,9438,8068,9432,8043</coords></spot>
+<spot><id>26d688984d2e29b3f1ea541e2d16fe60</id><title>111 Fulton</title><centerX>18611</centerX><centerY>16359</centerY><coords>9345,8164,9307,8111,9235,8134,9231,8161,9297,8248,9318,8245,9319,8214,9347,8166,9347,8166</coords></spot>
+<spot><id>4903ebc382b92be4d642ba36b03ef52b</id><title>25 Ann</title><centerX>18601</centerX><centerY>15996</centerY><coords>9314,7985,9305,7959,9274,7966,9273,8014,9292,8048,9307,8040,9317,7984,9317,7983</coords></spot>
+<spot><id>736eb5600efffb44a3f5a4af9b47826b</id><title>50 Ann</title><centerX>18498</centerX><centerY>16147</centerY><coords>9187,8081,9263,8055,9289,8072,9290,8110,9216,8130,9190,8081,9262,8056,9262,8056,9259,8054,9259,8054,9259,8053</coords></spot>
+<spot><id>7c6307f6741e8d9a125e253ea6415f4f</id><title>5 Beekman</title><centerX>18855</centerX><centerY>15905</centerY><coords>9462,7909,9412,7914,9407,7906,9355,7918,9353,7977,9365,7981,9379,8018,9413,8010,9411,7974,9442,7970,9457,7967,9462,7982,9474,7982,9475,7944,9464,7912,9464,7912,9463,7907</coords></spot>
+<spot><id>815830acc17e85e901d5204ef234b499</id><title>null</title><centerX>18656</centerX><centerY>15936</centerY><coords>9318,7984,9354,7979,9345,7946,9327,7945,9315,7955,9315,7981,9318,7983</coords></spot>
+<spot><id>9901cfd4ba9ad2ea21e485ce4cb4a343</id><title>104 Nassau</title><centerX>18670</centerX><centerY>16033</centerY><coords>9312,8034,9317,8030,9358,8022,9380,8020,9364,7982,9318,7986,9314,8027,9314,8027</coords></spot>
+<spot><id>a264fac4b790c6408b936e87aed598c9</id><title>49 Ann</title><centerX>18746</centerX><centerY>16105</centerY><coords>9379,8022,9316,8032,9315,8104,9333,8118,9378,8110,9390,8060,9412,8048,9413,8025,9405,8014,9377,8018,9380,8023</coords></spot>
+<spot><id>b4d5bb4ffec7d2bfefedf4db47c3618f</id><title>132 Nassau</title><centerX>18897</centerX><centerY>16011</centerY><coords>9459,7968,9414,7974,9414,8011,9415,8038,9431,8039,9440,8063,9489,8058,9482,7982,9467,7984,9459,7971,9460,7968</coords></spot>
+</hotspot>

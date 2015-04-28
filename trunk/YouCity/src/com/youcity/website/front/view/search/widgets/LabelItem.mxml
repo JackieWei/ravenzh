@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*"
+	styleName="labelItem" 
+	horizontalScrollPolicy="off" verticalScrollPolicy="off">
+	<mx:Script>
+		<![CDATA[
+			private var dataChange:Boolean = false;
+			private var _text:String;
+			public function get text():String
+			{
+				return this._text;
+			}
+			
+			public function set text(value:String):void
+			{
+				this._text = value;
+				dataChange = true;
+				invalidateDisplayList();
+			}
+			
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+			{
+				super.updateDisplayList(unscaledWidth, unscaledHeight);
+				if (dataChange)
+				{
+					dataChange = false;
+					this.item.text = this._text;
+				}
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:Style>
+		.itemLabel
+		{
+			color: #000000;
+			fontSize: 14;
+			fontWeight: bold;
+		}
+	</mx:Style>
+	<controls:Label id="item" width="{width - 10}" styleName="itemLabel"/>
+</mx:HBox>

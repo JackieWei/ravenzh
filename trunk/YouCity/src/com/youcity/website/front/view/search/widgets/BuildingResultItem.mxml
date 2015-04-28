@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*"
+	xmlns:widgets="com.youcity.website.front.view.search.widgets.*"
+	styleName="resultItem" click="handleBuildingItemClick(event)" 
+	verticalGap="2" buttonMode="true" 
+	paddingLeft="5" paddingTop="5" paddingBottom="5" paddingRight="5">
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.view.common.MapManager;
+			import com.youcity.maps.MapPoint;
+//			import com.youcity.website.front.view.marker.SearchMarkerManager;
+			import com.youcity.website.front.view.building.BuildingProxy;
+			import com.youcity.website.front.vo.BuildingVO;
+			import com.youcity.website.front.util.AuxUtil;
+
+			public var dataChanged:Boolean = false;
+			
+			private var _buildingVO:BuildingVO;
+			public function get buildingVO():BuildingVO
+			{
+				return this._buildingVO;
+			}
+			public function set buildingVO(value:BuildingVO):void
+			{
+				if (value != null && value != _buildingVO)
+				{
+					this._buildingVO = value;
+					dataChanged = true;
+					invalidateDisplayList();
+				}
+			}
+			
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+			{
+				super.updateDisplayList(unscaledWidth, unscaledHeight);
+				if (dataChanged)
+				{
+					dataChanged = false;
+					this.charItem.char = this.instanceIndex;
+					this.address.text = this._buildingVO.address;
+					this.phoneNumber.text = this._buildingVO.phoneNumber;
+					this.buildingName.text = this._buildingVO.buildingName;
+				}
+			}
+			
+			private function handleBuildingItemClick(event:MouseEvent):void
+			{
+				var tempMP:MapPoint = new MapPoint(_buildingVO.centerX, _buildingVO.centerY);
+				MapManager.getInstance().slideCenter(tempMP);
+//				BuildingProxy.instance.openBuilding(this._buildingVO.buildingId);
+			}
+		]]>
+	</mx:Script>
+	<widgets:LabelItem id="buildingName" width="{width - 10}" styleName="titleText"/>
+	<mx:HBox verticalAlign="middle" width="{width - 10}" 		
+		horizontalGap="2" 
+		horizontalScrollPolicy="off" verticalScrollPolicy="off">
+		<widgets:CharItem id="charItem"/>
+		<mx:VBox width="{width - 45}" verticalGap="2">
+			<controls:Label id="address" width="130"/>
+			<controls:Label id="phoneNumber" width="130"/>
+		</mx:VBox>		
+	</mx:HBox>
+</mx:VBox>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<components:UserComponent xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:components="com.youcity.website.front.view.components.*" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*">
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.vo.friend.PeopleVO;
+			
+			[Bindable]
+			public var people:PeopleVO;
+		]]>
+	</mx:Script>
+	<components:ImageUI x="10" y="10" width="60" height="60" source="assets/photo_test_source.png"/>
+	<mx:VBox x="70" y="10" verticalGap="0">
+		<controls:Label text="Raven Zheng" fontSize="14"/>
+		<controls:Label text="3 mutual friends"/>
+		<controls:Label text="3 mutual activities"/>
+	</mx:VBox> 
+</components:UserComponent>

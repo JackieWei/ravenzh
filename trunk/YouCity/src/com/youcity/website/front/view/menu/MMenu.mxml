@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+	styleName="dropdownMenu"
+	paddingLeft="10" paddingTop="10" paddingRight="10" paddingBottom="20"
+	xmlns:menu="com.youcity.website.front.view.menu.*">
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.view.common.ViewManager;
+			//Handler for friends icon click event
+			private function handleFriendsIconClickEvent(event:MouseEvent):void
+			{
+				ViewManager.getInstance().openView("friendListView");
+			}
+			
+			//Handler for friendfeed icon click event
+			private function handleFriendFeedIconClickEvent(event:MouseEvent):void
+			{
+				ViewManager.getInstance().openView("friendsEventView");
+			}
+			
+			//Handler for profile icon click event
+			private function handleProfileIconClickEvent(event:MouseEvent):void
+			{
+				//to do
+			}
+			
+			//Handler for calendar icon click event
+			private function handleCalendarIconClickEvent(event:MouseEvent):void
+			{
+				ViewManager.getInstance().openView("myActivityView");
+			}
+			
+			//Handler for mail icon click event
+			private function handleMailIconClickEvent(event:MouseEvent):void
+			{
+				ViewManager.getInstance().openView("messageView");
+			}
+			
+			//Handler for personalmap icon click event
+			private function handlePersonalMapIconClickEvent(event:MouseEvent):void
+			{
+				ViewManager.getInstance().openView("personalMapView", new Point(100, 100));
+			}
+			
+			private function handleFavoriteIconClickEvent(event:MouseEvent):void
+			{
+				ViewManager.getInstance().openView("favoriteView", new Point(100, 100));
+			}
+		]]>
+	</mx:Script>
+	<mx:Object id="friends" icon="assets/menu/friends.png" label="Friends"/>	
+	<mx:Object id="friendFeed" icon="assets/menu/friend_feed.png" label="Friends' Feed"/>	
+	<mx:Object id="profile" icon="assets/menu/profile.png" label="My Profile"/>	
+	<mx:Object id="calendar" icon="assets/menu/calendar.png" label="My Calendar"/>	
+	<mx:Object id="mail" icon="assets/menu/mail.png" label="Mail"/>	
+	<mx:Object id="personalMap" icon="assets/menu/personal_map.png" label="My Map"/>
+	<mx:Object id="favorites" icon="assets/menu/favorite.png" label="My Favorites"/>
+	<mx:VBox>
+		<menu:MainMenuItemRenderer menu="{friends}" click="handleFriendsIconClickEvent(event)"/>	
+		<menu:MainMenuItemRenderer menu="{friendFeed}" click="handleFriendFeedIconClickEvent(event)"/>	
+		<menu:MainMenuItemRenderer menu="{calendar}" click="handleCalendarIconClickEvent(event)"/>	
+	</mx:VBox>
+	<mx:VBox>
+		<menu:MainMenuItemRenderer menu="{mail}" click="handleMailIconClickEvent(event)"/>	
+		<menu:MainMenuItemRenderer menu="{personalMap}" click="handlePersonalMapIconClickEvent(event)"/>	
+		<menu:MainMenuItemRenderer menu="{favorites}" click="handleFavoriteIconClickEvent(event)"/>
+	</mx:VBox>
+</mx:HBox>

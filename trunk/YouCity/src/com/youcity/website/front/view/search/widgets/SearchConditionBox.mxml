@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*"
+	verticalGap="10"
+	currentState="{STATE_SEARCH_ALL}"
+	creationComplete="handleCreationComplete(event)" 
+	xmlns:rank="com.youcity.website.front.view.activities.rank.*">
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.view.common.MapManager;
+			import com.youcity.website.front.event.MapManagerEvent;
+			import mx.events.ListEvent;
+			import com.youcity.website.front.vo.BusinessCategoryVO;
+			import mx.collections.ArrayCollection;
+			import com.youcity.website.front.common.Constants;
+			import com.youcity.website.front.view.common.CallbackData;
+			import com.youcity.website.front.event.SearchEvent;
+			import com.youcity.website.front.model.OtherModelLocator;
+			import com.youcity.website.front.util.AuxUtil;
+			import com.youcity.website.front.model.SearchModelLocator;
+			import mx.events.FlexEvent;
+			
+			private static const STATE_SEARCH_ALL:String 		= "search_all";
+			private static const STATE_SEARCH_BUILDING:String = "search_building";
+			private static const STATE_SEARCH_BUSINESS:String = "search_business";
+			private static const STATE_SEARCH_NEARBY:String 	= "search_nearby";
+			
+			private var paramChanged:Boolean = false;
+			private var _param:Object;
+			public function get param():Object {
+				return this._param;
+			}
+			public function set param(value:Object):void {
+				if (value != null && value != this._param) {
+					this._param = value;
+					paramChanged = true;
+					invalidateProperties();
+				}
+			}
+			
+			private var _businessCategory:Array;
+			private var _isNearBySearch:Boolean = false;
+			public function get businessCategory():Array { return this._businessCategory; }
+			public function get isNearBySearch():Boolean { return this._isNearBySearch; }
+			public function set isNearBySearch(value:Boolean):void { this._isNearBySearch = value; }
+			
+			private var otherModel:OtherModelLocator = OtherModelLocator.getInstance();
+			
+			private var searchModel:SearchModelLocator = SearchModelLocator.getInstance();
+			
+			private var arr:Array = [{label:"All", value:"0"}, 
+									{label:"Building", value:"1"},
+									{label:"Business", value:"2"}];
+									
+			private var ratingArr:Array = [{label:"All", value:"0"}, 
+											{label:"Above 1 star", value:"1"},
+											{label:"Above 2 stars", value:"2"},
+											{label:"Above 3 stars", value:"3"},
+											{label:"Above 4 stars", value:"4"},
+											{label:"5 stars", value:"5"}];
+			
+			override protected function commitProperties():void {
+				super.commitProperties();
+				if (paramChanged) {
+					paramChanged = false;
+					if (this._param["searchType"] != undefined) {
+						this.typeComboBox.selectedIndex = uint(this._param["searchType"]);
+						switch (this.typeComboBox.selectedItem.value)  {
+							case "0":
+								currentState = STATE_SEARCH_ALL;
+								break;
+							case "1":
+								currentState = STATE_SEARCH_BUILDING;
+								break;
+							case "2":
+								currentState = STATE_SEARCH_BUSINESS;
+								categoryComboBox.dataProvider = businessCategory;
+								break;
+						}
+					}
+					if (this._param["keyword"] != undefined) {
+						if (AuxUtil.isEmpty(this._param["keyword"]))
+						return;
+						this.keywordTxt.text = this._param["keyword"];
+						doSearch();
+					} 
+				}
+			}
+			
+			private function handleCreationComplete(event:FlexEvent):void {
+				this.isNearBySearch = searchModel.isNearBySearch;
+				AuxUtil.includeTarget(nearbyBox, isNearBySearch)
+				buildingName.text = AuxUtil.isEmpty(searchModel.buildingName) ? "" : searchModel.buildingName;
+
+				typeComboBox.dataProvider = arr;
+				
+				var bc:BusinessCategoryVO= new BusinessCategoryVO();
+				bc.categoryId = 0;
+				bc.categoryName = "All";
+				_businessCategory = otherModel.business_categoryList.source.concat();
+				_businessCategory.unshift(bc);
+				
+				ratingComboBox.dataProvider = ratingArr;
+			}
+			
+			private function handleTypeComboBoxCloseEvent(event:ListEvent):void {
+				var index:uint = ComboBox(event.currentTarget).selectedIndex;
+				switch (arr[index].value) {
+					case "0":
+						currentState = STATE_SEARCH_ALL;
+						break;
+					case "1":
+						currentState = STATE_SEARCH_BUILDING;
+						break;
+					case "2":
+						currentState = STATE_SEARCH_BUSINESS;
+						categoryComboBox.dataProvider = businessCategory;
+						break;
+				}
+			}
+			
+			private function handleSearchBtnClick(event:MouseEvent):void {
+				doSearch();
+			}
+			
+			private function doSearchAll():void {
+				searchModel.keyword = keywordTxt.text;
+				searchModel.pageSize = 10;
+				searchModel.category = 0;
+				doSearchBuilding({q:keywordTxt.text, ps:10, np:1, cl:Constants.SEARCHTYPE_BUILDING});
+				doSearchBusiness({q:keywordTxt.text, ps:10, np:1, cl:Constants.SEARCHTYPE_BUSINESS, cg:0});
+			}
+			
+			private function doSearchBuilding(param:Object):void {
+				var e:SearchEvent = new SearchEvent(SearchEvent.SEARCH_BUILDING);
+				e.callback = doSearchBuildingCallback;
+				e.data = param;
+				e.dispatch();
+			}
+			
+			private function doSearchBuildingCallback(callbackData:CallbackData):void {
+				dispatchEvent(new Event("buildingSearchEnd"));
+			}
+			
+			private function doSearchBusiness(param:Object):void {
+				var e:SearchEvent = new SearchEvent(SearchEvent.SEARCH_BUSINESS);
+				e.callback = doSearchBusinessCallback;
+				e.data = param;
+				e.dispatch();
+			}
+			
+			private function doSearchBusinessCallback(callbackData:CallbackData):void {
+				dispatchEvent(new Event("businessSearchEnd"));
+			}
+			
+			public function doSearch():void {
+				dispatchEvent(new Event("searchStart"));
+				var param:Object = new Object();
+				var type:String = typeComboBox.selectedItem.value;
+				switch (type) {
+					case "0":
+						doSearchAll();
+						break;
+					case "1":
+						searchModel.keyword = this.keywordTxt.text;
+						searchModel.pageSize = 10;
+						//init param for building search
+						param.q = this.keywordTxt.text;
+						param.ps = 10;
+						param.np = 1;
+						param.cl = Constants.SEARCHTYPE_BUILDING;
+						doSearchBuilding(param);
+						break;
+					case "2":
+						searchModel.keyword = this.keywordTxt.text;
+						searchModel.pageSize = 10;
+						searchModel.category = categoryComboBox.selectedItem.categoryId;
+						//init param for business search
+						param.q = this.keywordTxt.text;
+						param.ps = 10;
+						param.np = 1;
+						param.cl = Constants.SEARCHTYPE_BUSINESS;
+						param.cg = categoryComboBox.selectedItem.categoryId;
+						param.fromRank = ratingComboBox.selectedItem.value;
+						param.toRank = 5;
+						doSearchBusiness(param);
+						break;
+					default:
+						break;
+				}
+			}
+			
+			public function close():void {
+				this.categoryComboBox.close();
+				this.typeComboBox.close();
+				this.ratingComboBox.close();
+				this.startDate.close();
+				this.endDate.close();
+			}
+		]]>
+	</mx:Script>
+	<mx:Metadata>
+		[Event(name = "searchStart", type="flash.events.Event")]
+		[Event(name = "buildingSearchEnd", type="flash.events.Event")]
+		[Event(name = "businessSearchEnd", type="flash.events.Event")]
+	</mx:Metadata>
+	<mx:states>
+		<mx:State name="{STATE_SEARCH_ALL}">
+			<mx:SetProperty target="{categoryBox}" name="visible" value="false"/>
+			<mx:SetProperty target="{categoryBox}" name="includeInLayout" value="false"/>
+			<mx:SetProperty target="{startDateBox}" name="includeInLayout" value="false"/>
+			<mx:SetProperty target="{startDateBox}" name="visible" value="false"/>
+			<mx:SetProperty target="{endDateBox}" name="includeInLayout" value="false"/>
+			<mx:SetProperty target="{endDateBox}" name="visible" value="false"/>
+			<mx:SetProperty target="{ratingBox}" name="includeInLayout" value="false"/>
+			<mx:SetProperty target="{ratingBox}" name="visible" value="false"/>
+		</mx:State>
+		<mx:State name="{STATE_SEARCH_BUILDING}">
+			<mx:SetProperty target="{categoryBox}" name="visible" value="false"/>
+			<mx:SetProperty target="{categoryBox}" name="includeInLayout" value="false"/>
+			<mx:SetProperty target="{startDateBox}" name="includeInLayout" value="false"/>
+			<mx:SetProperty target="{startDateBox}" name="visible" value="false"/>
+			<mx:SetProperty target="{endDateBox}" name="includeInLayout" value="false"/>
+			<mx:SetProperty target="{endDateBox}" name="visible" value="false"/>
+			<mx:SetProperty target="{ratingBox}" name="includeInLayout" value="false"/>
+			<mx:SetProperty target="{ratingBox}" name="visible" value="false"/>
+		</mx:State>
+		<mx:State name="{STATE_SEARCH_BUSINESS}">
+			<mx:SetProperty target="{categoryBox}" name="visible" value="true"/>
+			<mx:SetProperty target="{categoryBox}" name="includeInLayout" value="true"/>
+			<mx:SetProperty target="{startDateBox}" name="includeInLayout" value="false"/>
+			<mx:SetProperty target="{startDateBox}" name="visible" value="false"/>
+			<mx:SetProperty target="{endDateBox}" name="includeInLayout" value="false"/>
+			<mx:SetProperty target="{endDateBox}" name="visible" value="false"/>
+			<mx:SetProperty target="{ratingBox}" name="includeInLayout" value="true"/>
+			<mx:SetProperty target="{ratingBox}" name="visible" value="true"/>
+		</mx:State>
+		<mx:State name="{STATE_SEARCH_NEARBY}">
+			
+		</mx:State>
+	</mx:states>
+	
+	<mx:VBox id="typeBox" verticalGap="0">
+		<controls:Label text="Search for"/> 
+		<controls:ComboBox id="typeComboBox" styleName="combobox2" change="handleTypeComboBoxCloseEvent(event)"/> 
+	</mx:VBox>
+	<mx:VBox id="categoryBox" verticalGap="0">
+		<controls:Label text="Category"/>
+		<controls:ComboBox id="categoryComboBox" styleName="combobox2" labelField="categoryName"/>
+	</mx:VBox>
+	<mx:VBox verticalGap="0">
+		<controls:Label text="Search for"/>
+		<controls:NormalTextInput id="keywordTxt"/>
+	</mx:VBox>
+	<mx:VBox id="nearbyBox" verticalGap="0">
+		<controls:Label text="Around"/>
+		<controls:Label id="buildingName"/>
+	</mx:VBox>
+	
+	<mx:VBox id="ratingBox" verticalGap="0">
+		<controls:Label text="Average Rating: "/>
+		<controls:ComboBox id="ratingComboBox" styleName="combobox2"/>
+	</mx:VBox>
+	
+	<mx:HBox id="startDateBox" verticalAlign="middle">
+		<controls:Label text="From: " width="48"/>
+		<controls:DateField id="startDate" 
+			formatString="YYYY-MM-DD" 
+			editable="false" 
+			showToday="true" 
+			selectedDate="{new Date()}"/>
+	</mx:HBox>
+	<mx:HBox id="endDateBox" verticalAlign="middle">
+		<controls:Label text="To: " width="48"/>
+		<controls:DateField id="endDate" 
+				formatString="YYYY-MM-DD" 
+				editable="false"
+				showToday="true" 
+				selectedDate="{AuxUtil.nextDate(new Date(), 7)}"/>
+	</mx:HBox>
+	<mx:HBox width="100%" horizontalAlign="right">
+		<controls:Button id="searchBtn" label="Search" click="handleSearchBtnClick(event)"/>
+	</mx:HBox>
+</mx:VBox>

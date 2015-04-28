@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*"
+	creationComplete="new AlternateControl(this)"
+	cornerRadius="10"
+	>
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.view.building.base.AlternateControl;
+			import com.youcity.website.front.view.common.CallbackData;
+			import com.youcity.website.front.view.building.BuildingProxy;
+			import com.youcity.website.front.vo.BusinessVO;
+			
+			[Bindable]
+			private var _orignalBuildingName:String;
+			
+			private var _orignalBuildingId:String;
+			
+			public function set originalBusiness(value:BusinessVO):void
+			{
+				_orignalBuildingName = value.buildingName;
+				_orignalBuildingId = value.buildingId;
+			}
+			
+			[Bindable]
+			private var _source: BusinessVO;
+			
+			public function set source(value:BusinessVO):void
+			{
+				_source = value;
+			}
+			
+			private function voteRelocatedCallbackHandler(callbackData:CallbackData):void
+			{
+				relocatedVote.enabled = false;
+				relocatedOppose.enabled = false;
+				if (CallbackData.SUCCEED == callbackData.code)
+				{
+					_source.agreeCount ++;
+				}
+			}
+			
+			private function opposeRelocatedCallbackHandler(callbackData:CallbackData):void
+			{
+				relocatedVote.enabled = false;
+				relocatedOppose.enabled = false;
+				if (CallbackData.SUCCEED == callbackData.code)
+				{
+					_source.disagreeCount ++;
+				}
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:VBox width="{width - 16}" x="8" height="100%">
+		<mx:HBox>
+			<controls:LinkLabel styleName="linkBtn" text="{_source.userName}" />
+			<controls:Label text="posts:" />
+		</mx:HBox>
+		<mx:HBox>
+			<controls:LinkLabel 
+				click="BuildingProxy.instance.openBuilding(_orignalBuildingId)"
+				styleName="linkBtn" text="{_orignalBuildingName}" />
+			<controls:Label text="------" />
+			<controls:LinkLabel
+				click="BuildingProxy.instance.openBuilding(_source.buildingId)"
+				styleName="linkBtn" text="{_source.buildingName}" />
+		</mx:HBox>
+	</mx:VBox>
+	
+	<mx:VBox width="200" height="100%" right="0">
+		<controls:Label id="dateTime" text="{_source.createTime}" />
+		<mx:HBox width="100%" horizontalGap="10">
+			<mx:HBox horizontalGap="0">
+				<controls:AuthorizeButton id="relocatedVote" styleName="voteIcon" />
+				<controls:Label text="{_source.agreeCount}" />
+			</mx:HBox>
+			<mx:HBox horizontalGap="0">
+				<controls:AuthorizeButton id="relocatedOppose" styleName="opposeIcon" />
+				<controls:Label text="{_source.disagreeCount}"/>
+			</mx:HBox>
+			
+		</mx:HBox>
+	</mx:VBox>
+	
+</mx:Canvas>

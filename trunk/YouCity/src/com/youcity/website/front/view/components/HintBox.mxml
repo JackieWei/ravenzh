@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*"
+	width="80%" height="40"
+	horizontalCenter="0"
+	backgroundAlpha="0.4" 
+	backgroundColor="0x000000">
+	<mx:Script>
+		<![CDATA[
+			[Bindable]
+			public var hint:String;
+		]]>
+	</mx:Script>
+	<controls:Label text="{hint}" horizontalCenter="0" verticalCenter="0"/>
+</mx:Canvas>

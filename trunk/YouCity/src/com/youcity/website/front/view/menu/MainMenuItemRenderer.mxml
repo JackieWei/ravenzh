@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+	verticalAlign="middle" 
+	mouseChildren="false">
+	<mx:Script>
+		<![CDATA[
+	        private var menuChanged:Boolean = false;
+	        private var _menu:Object;	
+ 			private function get menu():Object
+ 			{
+ 				return this._menu;
+ 			}
+ 			public function set menu(value:Object):void
+ 			{
+ 				if (value != null && value != this._menu)
+ 				{
+ 					if(value["icon"] == undefined || value["label"] == undefined)
+ 					return;
+ 					this._menu = value
+ 					menuChanged = true;
+ 				}
+ 			}
+ 			
+ 			override protected function commitProperties():void
+ 			{
+ 				super.commitProperties()
+ 				if(menuChanged)
+ 				{
+ 					menuChanged = false;
+ 					menuIcon.source = this._menu["icon"];
+ 					menuLabel.text = this._menu["label"];
+ 				}
+ 			}
+ 			
+		]]>
+	</mx:Script>
+	<mx:Metadata>
+		[Exclude(name="menuIcon", kind="property")]
+		[Exclude(name="menuLabel", kind="property")]
+	</mx:Metadata>
+	<mx:SWFLoader id="menuIcon"/>
+	<mx:Label id="menuLabel" styleName="whiteFont" fontSize="12"/> 
+</mx:HBox>

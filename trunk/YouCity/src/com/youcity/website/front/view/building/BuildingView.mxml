@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<building:ViewBase 
+	xmlns:building="com.youcity.website.front.view.common.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="790" height="500"
+	viewID="buildingView" 
+	titleIcon="assets/building/building_detail.png"
+	creationComplete="onInit(event)" 
+	horizontalScrollPolicy="off" verticalScrollPolicy="off"
+	xmlns:navigator="com.youcity.website.front.view.components.navigator.*" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*" 
+	xmlns:buildingItems="com.youcity.website.front.view.building.widgets.items.*"
+	xmlns:commonItem="com.youcity.website.front.view.photoVideo.commonItem.*" 
+	xmlns:detailItems="com.youcity.website.front.view.activities.widgets.detailItems.*" 
+	xmlns:code="flexlib.controls.*"
+	currentState="default"
+	xmlns:widgets="com.youcity.website.front.view.building.widgets.*" xmlns:businessContent="com.youcity.website.front.view.building.widgets.items.businessContent.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.util.DebugUtil;
+			import com.youcity.website.front.util.DataLoadingUtil;
+			import com.youcity.website.front.view.common.CallbackData;
+			import com.youcity.website.front.event.OtherEvent;
+			import com.youcity.website.front.model.OtherModelLocator;
+			import com.youcity.website.front.vo.BusinessVO;
+			import mx.events.FlexEvent;
+			
+			public static const VIEW_WIDTH:Number = 790;
+			public static const VIEW_HEIGHT:Number = 500;
+			
+			private function onInit(event:FlexEvent):void
+			{
+				//设定你需要打开的默认的选项卡
+				navigator.selectedIndex = BuildingModel.firstIndex;
+			}
+			
+			private function onSelectedChangedHandler(event:Event):void {
+				//todo
+				DebugUtil.debug();
+			}
+		]]>
+	</mx:Script>
+	<building:states>
+		<mx:State name="default">
+			<mx:AddChild relativeTo="{this}">
+				<navigator:Navigator id="navigator"
+					iconGap="-32" 
+					marginStart="215"  marginEnd="20"
+					iconWidth="102" iconHeight="33"
+					innerGap="-13" location="top"
+					change="onSelectedChangedHandler(event)"
+					width="{VIEW_WIDTH - 36}" height="{VIEW_HEIGHT - 30}"
+					y="15" x="18"
+					contentStyleName="activityDetailNavigatorInnerStyle"
+					>
+					<navigator:icons>
+						<code:CanvasButton width="103" height="33" styleName="detailDetail" />
+						<code:CanvasButton width="103" height="33" styleName="detailBusinessBuilding" />
+					</navigator:icons>
+					<navigator:contents>
+						<buildingItems:Detail />
+						<buildingItems:Business />
+<!--						<businessContent:Business />-->
+					</navigator:contents>
+				</navigator:Navigator>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="minimize">
+		</mx:State>
+	</building:states>
+</building:ViewBase>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*"
+	xmlns:widgets="com.youcity.website.front.view.search.widgets.*"
+	styleName="resultItem" buttonMode="true" 
+	click="handleBusinessItemClick(event)"
+	verticalGap="2"
+	paddingLeft="5" paddingTop="5" paddingBottom="5" paddingRight="5">
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.view.common.MapManager;
+			import com.youcity.maps.MapPoint;
+			import com.youcity.website.front.view.business.BusinessProxy;
+			import com.youcity.website.front.util.AuxUtil;
+			import com.youcity.website.front.vo.BusinessVO;
+			
+			public var dataChanged:Boolean = false;
+			
+			private var _businessVO:BusinessVO;
+			public function get businessVO():BusinessVO
+			{
+				return this._businessVO;
+			}
+			public function set businessVO(value:BusinessVO):void
+			{
+				if (value != null && value != _businessVO)
+				{
+					this._businessVO = value;
+					dataChanged = true;
+					invalidateDisplayList();
+				}
+			}
+			
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+			{
+				super.updateDisplayList(unscaledWidth, unscaledHeight);
+				if (dataChanged)
+				{
+					this.charItem.char = this.instanceIndex ;
+					this.address.text = this._businessVO.address;
+//					this.phoneNumber.text = this._businessVO.phoneNumber;
+					this.phoneNumber.text = "2121-520850";
+					this.businessName.text = this._businessVO.businessName;
+				}
+			}
+			
+			private function handleBusinessItemClick(event:MouseEvent):void
+			{
+				var tempMP:MapPoint = new MapPoint(_businessVO.centerX, _businessVO.centerY);
+				MapManager.getInstance().slideCenter(tempMP);
+//				BusinessProxy.instance.openBusinessView(this._businessVO.buildingId);
+			}
+		]]>
+	</mx:Script>
+	<widgets:LabelItem id="businessName" width="{width - 10}" styleName="titleText"/>
+	<mx:HBox verticalAlign="middle" width="{width - 10}"
+		horizontalGap="2" 
+		horizontalScrollPolicy="off" verticalScrollPolicy="off">
+		<widgets:CharItem id="charItem"/>
+		<mx:VBox width="{width - 45}" verticalGap="2">
+			<controls:Label id="address" width="130"/>
+			<controls:Label id="phoneNumber" width="130"/>
+		</mx:VBox>
+	</mx:HBox>
+</mx:VBox>

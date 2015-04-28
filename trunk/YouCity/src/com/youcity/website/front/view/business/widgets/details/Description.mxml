@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigator:ItemBase
+	xmlns="com.youcity.website.front.view.business.base.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:navigator="com.youcity.website.front.view.components.navigator.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.vo.BusinessVO;
+			[Bindable]
+			private var _source:String;
+			
+			public function set source(value:BusinessVO):void
+			{
+				_source = value.businessContent;
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:Text id="description" width="{width}" text="{_source}" y="15" />
+	
+</navigator:ItemBase>

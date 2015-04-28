@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base:BusinessItemBase
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:businessItems="com.youcity.website.front.view.business.widgets.items.*"
+	xmlns:controls="com.youcity.website.front.view.components.controls.*" 
+	xmlns:components="com.youcity.website.front.view.components.*" 
+	xmlns:widgets="com.youcity.website.front.view.business.widgets.*" 
+	xmlns:base="com.youcity.website.front.view.business.base.*"
+	xmlns:navigator="com.youcity.website.front.view.components.navigator.*" 
+	xmlns:rank="com.youcity.website.front.view.activities.rank.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import com.youcity.website.front.util.DebugUtil;
+			import com.youcity.website.front.util.EventUtil;
+			import com.youcity.website.front.common.Constants;
+			import com.youcity.website.front.common.Config;
+			import com.youcity.maps.MapPoint;
+			import com.youcity.website.front.view.common.MapManager;
+			import com.youcity.website.front.view.building.BuildingProxy;
+			import mx.events.FlexEvent;
+			import com.youcity.website.front.util.AuxUtil;
+			import com.youcity.website.front.view.components.navigator.Navigator;
+			import com.youcity.website.front.view.business.widgets.details.Description;
+			import flexlib.controls.CanvasButton;
+			import com.youcity.website.front.vo.BusinessVO;
+			import com.youcity.website.front.view.business.BusinessProxy;
+			import com.youcity.website.front.view.business.BusinessModel;
+			import com.youcity.website.front.event.OtherEvent;
+			import com.youcity.website.front.view.common.CallbackData;
+			
+			override public function clear():void
+			{
+				super.clear();
+				BusinessProxy.instance.clearTakeMeThere();
+			}
+			
+			override public function getData():void
+			{
+				super.getData();
+				if (BusinessModel.currentBusiness)
+				{
+					setContent(BusinessModel.currentBusiness);
+				}
+				else
+				{
+					BusinessProxy.instance.getDetail(detailCallbacHandler);
+				}
+			}
+			
+			private function detailCallbacHandler(callbackData:CallbackData):void
+			{
+				if (CallbackData.SUCCEED == callbackData.code)
+				{
+					if (!callbackData.data)
+					{
+						Alert.show("We are sorry to tell you that the business you want to view is not exsit now!");
+						return;
+					}
+					BusinessModel.currentBusiness = BusinessVO(callbackData.data);
+					setContent(BusinessModel.currentBusiness);
+					if (Config.NEED_LOCATE_NEW_CENTER)
+                    {
+                        Config.NEED_LOCATE_NEW_CENTER = false;
+                        MapManager.getInstance().setInitCenter(new MapPoint(BusinessModel.currentBusiness.centerX,BusinessModel.currentBusiness.centerY));
+                    }
+				}
+			}
+			
+			private function setContent(source:BusinessVO):void
+			{
+				title.title = "     " + source.businessName;
+				logo.source = AuxUtil.addPhotoPrefix(source.logo);
+				var str:String =  source.address;
+				if (source.phoneNumber && "" != source.phoneNumber) str += "(" + source.phoneNumber +  ")";
+				address.text = str;
+				website.text = source.website;
+				category.text = BusinessModel.categoryDict[source.category];
+				var tags:Array = [];
+				if (source.tags) tags = source.tags.split(",");
+				tagsRpt.dataProvider = tags;
+				host.text = source.buildingName;
+				refreshNavigator(source);
+			}
+			
+			private var _desctiptionIcon:CanvasButton;
+			private var _editIcon:CanvasButton;
+			private var _relocateIcon:CanvasButton;
+			private var _description:Description;
+			private function refreshNavigator(source:BusinessVO):void
+			{
+				initNavigator();
+				initIconsAndContents();
+				if (!_created) return;
+				setNavis(source);
+			}
+			
+			private function setNavis(source:BusinessVO):void
+			{
+				navigator.icons = [];
+				navigator.contents = [];
+				navigator.icons.push(_desctiptionIcon);
+				_description.source = source;
+				navigator.contents.push(_description);
+				navigator.refresh();
+				navigator.selectedIndex = BusinessModel.secondIndex;
+			}
+			
+			private var _created:Boolean;
+			private function onCreationCompleteHandler(event:FlexEvent):void
+			{
+				_created = true;
+				setNavis(BusinessModel.currentBusiness);
+			}
+			
+			private function initIconsAndContents():void
+			{
+				if (!_desctiptionIcon)
+				{
+					_desctiptionIcon = new CanvasButton();
+					_desctiptionIcon.width = 171;
+					_desctiptionIcon.height = 35;
+					_desctiptionIcon.styleName = "businessDetailDescriptionIcon";
+				}
+				if (!_editIcon)
+				{
+					_editIcon = new CanvasButton();
+					_editIcon.width = 171;
+					_editIcon.height = 35;
+					_editIcon.styleName = "businessDetailUserEditHistoryIcon";
+				}
+				if (!_relocateIcon)
+				{
+					_relocateIcon = new CanvasButton();
+					_relocateIcon.width = 171;
+					_relocateIcon.height = 35;
+					_relocateIcon.styleName = "businessDetailRelocateHistroyIcon";
+				}
+				if (!_description)
+				{
+					_description = new Description();
+				}
+			}
+			
+			private var navigator:Navigator;
+			private function initNavigator():void
+			{
+				if (navigator) return;
+				navigator = new Navigator();
+				navigator.iconGap = "-10";
+				navigator.marginStart = -1;
+				navigator.iconWidth = 171;
+				navigator.iconHeight = 35;
+				navigator.innerGap = -18;
+				navigator.location = "top";
+				navigator.percentHeight = 100;
+				navigator.percentWidth = 100;
+				navigator.setStyle("contentStyleName", "businessBusinessBuildingBG");
+				navigator.addEventListener(FlexEvent.CREATION_COMPLETE, onCreationCompleteHandler);
+				container.addChild(navigator);
+			}
+			
+			private function addBtnClickHandler(event:MouseEvent):void {
+				//todo
+				DebugUtil.debug();
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<components:TitleContainer id="title"
+		titleAlign="left" width="{width - 6}" height="{height - 30}" 
+		x="3" y="15" 
+		horizontalScrollPolicy="off">
+		<mx:VBox id="detail"
+			x="10" width="{width - 30}" y="{TitleContainer.TITLE_HEIGHT}" 
+			horizontalScrollPolicy="off"
+			horizontalAlign="left" verticalAlign="middle">
+			<mx:HBox width="100%">
+				<components:ImageUI id="logo" width="100" height="100" />
+				<mx:VBox width="100%">
+					<controls:Label id="address"  />
+					<mx:Canvas height="20" width="100%">
+						<controls:Label id="website"/>
+						<controls:Button
+							styleName="correntIcon"
+							toolTip="Relocate it"
+							width="24" height="19"
+							right="10"
+							/>
+					</mx:Canvas>
+					<controls:Label id="category"/>
+					<controls:LinkLabel id="host" 
+						styleName="linkBtn" 
+						click="BusinessProxy.instance.takeMeThere()"/>
+					<components:GridContainer columnCount="5" width="100%">
+						<mx:Repeater id="tagsRpt">
+							<controls:LinkLabel styleName="linkBtn" textDecoration="none" text="{tagsRpt.currentItem}" />
+						</mx:Repeater>
+					</components:GridContainer>
+					<mx:HBox horizontalGap="0">
+						<controls:Label text="({BusinessModel.voteUserNum} {BusinessModel.voteUserNum >1 ? 'reviews' : 'review'})" />
+					</mx:HBox>
+				</mx:VBox>
+			</mx:HBox>
+			<mx:Canvas id="container" 
+				width="100%" height="265" 
+				horizontalScrollPolicy="off" verticalScrollPolicy="off"/>
+		</mx:VBox>
+	</components:TitleContainer>
+	
+	<mx:HBox bottom="1" horizontalAlign="center">
+		<controls:Button id="takeMeThere" label="Take Me There" click="BusinessProxy.instance.takeMeThere()" />
+	    <controls:Button id="createActivityBtn" label="Create Activity"/>
+	    <controls:Button id="getLink" label="Get Link" click="BusinessProxy.instance.getLinkAlert()" />
+		<controls:Button label="Bookmark" click="addBtnClickHandler(event)"/>   
+	</mx:HBox>
+	
+</base:BusinessItemBase>

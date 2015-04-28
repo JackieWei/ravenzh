@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<controls:Button xmlns:controls="com.youcity.website.front.view.components.controls.*" 
+	height="22" 
+	paddingLeft="5" paddingRight="5">
+</controls:Button>

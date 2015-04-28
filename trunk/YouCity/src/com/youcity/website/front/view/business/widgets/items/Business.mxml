@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<detailItem:ItemBase 
+	xmlns:detailItem="com.youcity.website.front.view.components.navigator.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:components="com.youcity.website.front.view.components.*" 
+	xmlns:businessItems="com.youcity.website.front.view.business.widgets.items.*"
+	xmlns:controls="com.youcity.website.front.view.components.controls.*">	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.util.DataLoadingUtil;
+			import com.youcity.website.front.vo.BuildingVO;
+			import mx.controls.DateField;
+			import com.youcity.website.front.model.OtherModelLocator;
+			import com.youcity.website.front.event.OtherEvent;
+			import com.youcity.website.front.vo.BusinessVO;
+			import com.youcity.website.front.view.business.BusinessView;
+			import com.youcity.website.front.view.common.ViewManager;
+			import mx.events.FlexEvent;
+			import mx.collections.ArrayCollection;
+			import com.youcity.website.front.view.components.controls.alert.Alert;
+			import com.youcity.website.front.view.common.CallbackData;
+			import com.youcity.website.front.model.ActivityModelLocator;
+			import com.youcity.website.front.model.UserModelLocator;
+			
+			[Bindable]
+			public var source:BusinessVO;
+			
+			[Bindable]
+			[ArrayElementType("com.youcity.website.front.vo.BusinessVO")] 
+			private var _businessList:ArrayCollection;
+			
+			private var _otherModel:OtherModelLocator = OtherModelLocator.getInstance();
+
+			override public function getDataAtFirstSelected():void
+			{
+				getData();
+			}
+			
+			private function getData():void
+			{
+				var event:OtherEvent = new OtherEvent(OtherEvent.GET_BUILDING_BUSINESSLIST);
+				event.callback = getBusinessListCallbackHandler;
+				event.data = {buildingId:_otherModel.building.buildingId};
+				event.dispatch();
+			}
+			
+			private function getBusinessListCallbackHandler(callbackData:CallbackData):void
+			{
+				if (CallbackData.SUCCEED == callbackData.code)
+				{
+					_businessList = _otherModel.building_businessList;
+				}
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:HBox 
+		x="10" y="20" width="{width - 20}" height="{height - 25}"
+		verticalGap="0" horizontalGap="6" 
+		horizontalScrollPolicy="off" verticalScrollPolicy="off"
+		>
+		<businessItems:DetailInfo source="{source}" height="100%" width="190"/>
+		<mx:Canvas id="businessContainer"
+			width="100%" height="100%"
+			horizontalScrollPolicy="off" verticalScrollPolicy="off"
+			styleName="activityDetailVideoList">
+			<mx:Canvas horizontalScrollPolicy="off" width="100%" height="{height - 30}">
+				<mx:VBox x="5" y="10" verticalGap="8" horizontalGap="0" width="{businessContainer.width - 40}">
+					<mx:Repeater id="_businessRpt" recycleChildren="true" dataProvider="{_businessList}">
+						<buildingItems:BusinessItem width="100%" height="90" source="{_businessRpt.currentItem}"/>
+					</mx:Repeater>
+				</mx:VBox>
+			</mx:Canvas>
+		</mx:Canvas>
+	</mx:HBox>
+</detailItem:ItemBase>

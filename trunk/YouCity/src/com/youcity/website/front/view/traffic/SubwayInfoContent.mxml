@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:controls="com.youcity.website.front.view.components.controls.*"
+	styleName="subwayInfoContent"
+	xmlns:items="com.youcity.website.front.view.traffic.items.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.vo.StationVO;
+			import mx.core.Container;
+			import mx.containers.Canvas;
+			import com.youcity.maps.ScreenPoint;
+			import mx.events.FlexEvent;
+			
+			private function resizeView():void
+			{
+				height = container.height + 40;
+				width = container.width + 30;
+				container.x = 30; 
+				container.y = 25; 
+			}
+			
+			public function set shiny(value:Boolean):void
+			{
+				
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:VBox id="container"
+		creationComplete="resizeView()"
+		resize="resizeView()"
+		>
+		<controls:Text text="{SubwayModel.subWayInfo.name}" width="120" />
+		<items:RouteList id="routeList"  size="1" source="{SubwayModel.subWayInfo.routes}" />
+	</mx:VBox>
+	
+	<controls:Button id="closeBtn" 
+		styleName="closeBtn"
+		includeInLayout="false"
+		click="TrafficProxy.instance.closeWin();"
+		right="{- closeBtn.width / 2}" y="{-closeBtn.height / 2}" />
+	
+</mx:Canvas>

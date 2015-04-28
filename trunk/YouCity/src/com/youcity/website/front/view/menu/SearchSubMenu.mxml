@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+	styleName="dropdownMenu" 
+	paddingLeft="10" paddingTop="10" paddingRight="10" paddingBottom="10" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.maps.overlays.OverlayBase;
+			import com.youcity.website.front.vo.BusinessVO;
+			import com.youcity.website.front.view.marker.FrontMarker;
+			import com.youcity.website.front.util.EventUtil;
+			import com.youcity.maps.overlays.Marker;
+			import com.youcity.website.front.view.traffic.TrafficProxy;
+			import com.youcity.maps.MapEvent;
+			import com.youcity.website.front.view.components.controls.CheckBox;
+			import com.youcity.website.front.vo.ResultVO;
+			import com.youcity.website.front.common.Constants;
+			import mx.core.Application;
+			import com.youcity.maps.MapPoint;
+			import com.youcity.website.front.view.common.MapManager;
+			import com.youcity.website.front.event.SearchEvent;
+			import com.youcity.website.front.view.common.CallbackData;
+			
+			private var mapManager:MapManager = MapManager.getInstance();
+			
+			private function handleStarbucksClickEvent(event:MouseEvent):void
+			{
+				if (!(event.currentTarget as CheckBox).selected)
+				{
+					MarkerManager.removeMarkers(MarkerManager.STARBUCKS);
+					return;
+				}
+				var param:Object = {};
+				param.q = "starbucks";
+//				param.ps = 10;
+//				param.np = 1;
+				param.cl = Constants.SEARCHTYPE_BUSINESS;
+				doSearch(param, addStarBucks);
+			}
+			
+			private function addStarBucks(callbackData:CallbackData):void
+			{
+				if (callbackData.code == CallbackData.SUCCEED)
+				{
+					var result:ResultVO = callbackData.data as ResultVO;
+					
+					var arr:Array = [];
+					for each (var vo:BusinessVO in result.resultList)
+					{
+						var point:MapPoint = new MapPoint(vo.centerX, vo.centerY);
+						var marker:OverlayBase = MarkerManager.generateMarker(MarkerManager.STARBUCKS, point, vo);
+						arr.push(marker);
+					}
+					MarkerManager.addMarkers(MarkerManager.STARBUCKS, arr);
+				}
+			}
+			
+			private function handleRestaurantClickEvent(event:MouseEvent):void
+			{
+				if (!(event.currentTarget as CheckBox).selected)
+				{
+					MarkerManager.removeMarkers(MarkerManager.RESTAURANTS);
+					return;
+				}
+				
+				var param:Object = {};
+				param.q = "";
+				param.cl = Constants.SEARCHTYPE_BUSINESS;
+				param.cg = "201";//201 代表 Restaurant
+				doSearch(param, addRestaurants);
+			}
+			
+			private function addRestaurants(callbackData:CallbackData):void
+			{
+				if (callbackData.code == CallbackData.SUCCEED)
+				{
+					var result:ResultVO = callbackData.data as ResultVO;
+					
+					var arr:Array = [];
+					for each (var vo:BusinessVO in result.resultList)
+					{
+						var point:MapPoint = new MapPoint(vo.centerX, vo.centerY);
+						var marker:OverlayBase = MarkerManager.generateMarker(MarkerManager.RESTAURANTS, point, vo);
+						arr.push(marker);
+					}
+					MarkerManager.addMarkers(MarkerManager.RESTAURANTS, arr);
+				}
+			}
+			
+			private function handleShoppingClickEvent(event:MouseEvent):void
+			{
+				if (!(event.currentTarget as CheckBox).selected)
+				{
+					MarkerManager.removeMarkers(MarkerManager.SHOPPING);
+					return;
+				}
+				
+				var param:Object = {};
+				param.q = "";
+				param.cl = Constants.SEARCHTYPE_BUSINESS;
+				param.cg = "202";//201 代表 Shopping
+				doSearch(param, addShopping);
+			}
+			
+			private function addShopping(callbackData:CallbackData):void
+			{
+				if (callbackData.code == CallbackData.SUCCEED)
+				{
+					var result:ResultVO = callbackData.data as ResultVO;
+					
+					var arr:Array = [];
+					for each (var vo:BusinessVO in result.resultList)
+					{
+						var point:MapPoint = new MapPoint(vo.centerX, vo.centerY);
+						var marker:OverlayBase = MarkerManager.generateMarker(MarkerManager.SHOPPING, point, vo);
+						arr.push(marker);
+					}
+					MarkerManager.addMarkers(MarkerManager.SHOPPING, arr);
+				}
+			}
+			
+			private function handleHotelsClickEvent(event:MouseEvent):void
+			{
+				if (!(event.currentTarget as CheckBox).selected)
+				{
+					MarkerManager.removeMarkers(MarkerManager.HOTELS);
+					return;
+				}
+				
+				var param:Object = {};
+				param.q = "hotel";
+				param.cl = Constants.SEARCHTYPE_BUSINESS;
+				doSearch(param, addHotels);
+			}
+			
+			private function addHotels(callbackData:CallbackData):void
+			{
+				if (callbackData.code == CallbackData.SUCCEED)
+				{
+					var result:ResultVO = callbackData.data as ResultVO;
+					
+					var arr:Array = [];
+					for each (var vo:BusinessVO in result.resultList)
+					{
+						var point:MapPoint = new MapPoint(vo.centerX, vo.centerY);
+						var marker:OverlayBase = MarkerManager.generateMarker(MarkerManager.HOTELS, point, vo);
+						arr.push(marker);
+					}
+					MarkerManager.addMarkers(MarkerManager.HOTELS, arr);
+				}
+			}
+			
+			private function handleMuseumsClickEvent(event:MouseEvent):void
+			{
+				if (!(event.currentTarget as CheckBox).selected)
+				{
+					MarkerManager.removeMarkers(MarkerManager.MUSEUMS);
+					return;
+				}
+				
+				var param:Object = {};
+				param.q = "museum";
+				param.cl = Constants.SEARCHTYPE_BUSINESS;
+				doSearch(param, addMuseums);
+			}
+			
+			private function addMuseums(callbackData:CallbackData):void
+			{
+				if (callbackData.code == CallbackData.SUCCEED)
+				{
+					var result:ResultVO = callbackData.data as ResultVO;
+					
+					var arr:Array = [];
+					for each (var vo:BusinessVO in result.resultList)
+					{
+						var point:MapPoint = new MapPoint(vo.centerX, vo.centerY);
+						var marker:OverlayBase = MarkerManager.generateMarker(MarkerManager.MUSEUMS, point, vo);
+						arr.push(marker);
+					}
+					MarkerManager.addMarkers(MarkerManager.MUSEUMS, arr);
+				}
+			}
+			
+			private function doSearch(param:Object, callback:Function = null):void
+			{
+				var center:MapPoint = mapManager.center;
+				var tempPoint:Point = mapManager.mapPointToPoint(center);
+				
+				var tempW:Number = Application.application.width / 2;
+				var tempH:Number = Application.application.height / 2;
+				
+				var startPoint:MapPoint = mapManager.pointToMapPoint(new Point(tempPoint.x - tempW, tempPoint.y - tempH));
+				var endPoint:MapPoint = mapManager.pointToMapPoint(new Point(tempPoint.x + tempW, tempPoint.y + tempH));
+				
+				var tempStartPoint:Point = mapManager.mapPointToPoint(startPoint);
+				var tempEndPoint:Point = mapManager.mapPointToPoint(endPoint);
+
+				param.startX = startPoint.x;
+				param.startY = startPoint.y;
+				param.endX = endPoint.x;
+				param.endY = endPoint.y;
+				
+				EventUtil.dispatchEvent(SearchEvent.SEARCH_ACTIVITY, param, callback);
+			}
+			
+			private function handleMetroBoxClickEvent(event:MouseEvent):void
+			{
+				if ((event.currentTarget as CheckBox).selected)
+				{
+					TrafficProxy.instance.addSubWay();
+					return;
+				}
+				TrafficProxy.instance.removeSubway();
+			}
+		]]>
+	</mx:Script>
+	<mx:Style>
+		.searchOption
+		{
+			upIcon: Embed(source="assets/controls/CheckBox_upIcon.png");
+			overIcon: Embed(source="assets/controls/CheckBox_overIcon.png");
+			downIcon: Embed(source="assets/controls/CheckBox_downIcon.png");
+			disabledIcon: Embed(source="assets/controls/CheckBox_disabledIcon.png");
+			selectedUpIcon: Embed(source="assets/controls/CheckBox_selectedUpIcon.png");
+			selectedOverIcon: Embed(source="assets/controls/CheckBox_selectedOverIcon.png");
+			selectedDownIcon: Embed(source="assets/controls/CheckBox_selectedDownIcon.png");
+			selectedDisabledIcon: Embed(source="assets/controls/CheckBox_selectedDisabledIcon.png");
+			focusAlpha: 0;
+			fontWeight: bold;
+			color: #CCCCCC;
+			textRollOverColor: #FFFFFF;
+			textSelectedColor:#FFFFFF;
+			highlightAlphas: .5, .8;
+		}
+	</mx:Style>
+	
+	<mx:Array id="optionArr">
+		<mx:Object key="Starbucks" value="Starbucks"/>
+		<mx:Object key="Restaurant Bars" value="Restaurant Bars"/>
+		<mx:Object key="Retail Shopping" value="Retail Shopping"/>
+		<mx:Object key="Hotels" value="Hotels"/>
+		<mx:Object key="Museums Galleries" value="Museums Galleries"/>
+		<mx:Object key="Metro" value="Metro"/>
+	</mx:Array>
+		<controls:CheckBox name="searchOption" styleName="searchOption" label="Starbucks" click="handleStarbucksClickEvent(event)"/>
+		<controls:CheckBox name="searchOption" styleName="searchOption" label="Restaurant Bars" click="handleRestaurantClickEvent(event)"/>
+		<controls:CheckBox name="searchOption" styleName="searchOption" label="Retail Shopping" click="handleShoppingClickEvent(event)"/>
+		<controls:CheckBox name="searchOption" styleName="searchOption" label="Hotels" click="handleHotelsClickEvent(event)"/>
+		<controls:CheckBox name="searchOption" styleName="searchOption" label="Museums Galleries" click="handleMuseumsClickEvent(event)"/>
+		<controls:CheckBox name="searchOption" styleName="searchOption" label="Metro" click="handleMetroBoxClickEvent(event)"/>
+</mx:VBox>

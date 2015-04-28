@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*" 
+	xmlns:controls1="com.youcity.website.front.view.activities.widgets.controls.*"
+	verticalAlign="middle"
+	horizontalGap="2">
+	
+	<mx:Metadata>
+		[Event(name="changePage", type="com.youcity.website.front.view.components.PaginationEvent")]
+	</mx:Metadata>
+	<mx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import com.youcity.website.front.util.AuxUtil;
+			
+			private var _numPerPage:uint = 10;
+			public function set numPerpPage(value:uint):void
+			{
+				this._numPerPage = value;
+			}
+			
+			private var totalNumChanged:Boolean = false;
+			//totalNum
+			private var _totalNum:uint = 1;
+			public function get totalNum():uint
+			{
+				return this._totalNum;
+			}
+			public function set totalNum(value:uint):void
+			{
+				value = Math.ceil(value/this._numPerPage);
+				if (value!= _totalNum)
+				{
+					this._totalNum = value;
+					totalNumChanged = true;
+					invalidateProperties();
+				}
+			}
+			
+			private var currentPageChanged:Boolean = false;			
+			//current page
+			private var _currentPage:uint = 1;
+			public function get currentPage():uint
+			{
+				return this._currentPage;
+			}
+			
+			public function set currentPage(value:uint):void
+			{
+				if (value > 0 && value!= _currentPage)
+				{
+					this._currentPage = value;
+					currentPageChanged = true;
+					invalidateProperties();
+				}
+			}
+			
+			override protected function commitProperties():void
+			{
+				super.commitProperties();
+				if (totalNumChanged)
+				{
+					totalNumChanged = false;
+					totalText.text = this._totalNum == 0 ? "/" + (this._totalNum + 1) +  "" : "/ " + this._totalNum + "";
+					if (this._totalNum > _currentPage)
+					nextBtn.enabled = true;
+				}
+				
+				if (currentPageChanged)
+				{
+					preBtn.enabled = _currentPage > 1;
+					nextBtn.enabled = _currentPage < _totalNum;
+					curText.text = this._currentPage + "";
+				}
+			}
+			private function handlePreBtnClick(event:MouseEvent):void
+			{
+				currentPage--;
+				
+				//dispatch pagination event
+				dispatchPaginationEvent();
+			}
+			
+			private function handleNextBtnClick(event:MouseEvent):void
+			{
+				currentPage++;
+				
+				//dispatch pagination event
+				dispatchPaginationEvent();
+			}
+			
+			private function handleTextInputEnterEvent(event:FlexEvent):void
+			{
+				if (AuxUtil.isEmpty(curText.text))
+				return;
+				if (uint(curText.text) > _totalNum || uint(curText.text) < 1)
+				return;
+				
+				currentPage = uint(curText.text);
+				//dispatch pagination event
+				dispatchPaginationEvent();
+			}
+			
+			private function handleGoBtnClick(event:MouseEvent):void
+			{
+				if (AuxUtil.isEmpty(curText.text))
+				return;
+				if (uint(curText.text) > _totalNum || uint(curText.text) < 1)
+				return;
+				
+				currentPage = uint(curText.text);
+				//dispatch pagination event
+				dispatchPaginationEvent();
+			}
+			
+			private function dispatchPaginationEvent():void
+			{
+				var e:PaginationEvent = new PaginationEvent(PaginationEvent.CHANGE_PAGE);
+				e.currentPage = currentPage;
+				e.totalNum = totalNum;
+				dispatchEvent(e);
+			}
+		]]>
+	</mx:Script>
+	<mx:Metadata>
+		[Exclude(name="preBtn", 	kind="property")]
+		[Exclude(name="nextBtn", 	kind="property")]
+		[Exclude(name="curText", 	kind="property")]
+		[Exclude(name="totalText", 	kind="property")]
+	</mx:Metadata>
+	<controls:Button id="preBtn"  click="handlePreBtnClick(event)"  styleName="preBtn" enabled="false"/>
+	<controls:Button id="nextBtn" click="handleNextBtnClick(event)" styleName="nextBtn" enabled="false"/>
+	<mx:Spacer width="5"/>
+	<controls:NormalTextInput id="curText" text="1" width="35" enter="handleTextInputEnterEvent(event)"/>
+	<controls:Text id="totalText" styleName="defaultText"/>
+	<controls:Button label="GO" click="handleGoBtnClick(event)"/>
+</mx:HBox>

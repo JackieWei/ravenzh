@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
+	layout="vertical" 
+	horizontalAlign="center"
+	width="100%" height="100%" 
+	backgroundColor="#EAEFDF" 
+	horizontalScrollPolicy="off"
+	verticalScrollPolicy="off" 
+	creationComplete="mapInit(event)">
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.maps.MapTypeConstants;
+			import com.youcity.maps.controls.MapTypeControlContainer;
+			import com.youcity.maps.controls.StandardControlContainer;
+			import com.youcity.maps.MapEvent;
+			import mx.events.ResizeEvent;
+			import com.youcity.maps.MapPoint;
+			import com.youcity.maps.Map;
+			
+			private var map:Map;
+			
+			private function mapInit(event:Event):void {
+				map = new Map();
+				//1. add and set maptype,  3d, 2d etc
+				map.setMapType(MapTypeConstants.getNewMap());
+				//2. add listener for map ready
+				map.addEventListener(MapEvent.MAP_READY, onMapReadyHandler);
+				map.addEventListener(MapEvent.MAP_MOVE, onMapCenterChangedHandler);
+				map.addEventListener(MapEvent.MAP_LOADED, onMapLoaded);
+				//3. add map to a container
+				mapContainer.addChild(map);
+			}
+			
+			//map ready handler
+			private function onMapReadyHandler(event:Event):void {
+				//when map ready,  set map's center and zoom, here we give default value
+				map.setCenter(new MapPoint(15840, 15432), 2);
+				//add controls also
+				//map.addControl(new StandardControlContainer(map));
+				//map.addControl(new MapTypeControlContainer(map));
+				map.setSize(mapContainer.width, mapContainer.height);
+				trace(map.mapWidth, map.mapHeight);
+			}
+			
+			//when mapContainer's size changed, need to resize map
+			private function onContainerResizeHandler(event:ResizeEvent):void {
+			}
+			
+			//when map's center changed, update the text
+			private function onMapCenterChangedHandler(event:MapEvent):void {
+				centerPosition.text = "Center  " + map.center.toHashKey();
+			}
+			
+			private function onMapLoaded(event:MapEvent):void {
+				trace("map loaded");
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:HBox width="80%" height="40" backgroundColor="0x000000" backgroundAlpha="0.6" verticalAlign="middle" paddingRight="10">
+		<mx:Text id="centerPosition" color="#FFFFFF" fontSize="14" fontWeight="bold"/>
+	</mx:HBox>
+	
+	<mx:UIComponent id="mapContainer" width="80%" height="80%"/> 
+
+</mx:Application>

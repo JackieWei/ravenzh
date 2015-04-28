@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>   
+	<!-- usa -->
+	<avatarPath>http://www.youcity.com/2009/photo/avatar/</avatarPath>
+	<photoPrefix>http://www.youcity.com/2009/photo/</photoPrefix>
+	<fileupload>http://www.youcity.com/website_back/fileupload</fileupload>
+	<service>http://www.youcity.com/website_back/messagebroker/amf/</service>
+	<searchService>http://www.youcity.com/cgi-bin/search</searchService>
+	<home>http://www.youcity.com/index.html</home>
+	<blog>http://www.youcity3d.blogspot.com</blog>
+	<twitter>http://twitter.com/youcity</twitter>
+</root>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:controls="com.youcity.website.front.view.components.controls.*" 
+	xmlns:components="com.youcity.website.front.view.components.*"
+	styleName="resultItem"
+	buttonMode="true" mouseChildren="false"
+	click="openBusinessDetailHandler(event)"
+	verticalScrollPolicy="off" horizontalScrollPolicy="off">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.view.business.BusinessProxy;
+			import com.youcity.website.front.vo.BusinessVO;
+			
+			[Bindable]
+			public var source:BusinessVO;
+			
+			private function openBusinessDetailHandler(event:MouseEvent):void
+			{
+				BusinessProxy.instance.openBusinessView(source.id);
+			}
+		]]>
+	</mx:Script>
+	<components:ImageUI 
+		x="10" y="10"
+		width="60" height="60" 
+		source="{source.logo}"/>
+	<mx:HBox x="75" width="{width - 75}" height="100%">
+		<mx:VBox height="100%" x="130" y="10">
+			<controls:Label text="{source.businessName}" fontSize="15" selectable="true" />
+			<controls:Label text="{source.address}" fontSize="10" selectable="true" />
+		</mx:VBox>
+		<mx:VBox>
+			<controls:Label text="{source.address}" selectable="true" fontSize="10"/>
+			<controls:Label text="{source.website}"  fontSize="10" selectable="true"/>
+		</mx:VBox>
+	</mx:HBox>
+	
+</mx:Canvas>

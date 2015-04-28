@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ViewBase xmlns="com.youcity.website.front.view.common.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="160" height="80" 
+	viewID="measureResultView"
+	creationComplete="handleCreationComplete(event)" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*">
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.model.OtherModelLocator;
+			import mx.events.FlexEvent;
+			
+			private var otherModel:OtherModelLocator = OtherModelLocator.getInstance();
+			private function handleCreationComplete(event:FlexEvent):void
+			{
+			  result.text = "The distance is " + otherModel.measureResult;
+			}
+		]]>
+	</mx:Script>
+	<controls:Text id="result" horizontalCenter="0" verticalCenter="0" styleName="defaultText"/>
+</ViewBase>

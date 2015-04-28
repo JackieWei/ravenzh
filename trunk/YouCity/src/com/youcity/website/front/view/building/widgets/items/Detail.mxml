@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base:BuildingItemBase
+	xmlns="com.youcity.website.front.view.components.navigator.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:buildingItems="com.youcity.website.front.view.building.widgets.items.*" 
+	xmlns:controls="com.youcity.website.front.view.components.controls.*" 
+	xmlns:components="com.youcity.website.front.view.components.*"
+	xmlns:base="com.youcity.website.front.view.building.base.*"
+	creationComplete="onInit(event)">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.youcity.website.front.util.DebugUtil;
+			import com.youcity.website.front.util.EventUtil;
+			import com.youcity.maps.MapPoint;
+			import com.youcity.website.front.view.common.MapManager;
+			import com.youcity.website.front.common.Config;
+			import com.youcity.website.front.common.Constants;
+			import com.youcity.website.front.view.building.BuildingProxy;
+			import com.youcity.website.front.view.building.BuildingModel;
+			import mx.events.FlexEvent;
+			import com.youcity.website.front.view.common.CallbackData;
+			import com.youcity.website.front.vo.BuildingVO;
+			
+			[Bindable]
+			public var source:BuildingVO;
+			
+			private function onInit(event:FlexEvent):void
+			{
+				//一旦创建完就读取数据，因为Detail比较特殊
+				getData();
+				//一般都是在getDataAtFirstSelected里添加watch，现在重写getDataAtFirstSelected，自然需要添加
+				watchChange();
+			}
+			
+			override public function getDataAtFirstSelected():void
+			{
+				//由于在一开始就需要详细信息，所以在creationcomplete里做而不是第一次选择，
+				//虽然目前由于index原因这两个基本在一个时间发生但是理论上应当是creationcomplete
+			}
+			
+			override public function clear():void
+			{
+				super.clear();
+				BuildingProxy.instance.clearTakeMeThere();
+			}
+			
+			override public function getData():void
+			{
+				super.getData();
+				BuildingProxy.instance.getDetail(getdetailCallbackHandler);
+			}
+			
+			private function getdetailCallbackHandler(callbackData:CallbackData):void
+			{
+				if (CallbackData.SUCCEED == callbackData.code)
+				{
+					BuildingModel.currentBuilding = BuildingVO(callbackData.data);
+					setContent(BuildingModel.currentBuilding);
+					if (Config.NEED_LOCATE_NEW_CENTER)
+                    {
+                        Config.NEED_LOCATE_NEW_CENTER = false;
+                        MapManager.getInstance().setInitCenter(new MapPoint(BuildingModel.currentBuilding.centerX,BuildingModel.currentBuilding.centerY));
+                    }
+				}
+			}
+			
+			private function setContent(source:BuildingVO):void
+			{
+				sampleUrl.source = "assets/building/building_picture_sample.png";
+				title.title = "    " + source.buildingName;
+				buildingName.text = source.buildingName;
+				address.text = source.address;
+				photoNumber.text = source.phoneNumber;
+//				category.text = source.category;
+				if (source.buildingContent && "" != source.buildingContent)
+				detail.text = "Building Detail: " +  source.buildingContent;
+			}
+			
+			private function addBtnClickHandler(event:MouseEvent):void {
+				//todo
+				DebugUtil.debug();
+			}
+		]]>
+	</mx:Script>
+	<components:TitleContainer id="title"
+		titleAlign="left" width="{width - 10}" height="{height - 43}" 
+		x="5" y="12" horizontalScrollPolicy="off">
+		<mx:VBox 
+			width="{width - 20}" y="{TitleContainer.TITLE_HEIGHT}" x="10"
+			horizontalScrollPolicy="off"
+			horizontalAlign="center" verticalAlign="top">
+			<mx:HBox width="100%" horizontalAlign="left">
+				<components:ImageUI id="sampleUrl" width="180" height="180" 
+					brokenImage="{Constants.ACTIVITY_BROKEN_IMAGE}"/>
+				<mx:VBox>
+					<controls:Label id="buildingName" fontSize="15" styleName="blackFont"/>
+					<controls:Label id="address" />
+					<controls:Label id="photoNumber"/>
+				</mx:VBox>
+			</mx:HBox>
+			<controls:Text id="detail" width="100%" />
+		</mx:VBox>
+	</components:TitleContainer>
+	<mx:HBox width="100%" horizontalAlign="center" bottom="8">
+		<controls:Button id="takeMeThere" label="Take Me There" click="BuildingProxy.instance.takeMeThere()"/>
+		<controls:Button id="searchNearBy" label="Search Nearby" click="BuildingProxy.instance.searchNearby()"/>
+		<controls:Button id="addBusiness" label="Add Business" width="110" height="25"/>
+		<controls:Button id="settleDown" label="Settle Down" width="110" height="25"/>
+	    <controls:Button id="getLink" label="Get Link" click="BuildingProxy.instance.getLinkAlert()" />
+	    <controls:Button label="Bookmark" click="addBtnClickHandler(event)"/>
+	</mx:HBox>
+</base:BuildingItemBase>
